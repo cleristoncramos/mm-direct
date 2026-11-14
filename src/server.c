@@ -4102,18 +4102,18 @@ void loadDataFromDisk() {
     long long start = ustime();
     int is_post_failure_recovery = server.experiment_failure_triggered || (server.experiment_state == EXPERIMENT_RECOVERING);
 
-    // Recuperação padrão (SRSL): o banco só aceita conexões depois de reexecutar todo o log
+    // Recuperação padrão (log sequencial): o banco só aceita conexões depois de reexecutar todo o log
     // sequencial. Eventos estruturados iguais aos da recuperação instantânea, para o painel
     // comparar as duas técnicas (Fase 5 do plano, 14/11/2026).
     pthread_mutex_lock(&server.experiment_mutex);
     if (is_post_failure_recovery) {
         server.experiment_state = EXPERIMENT_RECOVERING;
         serverLog(LL_NOTICE, "EXECUTION_BRANCH POST_FAILURE_RECOVERY (standard recovery: sequential log)");
-        logPhase3Event("RECOVERY_STARTED", start, 0, "technique=SRSL", "\"technique\":\"SRSL\"");
+        logPhase3Event("RECOVERY_STARTED", start, 0, "recovery=standard", "\"recovery\":\"standard\"");
     } else {
         server.experiment_state = EXPERIMENT_PRELOADING;
         serverLog(LL_NOTICE, "EXECUTION_BRANCH INITIAL_PRELOAD (standard recovery: sequential log)");
-        logPhase3Event("PRELOAD_STARTED", start, 0, "technique=SRSL", "\"technique\":\"SRSL\"");
+        logPhase3Event("PRELOAD_STARTED", start, 0, "recovery=standard", "\"recovery\":\"standard\"");
     }
     pthread_mutex_unlock(&server.experiment_mutex);
 
@@ -4158,8 +4158,8 @@ void loadDataFromDisk() {
     char kv_res[256], json_res[256];
     // Registros lidos do log sequencial (contados em loadAppendOnlyFile, aof.c).
     unsigned long long records_processed = (unsigned long long)server.count_tuples_loaded_incr;
-    snprintf(kv_res, sizeof(kv_res), "loaded_tuples=%llu records_processed=%llu inconsistencies=0 duration=%.3fs technique=SRSL", loaded_tuples, records_processed, duration_s);
-    snprintf(json_res, sizeof(json_res), "\"loadedTuples\":%llu,\"recordsProcessed\":%llu,\"inconsistencies\":0,\"technique\":\"SRSL\"", loaded_tuples, records_processed);
+    snprintf(kv_res, sizeof(kv_res), "loaded_tuples=%llu records_processed=%llu inconsistencies=0 duration=%.3fs recovery=standard", loaded_tuples, records_processed, duration_s);
+    snprintf(json_res, sizeof(json_res), "\"loadedTuples\":%llu,\"recordsProcessed\":%llu,\"inconsistencies\":0,\"recovery\":\"standard\"", loaded_tuples, records_processed);
 
     pthread_mutex_lock(&server.experiment_mutex);
     if (!load_ok) {

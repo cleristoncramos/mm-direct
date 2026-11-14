@@ -8,7 +8,7 @@ import { ExperimentVisualState, TelemetryStatus, TelemetryPoint } from "./types"
 import TerminalController from "../TerminalController";
 import { Chart as ChartJS, registerables } from "chart.js";
 import annotationPlugin from "chartjs-plugin-annotation";
-import { TECHNIQUE_LABEL, techniqueOf } from "../History/comparison";
+import { RECOVERY_MODE_LABEL, recoveryModeOf } from "../History/comparison";
 import { ExperimentPhases, sharedXMax, PHASE_COLORS, phasesFromEventList, TimelineEvent } from "./phaseAnnotations";
 import { UI, TIP } from "../../i18n/strings";
 import { fmtSeconds, fmtPercent, fmtMB, fmtMicros } from "../../utils/format";
@@ -867,7 +867,7 @@ const ChartBoard = ({
             folderId: currentRunMeta?.folderId ?? null,
             runStartUs,
             statusLabel: statusLabelFromVisualState(experimentState),
-            modeLabel: TECHNIQUE_LABEL[techniqueOf({ metadata: { config: configData || {} } })].pt,
+            modeLabel: RECOVERY_MODE_LABEL[recoveryModeOf({ metadata: { config: configData || {} } })].pt,
             config: configData || {},
             database: currentRunMeta?.metadata?.database ?? null,
             events: { ...structuredEventsRef.current },

@@ -6,7 +6,7 @@ import { UI, TIP } from "../../i18n/strings";
 import { fmtNum } from "../../utils/format";
 import {
     RunMetrics, METRIC_ROWS, METRIC_GROUP_LABEL, MetricGroup, delta, compareConfigs, alignAtFailure,
-    groupRepetitions, groupDistinctions, groupHeadline, RepetitionGroup, Stat, toCsv, downloadText, TECHNIQUE_LABEL,
+    groupRepetitions, groupDistinctions, groupHeadline, RepetitionGroup, Stat, toCsv, downloadText, RECOVERY_MODE_LABEL,
 } from "./comparison";
 import ExportMenu from "./ExportMenu";
 import { fillThroughputGaps } from "../Charts/phaseAnnotations";
@@ -47,7 +47,7 @@ const CompareChart = ({ title, unit, metrics, pick, align, labels = false }: {
     labels?: boolean;
 }) => {
     const datasets = metrics.map((m, i) => ({
-        label: `${m.tag} · ${m.technique}${m.sum.annotations.label ? ` · ${m.sum.annotations.label}` : ""}`,
+        label: `${m.tag} · ${RECOVERY_MODE_LABEL[m.recoveryMode].shortEn}${m.sum.annotations.label ? ` · ${m.sum.annotations.label}` : ""}`,
         data: align === "failure" ? alignAtFailure(pick(m), m.failureAt) : pick(m),
         borderColor: RUN_COLORS[i],
         backgroundColor: RUN_COLORS[i],
@@ -103,7 +103,7 @@ const CompareChart = ({ title, unit, metrics, pick, align, labels = false }: {
                     {metrics.map((m, i) => (
                         <span key={m.id} className="flex items-center gap-1.5">
                             <span className="w-3 h-0.5 inline-block" style={{ background: RUN_COLORS[i] }} />
-                            <strong className="text-slate-300">{m.tag}</strong> {TECHNIQUE_LABEL[m.technique].en}
+                            <strong className="text-slate-300">{m.tag}</strong> {RECOVERY_MODE_LABEL[m.recoveryMode].en}
                         </span>
                     ))}
                 </div>

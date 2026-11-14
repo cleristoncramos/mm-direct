@@ -43,8 +43,8 @@ As escolhas principais. Os campos numéricos aceitam digitação ou os botões �
 
 | Campo | Opções | Efeito |
 | --- | --- | --- |
-| *Recovery technique* | Instant (IRAIL), Instant (sync) (IRSIL), Standard (SRSL) | Liga ou desliga a recuperação instantânea e a indexação síncrona |
-| *Preload* | Sempre ligado | Antes da carga, o banco inteiro é carregado na memória (do log indexado na IR; do log sequencial na SRSL), simulando um banco que já estava em operação |
+| *Recovery mode* | Instant, Standard | Recuperação instantânea (log indexado) ou recuperação padrão (log sequencial) |
+| *Preload* | Sempre ligado | Antes da carga, o banco inteiro é carregado na memória (do log indexado na recuperação instantânea; do log sequencial na padrão), simulando um banco que já estava em operação |
 | *Checkpoint* | Ligado/desligado, intervalo | Grava checkpoints do log indexado periodicamente. O intervalo pode ser fixo ou ajustado automaticamente (*Advanced settings › Checkpointer*) |
 | *Simulated failure* | Ligado/desligado, *Failure after* (s), *Failures* | Instante da falha, contado do início da operação estável, e número de falhas sucessivas. Cada falha é seguida de reinício, nova submissão da carga e recuperação |
 
@@ -54,6 +54,7 @@ Parâmetros detalhados, com valores padrão. Cada grupo abre com um clique.
 
 | Grupo | Exemplos de parâmetros |
 | --- | --- |
+| *Indexer* | Indexação síncrona (*Synchronous indexing*, só na recuperação instantânea), intervalo do indexador, nomes dos arquivos de log |
 | *Checkpointer* | Número de checkpoints, intervalo fixo ou auto-ajustado, somente tuplas mais usadas (MFU) |
 | *Failure* | Atraso do reinício, falha por tempo ou após o preload |
 | *Memtier* | Parâmetros do `memtier_benchmark` (número de requisições por cliente `-n`, intervalo de chaves, padrão de chaves, comandos) e número de rodadas |
@@ -73,7 +74,7 @@ A lista completa dos parâmetros do `redis_ir.conf` está na [referência](refer
 | *Preloading* | Carregando a base na memória |
 | *Stable operation* | Carga rodando normalmente |
 | *Failure triggered* | Falha simulada; o processo está reiniciando |
-| *Recovering* | Recuperação em andamento (na IR, o banco já atende clientes) |
+| *Recovering* | Recuperação em andamento (na recuperação instantânea, o banco já atende clientes) |
 | *Running after recovery* | Recuperação concluída; a carga reenviada continua |
 | *Completed* | Carga terminou após a última falha; experimento encerrado |
 | *Failed* | Erro no preload ou na validação da recuperação |
@@ -82,7 +83,7 @@ A lista completa dos parâmetros do `redis_ir.conf` está na [referência](refer
 
 - Uma linha contínua, do início ao fim, em operações por segundo. Quando o banco está fora do ar, a linha vai a zero, mas não é interrompida.
 - Cor da linha por fase: azul (operação estável), âmbar (da falha ao fim da recuperação), verde (após a recuperação).
-- Faixas de fundo: ciano (preload), vermelho (reinício entre a falha e a recuperação), âmbar (recuperação), violeta tracejada (checkpoint). Linha tracejada vermelha = falha simulada; linha verde = fim da recuperação, com o rótulo "*N* s (Recovery time)", como nas figuras da tese.
+- Faixas de fundo: ciano (preload), vermelho (reinício entre a falha e a recuperação), âmbar (recuperação), violeta tracejada (checkpoint). Linha tracejada vermelha = falha simulada; linha verde = fim da recuperação, com o rótulo "*N* s (Recovery time)".
 - O eixo horizontal é sempre "segundos desde o início do experimento" e é o mesmo nos quatro gráficos.
 
 ### 2.3 Fim do experimento

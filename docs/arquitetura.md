@@ -14,7 +14,7 @@ Versão do Redis 5.0.7 com recuperação instantânea, criada na tese de doutora
 | --- | --- | --- |
 | Log sequencial (AOF) | `src/logs/sequentialLog.aof` | Registro de todas as escritas, como no Redis original |
 | Log indexado | `src/logs/indexedLog.db` | Árvore B+ da Berkeley DB, com os registros do log organizados por chave. Permite recuperar uma tupla sem reler o log inteiro |
-| Indexador | `instant_recovery.c` | Lê o log sequencial e grava no log indexado. Assíncrono (IRAIL) ou síncrono (IRSIL). A posição já indexada fica em `src/logs/finalLogSeek.dat` |
+| Indexador | `instant_recovery.c` | Lê o log sequencial e grava no log indexado. Assíncrono (padrão) ou síncrono (*Synchronous indexing*). A posição já indexada fica em `src/logs/finalLogSeek.dat` |
 | Checkpointer | `instant_recovery.c` | Grava periodicamente o estado do log indexado (completo ou só tuplas mais usadas, MFU) |
 | Restaurador | `instant_recovery.c` | Na recuperação, percorre o log indexado e carrega cada tupla com o comando interno `setIR` (que só grava se a chave não existir) |
 | Carga sob demanda | `server.c` / `instant_recovery.c` | Quando um cliente pede uma chave ainda não restaurada, ela é buscada no log indexado na hora |

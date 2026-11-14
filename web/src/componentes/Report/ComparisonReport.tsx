@@ -9,7 +9,7 @@ import { createPortal } from "react-dom";
 import { brNum, renderChartImage } from "./ExperimentReport";
 import {
     RunMetrics, METRIC_ROWS, delta, compareConfigs, alignAtFailure, groupRepetitions, groupDistinctions, Stat,
-    TECHNIQUE_LABEL,
+    RECOVERY_MODE_LABEL,
 } from "../History/comparison";
 import { EMPTY_PHASES, fillThroughputGaps } from "../Charts/phaseAnnotations";
 
@@ -45,7 +45,7 @@ const SideReport = ({ metrics, rawRuns }: { metrics: RunMetrics[]; rawRuns: any[
     useEffect(() => {
         const id = setTimeout(() => {
             const ds = (pick: (m: RunMetrics) => { x: number; y: number }[]) =>
-                metrics.map((m, i) => ({ label: `${m.tag} · ${m.technique}`, data: alignAtFailure(pick(m), m.failureAt), color: PRINT_COLORS[i] }));
+                metrics.map((m, i) => ({ label: `${m.tag} · ${RECOVERY_MODE_LABEL[m.recoveryMode].shortPt}`, data: alignAtFailure(pick(m), m.failureAt), color: PRINT_COLORS[i] }));
             // Fim da recuperação de cada experimento, como as linhas "Recovery Time" da Fig. 26 da tese
             const recLines: Record<string, any> = {};
             metrics.forEach((m, i) => {
@@ -84,7 +84,7 @@ const SideReport = ({ metrics, rawRuns }: { metrics: RunMetrics[]; rawRuns: any[
                 <section>
                     <H2>I. Experimentos</H2>
                     <table className="w-full text-xs border-collapse">
-                        <thead><tr><Th>Identificação</Th><Th>Experimento</Th><Th>Rótulo</Th><Th>Início</Th><Th>Técnica</Th></tr></thead>
+                        <thead><tr><Th>Identificação</Th><Th>Experimento</Th><Th>Rótulo</Th><Th>Início</Th><Th>Modo de recuperação</Th></tr></thead>
                         <tbody>
                             {metrics.map((m) => (
                                 <tr key={m.id}>
@@ -92,7 +92,7 @@ const SideReport = ({ metrics, rawRuns }: { metrics: RunMetrics[]; rawRuns: any[
                                     <Td mono>{m.id}</Td>
                                     <Td>{m.sum.annotations.label || "—"}</Td>
                                     <Td mono>{dt(m.sum.startedAt)}</Td>
-                                    <Td>{TECHNIQUE_LABEL[m.technique].pt}</Td>
+                                    <Td>{RECOVERY_MODE_LABEL[m.recoveryMode].pt}</Td>
                                 </tr>
                             ))}
                         </tbody>

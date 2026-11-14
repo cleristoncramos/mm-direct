@@ -4,7 +4,7 @@
  * Textos: i18n/strings.ts (UI.history e TIP.history).
  */
 import { useEffect, useState, useMemo, useRef } from "react";
-import { TECHNIQUE_LABEL, techniqueOf } from "./History/comparison";
+import { RECOVERY_MODE_LABEL, recoveryModeOf } from "./History/comparison";
 import ExperimentReport, { ExperimentReportData, eventsFromResults, statusLabelFromResults, buildTimeline, phasesFromEvents } from "./Report/ExperimentReport";
 import { summarizeRun, filterRuns, DEFAULT_FILTERS, RunFilters, RunStatusKey, RunSummary, STATUS_META, SIZE_LABEL } from "./History/runSummary";
 import AnnotationsEditor from "./History/AnnotationsEditor";
@@ -163,7 +163,7 @@ const HistoryPanel = ({ onBack }: HistoryPanelProps) => {
             folderId: selectedRun.id,
             runStartUs: res.runStartUs ? Number(res.runStartUs) : (tel?.runStartUs ? Number(tel.runStartUs) : null),
             statusLabel: statusLabelFromResults(res.experimentStatus),
-            modeLabel: TECHNIQUE_LABEL[techniqueOf(selectedRun)].pt,
+            modeLabel: RECOVERY_MODE_LABEL[recoveryModeOf(selectedRun)].pt,
             config: cfg,
             database: meta.database ?? null,
             events: eventsFromResults(res),

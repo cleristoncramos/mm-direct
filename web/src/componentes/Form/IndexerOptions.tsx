@@ -23,22 +23,13 @@ const IndexerOptions = ({ errors = {}, isDisabled = false }: SectionProps) => {
         <OptionsBoard BoardHeader="Indexer" hasErrors={hasErrors} isDisabled={isDisabled}>
             <div className="flex justify-around flex-wrap gap-2 mb-2">
                 <SwitchInput 
-                    SwitchName="instantRecoveryState" 
-                    checked={instantRecoveryState}
-                    onChange={(e) => updateField("instantRecoveryState", e.target.checked)}
-                    isDisable={isDisabled}
-                    tooltip="Habilita a Recuperação Instantânea via MM-DIRECT (B-Tree). Quando desligado, utiliza a recuperação tradicional por log sequencial (AOF)."
-                >
-                    Instant Recovery
-                </SwitchInput>
-                <SwitchInput 
                     SwitchName="instantRecoverySynchronous"
                     checked={instantRecoverySynchronous}
                     onChange={(e) => updateField("instantRecoverySynchronous", e.target.checked)}
-                    isDisable={isDisabled}
-                    tooltip="Habilita a indexação síncrona dos registros de log (cada transação aguarda a indexação antes de prosseguir)."
+                    isDisable={isDisabled || !instantRecoveryState}
+                    tooltip="Só vale para a recuperação instantânea. Ligado: cada transação espera seu registro ser gravado no log indexado antes de confirmar. Desligado (padrão): a indexação ocorre em segundo plano."
                 >
-                    Synchronous
+                    Synchronous indexing
                 </SwitchInput>
             </div>
             <TextInput

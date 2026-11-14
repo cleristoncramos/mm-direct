@@ -1,3 +1,4 @@
+import IndexerOptions from "./IndexerOptions";
 import CheckpointerOptions from "./CheckpointerOptions";
 import FailureOptions from "./FailureOptions";
 import MemtierOptions from "./MemtierOptions";
@@ -40,10 +41,11 @@ const SetupForm = ({ submitFunction, resetFunction, errors = {}, isDisabled = fa
                 <div className="flex items-center gap-2 pt-2 pb-1">
                     <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500 flex items-center">
                         Advanced settings
-                        <TooltipBadge text="Parâmetros detalhados do Redis-IR, do checkpoint, da falha, da carga (memtier) e dos relatórios. Já vêm com valores padrão; só é preciso abrir para ajustar." />
+                        <TooltipBadge text="Parâmetros detalhados do indexador (indexação síncrona, intervalo), do checkpoint, da falha, da carga (memtier) e dos relatórios. Já vêm com valores padrão; só é preciso abrir para ajustar." />
                     </span>
                     <span className="flex-1 h-px bg-slate-800" />
                 </div>
+                <IndexerOptions errors={errors} isDisabled={isDisabled} />
                 <CheckpointerOptions errors={errors} isDisabled={isDisabled} />
                 <FailureOptions errors={errors} isDisabled={isDisabled} />
                 <MemtierOptions errors={errors} isDisabled={isDisabled} />

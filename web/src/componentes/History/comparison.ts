@@ -61,26 +61,24 @@ export interface RunMetrics {
     memPeakMb: number | null;
     series: { throughput: XY[]; cpu: XY[]; memoryMb: XY[] };
     hasTelemetry: boolean;
-    /** Técnica de recuperação (cenários da tese): IRAIL, IRSIL ou SRSL */
-    technique: Technique;
+    /** Modo de recuperação: instantânea (log indexado) ou padrão (log sequencial) */
+    recoveryMode: RecoveryMode;
     /** Fim da carga submetida de novo após a falha (s desde o início) */
     workloadEndAt: number | null;
     /** "Workload runtime" da tese: da falha até o fim da carga (s) */
     workloadRunS: number | null;
 }
 
-export type Technique = "IRAIL" | "IRSIL" | "SRSL";
+export type RecoveryMode = "instant" | "standard";
 const isOn = (v: any, dflt: boolean) => v === undefined || v === null || v === "" ? dflt : String(v).toUpperCase() === "ON" || v === true;
-/** Técnica a partir da configuração do experimento */
-export const techniqueOf = (run: any): Technique => {
+/** Modo de recuperação a partir da configuração do experimento (instant_recovery_state) */
+export const recoveryModeOf = (run: any): RecoveryMode => {
     const cfg = run?.metadata?.config || {};
-    if (!isOn(cfg.instantRecoveryState, true)) return "SRSL";
-    return isOn(cfg.instantRecoverySynchronous, false) ? "IRSIL" : "IRAIL";
+    return isOn(cfg.instantRecoveryState, true) ? "instant" : "standard";
 };
-export const TECHNIQUE_LABEL: Record<Technique, { en: string; pt: string }> = {
-    IRAIL: { en: "Instant recovery, asynchronous indexed log (IRAIL)", pt: "Recuperação instantânea, log indexado assíncrono (IRAIL)" },
-    IRSIL: { en: "Instant recovery, synchronous indexed log (IRSIL)", pt: "Recuperação instantânea, log indexado síncrono (IRSIL)" },
-    SRSL: { en: "Standard recovery, sequential log (SRSL)", pt: "Recuperação padrão, log sequencial (SRSL)" },
+export const RECOVERY_MODE_LABEL: Record<RecoveryMode, { en: string; pt: string; shortEn: string; shortPt: string }> = {
+    instant: { en: "Instant recovery (indexed log)", pt: "Recuperação instantânea (log indexado)", shortEn: "Instant", shortPt: "Instantânea" },
+    standard: { en: "Standard recovery (sequential log)", pt: "Recuperação padrão (log sequencial)", shortEn: "Standard", shortPt: "Padrão" },
 };
 
 const relSec = (ev: ReportEvent | undefined, runStartUs: number | null): number | null => {
@@ -146,7 +144,7 @@ export const computeRunMetrics = (run: any, telemetry: any | null, tag: string):
         memPeakMb: peak(memoryMb),
         series: { throughput, cpu, memoryMb },
         hasTelemetry: throughput.length > 0 || cpu.length > 0,
-        technique: techniqueOf(run),
+        recoveryMode: recoveryModeOf(run),
         workloadEndAt,
         workloadRunS: failureAt !== null && workloadEndAt !== null && workloadEndAt > failureAt ? workloadEndAt - failureAt : null,
     };
@@ -229,9 +227,9 @@ const dbOf = (run: any) => run?.metadata?.database || null;
 
 export const CONFIG_FIELDS: ConfigField[] = [
     {
-        // Não é "crítica": comparar técnicas na mesma situação é justamente o objetivo (Fig. 26 da tese)
-        key: "mode", label: U("Recovery technique", "Técnica de recuperação"), critical: false,
-        get: (r, l) => TECHNIQUE_LABEL[techniqueOf(r)][l],
+        // Não é "crítica": comparar a recuperação instantânea com a padrão na mesma situação é o objetivo
+        key: "mode", label: U("Recovery mode", "Modo de recuperação"), critical: false,
+        get: (r, l) => RECOVERY_MODE_LABEL[recoveryModeOf(r)][l],
     },
     {
         key: "base", label: U("Database (records / tuples)", "Base (registros / tuplas)"), critical: true, get: (r, l) => {

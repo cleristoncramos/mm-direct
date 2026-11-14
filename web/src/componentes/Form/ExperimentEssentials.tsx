@@ -1,12 +1,11 @@
 import { NumericInput, SwitchInput, TooltipBadge } from "./InputTypes";
 import { useExperimentStore } from "../../store/experimentStore";
 
-type Technique = "IRAIL" | "IRSIL" | "SRSL";
+type RecoveryMode = "instant" | "standard";
 
-const TECHNIQUES: { key: Technique; label: string; tip: string }[] = [
-    { key: "IRAIL", label: "Instant", tip: "IRAIL — recuperação instantânea do MM-DIRECT: log indexado gravado de forma assíncrona; o banco aceita transações durante a recuperação." },
-    { key: "IRSIL", label: "Instant (sync)", tip: "IRSIL — recuperação instantânea com inserção síncrona no log indexado: cada transação espera a gravação no log indexado (mede o custo da indexação síncrona)." },
-    { key: "SRSL", label: "Standard", tip: "SRSL — recuperação padrão: o banco só volta a aceitar transações depois de reexecutar todo o log sequencial (AOF). Throughput zero durante a recuperação." },
+const RECOVERY_MODES: { key: RecoveryMode; label: string; tip: string }[] = [
+    { key: "instant", label: "Instant", tip: "Recuperação instantânea do MM-DIRECT: após a falha, o banco volta a aceitar transações logo após reiniciar, e as tuplas são carregadas do log indexado em segundo plano e sob demanda." },
+    { key: "standard", label: "Standard", tip: "Recuperação padrão do Redis: o banco só volta a aceitar transações depois de reler todo o log sequencial (AOF). Use como linha de base para comparar com a recuperação instantânea." },
 ];
 
 interface SectionProps {
@@ -34,15 +33,16 @@ const ExperimentEssentials = ({ errors = {}, isDisabled = false }: SectionProps)
         checkpointTimeInterval,
         selftuneCheckpointTimeInterval,
         instantRecoveryState,
-        instantRecoverySynchronous,
         updateField,
     } = useExperimentStore();
 
-    // Técnica de recuperação, com os nomes dos cenários da tese (Araújo, 2022, Seção 5.1)
-    const technique: Technique = !instantRecoveryState ? "SRSL" : instantRecoverySynchronous ? "IRSIL" : "IRAIL";
-    const setTechnique = (t: Technique) => {
-        updateField("instantRecoveryState", t !== "SRSL");
-        updateField("instantRecoverySynchronous", t === "IRSIL");
+    // Modo de recuperação: instantânea (log indexado) ou padrão (log sequencial).
+    // A indexação síncrona é um ajuste da recuperação instantânea e fica em Advanced settings › Indexer.
+    const recoveryMode: RecoveryMode = instantRecoveryState ? "instant" : "standard";
+    const setRecoveryMode = (m: RecoveryMode) => {
+        updateField("instantRecoveryState", m === "instant");
+        // Indexação síncrona não se aplica à recuperação padrão
+        if (m === "standard") updateField("instantRecoverySynchronous", false);
     };
 
     const failureOn = enableRestartAfterTime || enablePreloadDatabase;
@@ -65,30 +65,29 @@ const ExperimentEssentials = ({ errors = {}, isDisabled = false }: SectionProps)
             </div>
 
             <div className="px-3 py-2 space-y-1.5">
-                {/* 0. Técnica de recuperação (para comparar as abordagens, como na Fig. 26 da tese) */}
+                {/* 0. Modo de recuperação (instantânea x padrão, para a comparação pedida pelo orientador) */}
                 <div className="space-y-1">
                     <span className="text-xs font-semibold text-slate-300 flex items-center gap-1">
-                        Recovery technique
-                        <TooltipBadge text="Rode o mesmo cenário com cada técnica e compare no histórico (Compare): as curvas ficam alinhadas no instante da falha." />
+                        Recovery mode
+                        <TooltipBadge text="Rode o mesmo cenário com a recuperação instantânea e com a padrão e compare no histórico (Compare): as curvas ficam alinhadas no instante da falha." />
                     </span>
-                    <div className="grid grid-cols-3 gap-1" role="radiogroup" aria-label="Recovery technique">
-                        {TECHNIQUES.map((t) => (
+                    <div className="grid grid-cols-2 gap-1" role="radiogroup" aria-label="Recovery mode">
+                        {RECOVERY_MODES.map((t) => (
                             <button
                                 key={t.key}
                                 type="button"
                                 role="radio"
-                                aria-checked={technique === t.key}
+                                aria-checked={recoveryMode === t.key}
                                 disabled={isDisabled}
-                                onClick={() => setTechnique(t.key)}
+                                onClick={() => setRecoveryMode(t.key)}
                                 title={t.tip}
                                 className={`py-1 px-1 text-[9px] font-semibold rounded-none border leading-tight transition ${
-                                    technique === t.key
+                                    recoveryMode === t.key
                                         ? "bg-blue-900/60 border-blue-500 text-blue-200"
                                         : "bg-slate-950 border-slate-700 text-slate-400 hover:border-slate-500"
                                 } ${isDisabled ? "opacity-60 cursor-not-allowed" : ""}`}
                             >
                                 {t.label}
-                                <span className="block font-mono text-[8px] opacity-70">{t.key}</span>
                             </button>
                         ))}
                     </div>

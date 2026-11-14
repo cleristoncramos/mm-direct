@@ -10,7 +10,7 @@ Sobre esse núcleo, o MM-DIRECT acrescenta um painel web (o *Workbench*). Ele se
 
 ## Sumário
 
-1. [Técnicas de recuperação comparadas](#técnicas-de-recuperação-comparadas)
+1. [Modos de recuperação](#modos-de-recuperação)
 2. [Arquitetura](#arquitetura)
 3. [Requisitos](#requisitos)
 4. [Instalação](#instalação)
@@ -25,15 +25,16 @@ Sobre esse núcleo, o MM-DIRECT acrescenta um painel web (o *Workbench*). Ele se
 
 ---
 
-## Técnicas de recuperação comparadas
+## Modos de recuperação
 
-| Sigla | Nome no painel | Como o banco é recuperado após a falha |
-| --- | --- | --- |
-| **IRAIL** | Instant | Recuperação instantânea com **log indexado assíncrono**. O banco atende clientes logo após reiniciar; as tuplas vêm do log indexado em segundo plano e sob demanda. A indexação do log ocorre fora do caminho da transação. |
-| **IRSIL** | Instant (sync) | Igual à IRAIL, mas com **indexação síncrona**: cada escrita espera ser indexada antes de confirmar. |
-| **SRSL** | Standard | Recuperação **padrão** do Redis: o log sequencial (AOF) é relido inteiro; o banco só atende clientes depois do fim da leitura. |
+O experimento compara dois modos, escolhidos em *Experiment › Recovery mode*:
 
-As siglas seguem a tese de doutorado de Araújo (2022), que deu origem ao Redis-IR. A tese também é a referência para o protocolo experimental e para o formato dos gráficos.
+| Modo no painel | Como o banco é recuperado após a falha |
+| --- | --- |
+| **Instant** (recuperação instantânea) | O banco volta a atender clientes logo após reiniciar. As tuplas vêm do log indexado em segundo plano (carga incremental) e quando um cliente pede uma chave ainda não carregada (carga sob demanda). |
+| **Standard** (recuperação padrão) | Recuperação do Redis original: o log sequencial (AOF) é relido inteiro, e o banco só atende clientes depois do fim da leitura. Serve de linha de base. |
+
+Na recuperação instantânea, a gravação no log indexado é assíncrona por padrão. A opção *Synchronous indexing* (*Advanced settings › Indexer*) faz cada escrita esperar ser indexada antes de confirmar.
 
 ## Arquitetura
 
@@ -116,7 +117,7 @@ Sempre que alterar arquivos em `src/*.c`, recompile com `make` antes do `npm sta
 ## Uso em cinco passos
 
 1. **Base de dados.** Na seção *Indexed database* da barra lateral, escolha o tamanho (Small, Medium, Large ou X-Large) e use a base da biblioteca ou gere uma nova com *Load database*. A base é restaurada automaticamente antes de cada experimento.
-2. **Experimento.** Na seção *Experiment*, escolha a técnica (Instant, Instant (sync) ou Standard), o checkpoint e a falha simulada (instante e número de falhas). Os demais parâmetros ficam em *Advanced settings*.
+2. **Experimento.** Na seção *Experiment*, escolha o modo de recuperação (Instant ou Standard), o checkpoint e a falha simulada (instante e número de falhas). Os demais parâmetros ficam em *Advanced settings*.
 3. **Start.** O painel mostra a fase atual (Preload, Stable operation, Simulated failure, Restart, Recovering, Running after recovery) e desenha a vazão, CPU, memória e latência em tempo real.
 4. **Fim.** O experimento termina sozinho quando a carga reenviada após a última falha acaba. *End experiment* interrompe antes, se necessário.
 5. **Histórico.** Em *History*, cada ensaio tem relatório em PDF, exportação em JSON/CSV, anotações e comparação de até três ensaios (RUN A, B e C), com as curvas alinhadas no início ou no instante da falha.
@@ -130,8 +131,8 @@ O guia completo da interface está em [docs/guia-de-uso.md](docs/guia-de-uso.md)
 | Duração do preload | Do início ao fim do carregamento inicial da base na memória |
 | Operação estável até a falha | Do início da operação estável até a falha simulada |
 | Intervalo falha → recuperação | Da falha ao início da recuperação (inclui o reinício do processo) |
-| Tempo de recuperação | Do início ao fim da recuperação. Na IR, o banco já atende durante esse período; na SRSL, não |
-| Execução da carga após a falha | Da falha até o fim da carga reenviada (*workload runtime*, como na tese) |
+| Tempo de recuperação | Do início ao fim da recuperação. Na recuperação instantânea, o banco já atende durante esse período; na padrão, não |
+| Execução da carga após a falha | Da falha até o fim da carga reenviada (*workload runtime*) |
 | Vazão, CPU, memória, latência | Séries por segundo; médias por fase (estável, recuperação, pós-recuperação) |
 | Tuplas e inconsistências | Tuplas carregadas (incrementais e sob demanda) e falhas de carga |
 
@@ -190,8 +191,8 @@ Mais casos em [docs/instalacao.md](docs/instalacao.md#solução-de-problemas).
 
 ## Limitações conhecidas
 
-- **Validação da recuperação instantânea sob alta concorrência.** Se uma chave é carregada sob demanda no mesmo instante em que o restaurador a carrega, a contagem a registra como inconsistência e o ensaio pode ser marcado como falho. Ocorreu em 1 de 6 ensaios IRAIL numa máquina rápida de 2 núcleos; não ocorreu na máquina virtual usada nos experimentos. Detalhes em [docs/compatibilidade-ubuntu-24.md](docs/compatibilidade-ubuntu-24.md).
-- **Tempos dependem da máquina.** A mesma base levou cerca de 242 s para ser recuperada (IRAIL) na máquina virtual e cerca de 11 s numa máquina física. Compare apenas ensaios feitos no mesmo ambiente.
+- **Validação da recuperação instantânea sob alta concorrência.** Se uma chave é carregada sob demanda no mesmo instante em que o restaurador a carrega, a contagem a registra como inconsistência e o ensaio pode ser marcado como falho. Ocorreu em 1 de 6 ensaios com recuperação instantânea numa máquina rápida de 2 núcleos; não ocorreu na máquina virtual usada nos experimentos. Detalhes em [docs/compatibilidade-ubuntu-24.md](docs/compatibilidade-ubuntu-24.md).
+- **Tempos dependem da máquina.** A mesma base levou cerca de 242 s para ser recuperada (recuperação instantânea) na máquina virtual e cerca de 11 s numa máquina física. Compare apenas ensaios feitos no mesmo ambiente.
 - **Cache do sistema operacional.** A base é restaurada do backup antes de cada Start, então o log costuma estar no cache de disco (cache quente). Isso é registrado no relatório.
 - **Somente Linux.** O controle de processos e o monitoramento usam `fuser`, `lsof` e `top`.
 
@@ -203,7 +204,6 @@ O MM-DIRECT é desenvolvido como ferramenta de instrumentação e coleta de dado
 * **Primeira versão do painel de monitoramento** (2023–2024): Manoel Rocha ([@ManoelRochadev](https://github.com/ManoelRochadev)) e Airck Lima ([@AirckLima](https://github.com/AirckLima)). O histórico de commits dessa fase está preservado no repositório anterior do projeto.
 * **Desenvolvimento atual do MM-DIRECT**: Cleriston ([@cleristoncramos](https://github.com/cleristoncramos)).
 
-Referência do protocolo experimental: ARAÚJO, Arlino Henrique Magalhães de. *Main Memory Database Instant Recovery*. Tese (Doutorado em Ciência da Computação) – Universidade Federal do Ceará, Fortaleza, 2022.
 
 ## Licença
 

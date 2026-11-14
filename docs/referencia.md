@@ -20,7 +20,7 @@ O Redis-IR grava cada marco do experimento no log em duas linhas: `EVENT <NOME> 
 | `FAILURE_TIMER_STARTED` | Temporizador da falha armado | `durationMs`, `durationSeconds` |
 | `FAILURE_TRIGGERED` | Falha simulada; o processo vai reiniciar | |
 | `RUN_CONTINUED_AFTER_FAILURE` | Processo reiniciado reconhece o mesmo ensaio | `runStartUs` |
-| `RECOVERY_STARTED` | Início da recuperação | `technique` (SRSL) ou `expectedTuples` (IR) |
+| `RECOVERY_STARTED` | Início da recuperação | `recovery` (`standard`, na recuperação padrão) ou `expectedTuples` (na instantânea) |
 | `WORKLOAD_RESUMED` | Carga reenviada após o reinício | |
 | `RECOVERY_COMPLETED` | Fim da recuperação | `durationMs`, `loadedTuples`, `recordsProcessed`, `inconsistencies` |
 | `RECOVERY_FAILED` | Validação da recuperação falhou | `reason` |
@@ -59,8 +59,8 @@ O arquivo fica na raiz do projeto e é reescrito pelo painel a cada Start e a ca
 | Parâmetro | Efeito |
 | --- | --- |
 | `aof_filename` | Caminho do log sequencial (`logs/sequentialLog.aof`) |
-| `instant_recovery_state` | `ON` = recuperação instantânea (IRAIL/IRSIL); `OFF` = recuperação padrão (SRSL) |
-| `instant_recovery_synchronous` | `ON` = indexação síncrona (IRSIL); `OFF` = assíncrona (IRAIL) |
+| `instant_recovery_state` | `ON` = recuperação instantânea; `OFF` = recuperação padrão |
+| `instant_recovery_synchronous` | `ON` = indexação síncrona; `OFF` = assíncrona (padrão) |
 | `indexedlog_structure` | Estrutura do log indexado (`BTREE`) |
 | `indexedlog_filename` | Caminho do log indexado (`logs/indexedLog.db`) |
 | `starts_log_indexing` | Início da indexação assíncrona: antes (`B`) ou depois (`A`) da recuperação |
