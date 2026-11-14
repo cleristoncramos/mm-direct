@@ -63,10 +63,6 @@ export interface RunMetrics {
     hasTelemetry: boolean;
     /** Modo de recuperação: instantânea (log indexado) ou padrão (log sequencial) */
     recoveryMode: RecoveryMode;
-    /** Fim da carga submetida de novo após a falha (s desde o início) */
-    workloadEndAt: number | null;
-    /** "Workload runtime" da tese: da falha até o fim da carga (s) */
-    workloadRunS: number | null;
 }
 
 export type RecoveryMode = "instant" | "standard";
@@ -104,7 +100,6 @@ export const computeRunMetrics = (run: any, telemetry: any | null, tag: string):
     const failureAt = relSec(events.FAILURE_TRIGGERED, runStartUs);
     const recoveryStartAt = relSec(events.RECOVERY_STARTED, runStartUs);
     const recoveryEndAt = relSec(events.RECOVERY_COMPLETED, runStartUs);
-    const workloadEndAt = relSec(events.WORKLOAD_FINISHED ?? events.WORKLOAD_STOPPED, runStartUs);
 
     const rows = (arr: any[] | undefined, col: number, scale = 1): XY[] =>
         Array.isArray(arr) ? arr.map((r) => ({ x: Number(r[0]), y: Number(r[col]) * scale })).filter((p) => Number.isFinite(p.x) && Number.isFinite(p.y)) : [];
@@ -145,8 +140,6 @@ export const computeRunMetrics = (run: any, telemetry: any | null, tag: string):
         series: { throughput, cpu, memoryMb },
         hasTelemetry: throughput.length > 0 || cpu.length > 0,
         recoveryMode: recoveryModeOf(run),
-        workloadEndAt,
-        workloadRunS: failureAt !== null && workloadEndAt !== null && workloadEndAt > failureAt ? workloadEndAt - failureAt : null,
     };
 };
 
@@ -190,7 +183,6 @@ export const METRIC_ROWS: MetricRow[] = [
     { key: "recoveryS", label: U("Recovery", "Recuperação"), unit: U("s"), decimals: 3, get: (m) => m.recoveryS, source: "RECOVERY_STARTED → RECOVERY_COMPLETED", group: "times" },
     { key: "recoveryCountS", label: U("  · counting the log", "  · contagem do log"), unit: U("s"), decimals: 3, get: (m) => m.recoveryCountS, source: "RECOVERY_STARTED → PRELOAD_INDEX_OPEN", group: "times" },
     { key: "recoveryReadS", label: U("  · reading the log", "  · leitura do log"), unit: U("s"), decimals: 3, get: (m) => m.recoveryReadS, source: "PRELOAD_INDEX_OPEN → RECOVERY_COMPLETED", group: "times" },
-    { key: "workloadRunS", label: U("Workload runtime after the failure", "Execução da carga após a falha"), unit: U("s"), decimals: 3, get: (m) => m.workloadRunS, source: "FAILURE_TRIGGERED → WORKLOAD_FINISHED", group: "times" },
     { key: "preloadRate", label: U("Log read rate, preload", "Taxa de leitura do log, preload"), unit: U("records/s", "registros/s"), decimals: 0, get: (m) => m.preloadRate, source: "registros / tempo de leitura", group: "data" },
     { key: "recoveryRate", label: U("Log read rate, recovery", "Taxa de leitura do log, recuperação"), unit: U("records/s", "registros/s"), decimals: 0, get: (m) => m.recoveryRate, source: "registros / tempo de leitura", group: "data" },
     { key: "preloadedTuples", label: U("Tuples loaded in preload", "Tuplas no preload"), unit: U(""), decimals: 0, get: (m) => m.preloadedTuples, source: "PRELOAD_COMPLETED.loadedTuples", group: "data" },

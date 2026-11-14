@@ -132,7 +132,6 @@ O guia completo da interface está em [docs/guia-de-uso.md](docs/guia-de-uso.md)
 | Operação estável até a falha | Do início da operação estável até a falha simulada |
 | Intervalo falha → recuperação | Da falha ao início da recuperação (inclui o reinício do processo) |
 | Tempo de recuperação | Do início ao fim da recuperação. Na recuperação instantânea, o banco já atende durante esse período; na padrão, não |
-| Execução da carga após a falha | Da falha até o fim da carga reenviada (*workload runtime*) |
 | Vazão, CPU, memória, latência | Séries por segundo; médias por fase (estável, recuperação, pós-recuperação) |
 | Tuplas e inconsistências | Tuplas carregadas (incrementais e sob demanda) e falhas de carga |
 

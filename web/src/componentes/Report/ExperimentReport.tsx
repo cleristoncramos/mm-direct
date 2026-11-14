@@ -198,10 +198,6 @@ export const buildTimeline = (ev: Record<string, ReportEvent>, runStartUs: numbe
             const r = relSecOf(e, runStartUs);
             if (r !== null) detail = `${en ? "Since failure" : "Desde a falha"}: ${sec(r - failureAt)}`;
         }
-        if ((t.event === "WORKLOAD_FINISHED" || t.event === "WORKLOAD_STOPPED") && failureAt !== null) {
-            const r = relSecOf(e, runStartUs);
-            if (r !== null) detail = `${en ? "Workload runtime after the failure" : "Execução da carga após a falha"}: ${sec(r - failureAt)}`;
-        }
         return { event: t.event, label: en ? t.labelEn : t.label, rel: relSecOf(e, runStartUs), clock: clock(e.timestampUs), detail };
     }).sort((a, b) => (a.rel ?? Infinity) - (b.rel ?? Infinity));
 };
@@ -312,9 +308,6 @@ const ExperimentReport = ({ data, active = true }: { data: ExperimentReportData 
     const stableS = stableStart !== null && failureAt !== null ? failureAt - stableStart : null;
     const recStart = relSecOf(ev.RECOVERY_STARTED, runStartUs);
     const downtimeS = failureAt !== null && recStart !== null ? recStart - failureAt : null;
-    // "Workload runtime" da tese: da falha até o fim da carga submetida de novo no reinício
-    const workloadEnd = relSecOf(ev.WORKLOAD_FINISHED ?? ev.WORKLOAD_STOPPED, runStartUs);
-    const workloadRunS = failureAt !== null && workloadEnd !== null && workloadEnd > failureAt ? workloadEnd - failureAt : null;
 
     const cfg = data?.config || {};
     const failureMode = Number(cfg.restartAfterTime) > 0 ? "Por tempo" : Number(cfg.preloadDatabaseAndRestart) > 0 ? "Após o preload" : "Sem falha simulada";
@@ -393,9 +386,6 @@ const ExperimentReport = ({ data, active = true }: { data: ExperimentReportData 
                             <tr><Td>Tuplas carregadas na recuperação</Td><Td mono>{brInt(ev.RECOVERY_COMPLETED?.loadedTuples)}</Td><Td>RECOVERY_COMPLETED</Td></tr>
                             {data.recoverySplit && num(data.recoverySplit.onDemand) !== null && (
                                 <tr><Td>&nbsp;&nbsp;· incrementalmente / sob demanda</Td><Td mono>{brInt(data.recoverySplit.incremental)} / {brInt(data.recoverySplit.onDemand)}</Td><Td>Log do Redis-IR (DB loaded from Indexed Log)</Td></tr>
-                            )}
-                            {workloadRunS !== null && (
-                                <tr><Td>{ev.WORKLOAD_FINISHED ? "Execução da carga após a falha" : "Execução da carga após a falha (interrompida)"}</Td><Td mono>{brSec(workloadRunS)}</Td><Td>{ev.WORKLOAD_FINISHED ? "FAILURE_TRIGGERED → WORKLOAD_FINISHED" : "FAILURE_TRIGGERED → WORKLOAD_STOPPED"}</Td></tr>
                             )}
                             <tr><Td>Registros do log processados na recuperação</Td><Td mono>{brInt(ev.RECOVERY_COMPLETED?.recordsProcessed)}</Td><Td>RECOVERY_COMPLETED</Td></tr>
                             <tr><Td>Inconsistências na recuperação</Td><Td mono>{brInt(ev.RECOVERY_COMPLETED?.inconsistencies)}</Td><Td>RECOVERY_COMPLETED</Td></tr>

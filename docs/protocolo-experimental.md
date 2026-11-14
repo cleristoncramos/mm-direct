@@ -36,7 +36,6 @@ A carga é **reenviada inteira** após cada reinício. O ensaio termina quando e
 | Operação estável até a falha | `STABLE_OPERATION_STARTED` → `FAILURE_TRIGGERED` | Deve ser igual ao configurado (ex.: 30 s) |
 | Intervalo falha → recuperação | `FAILURE_TRIGGERED` → `RECOVERY_STARTED` | Tempo de reinício do processo, incluindo o atraso configurado |
 | Tempo de recuperação | `RECOVERY_STARTED` → `RECOVERY_COMPLETED` | Na recuperação instantânea, o banco atende durante todo esse intervalo; na padrão, fica indisponível |
-| Execução da carga após a falha | `FAILURE_TRIGGERED` → `WORKLOAD_FINISHED` | *Workload runtime*: a medida principal de desempenho percebido pelo cliente |
 | Tuplas carregadas | `RECOVERY_COMPLETED` | Na recuperação instantânea, dividida em incrementais e sob demanda |
 | Registros processados | `RECOVERY_COMPLETED` | Registros do log lidos na recuperação |
 | Inconsistências | `RECOVERY_COMPLETED` | Cargas que não puderam ser aplicadas (veja a seção 5) |
@@ -50,7 +49,6 @@ Todos os instantes vêm de eventos `EVENT_JSON` com resolução de microssegundo
 O tempo de recuperação **não mede a mesma coisa** nos dois modos. Na recuperação instantânea, ela acontece com o banco já atendendo. Na padrão, o banco fica fora do ar até o fim. Para comparar disponibilidade e desempenho percebido, use:
 
 - **o intervalo até o banco voltar a atender**: falha → `WORKLOAD_RESUMED`;
-- **a execução da carga após a falha** (*workload runtime*);
 - **a curva de vazão alinhada no instante da falha** (comparação com *Align at failure*).
 
 ## 3. Planejamento de um experimento
