@@ -1,194 +1,210 @@
-# MM-DIRECT: Banco de Dados em Memória com Recuperação Instantânea
+# MM-DIRECT
 
-## Visão Geral
+**Bancada experimental para recuperação instantânea de bancos de dados em memória.**
 
-O MM-DIRECT é uma extensão experimental de banco de dados em memória baseada no ecossistema Redis, cujo foco reside na otimização e validação científica do mecanismo de recuperação instantânea após falhas. Diferente dos métodos de persistência tradicionais, que exigem o carregamento completo do log de operações (AOF) antes de liberar o banco de dados para novas conexões, o MM-DIRECT emprega uma estrutura de indexação paralela baseada em árvore (B-Tree) implementada com suporte a Berkeley DB. Esta abordagem permite que a instância do banco de dados volte a aceitar conexões e processar novas transações quase que imediatamente após a inicialização, enquanto a recuperação das tuplas remanescentes ocorre de forma incremental e sob demanda em segundo plano.
+O MM-DIRECT executa, mede e compara a recuperação de um banco de dados em memória após uma falha. O núcleo é o **Redis-IR**, uma versão do Redis 5.0.7 que acrescenta um **log indexado** (árvore B+ da Berkeley DB). Com ele, o banco volta a atender clientes logo após reiniciar, enquanto as tuplas são carregadas em segundo plano (incrementalmente) ou quando um cliente pede (sob demanda).
 
-O projeto integra um backend de controle e telemetria acoplado a um frontend interativo para permitir a instrumentação científica, simulação controlada de ciclos de falha e recuperação, medição de métricas de uso de recursos e comparação analítica de cenários experimentais.
+Sobre esse núcleo, o MM-DIRECT acrescenta um painel web (o *Workbench*). Ele serve para configurar o experimento, simular falhas, acompanhar vazão, CPU, memória e latência em tempo real, guardar o histórico e gerar relatórios e comparações em PDF.
 
-## Objetivo Científico
+---
 
-O principal propósito científico do MM-DIRECT é avaliar e contrastar o desempenho temporal de esquemas de recuperação instantânea contra abordagens tradicionais de restauração sequencial (AOF/RDB). O sistema serve de plataforma para a pesquisa de modelos de consistência híbrida, mensurando o tempo necessário para o restabelecimento da estabilidade transacional, a taxa de vazão (throughput) durante a fase de degradação por falha e a sobrecarga imposta sobre a CPU e a memória RAM devido ao indexador concorrente.
+## Sumário
 
-A reprodutibilidade é tratada como pilar central, fornecendo ferramentas padronizadas para capturar dados finos de latência física e speedup em microsegundos do sistema, eliminando flutuações e viabilizando a validação de hipóteses de pesquisa sobre sistemas de banco de dados não voláteis (NVM) e recuperação instantânea.
+1. [Técnicas de recuperação comparadas](#técnicas-de-recuperação-comparadas)
+2. [Arquitetura](#arquitetura)
+3. [Requisitos](#requisitos)
+4. [Instalação](#instalação)
+5. [Execução](#execução)
+6. [Uso em cinco passos](#uso-em-cinco-passos)
+7. [O que é medido](#o-que-é-medido)
+8. [Estrutura do repositório](#estrutura-do-repositório)
+9. [Documentação detalhada](#documentação-detalhada)
+10. [Problemas comuns](#problemas-comuns)
+11. [Limitações conhecidas](#limitações-conhecidas)
+12. [Contexto acadêmico e créditos](#contexto-acadêmico-e-créditos)
 
-## Principais Funcionalidades
+---
 
-* Execução manual e controlada do ciclo de vida do experimento (inicialização, aplicação de carga sintética, simulação de queda abrupta e recuperação incremental).
-* Dashboard analítico em tempo real com gráfico principal de vazão (Throughput) e gráficos auxiliares síncronos de consumo de CPU, consumo de memória RAM e latência das operações em nível de microsegundos.
-* Marcação automatizada de marcos temporais: tempo até a falha, início da recuperação física do indexador, fim do carregamento do banco de dados e retorno do sistema à estabilidade operacional.
-* Persistência histórica dos ensaios em estruturas cronológicas identificadas por carimbo de data/hora (timestamps).
-* Módulo comparador de rodadas para contraste visual de curvas de vazão, análise de speedup de recuperação e sobreposição gráfica de múltiplos cenários.
-* Exportação de dados consolidados do ensaio em formatos padronizados (JSON) e emissão de relatórios científicos em formato PDF seguindo formatação acadêmica.
+## Técnicas de recuperação comparadas
 
-## Arquitetura Geral do Sistema
+| Sigla | Nome no painel | Como o banco é recuperado após a falha |
+| --- | --- | --- |
+| **IRAIL** | Instant | Recuperação instantânea com **log indexado assíncrono**. O banco atende clientes logo após reiniciar; as tuplas vêm do log indexado em segundo plano e sob demanda. A indexação do log ocorre fora do caminho da transação. |
+| **IRSIL** | Instant (sync) | Igual à IRAIL, mas com **indexação síncrona**: cada escrita espera ser indexada antes de confirmar. |
+| **SRSL** | Standard | Recuperação **padrão** do Redis: o log sequencial (AOF) é relido inteiro; o banco só atende clientes depois do fim da leitura. |
 
-A arquitetura do MM-DIRECT baseia-se em um modelo integrado de três camadas, operando inteiramente em ambiente local para mitigar latências de rede nas medições:
+As siglas seguem a tese de doutorado de Araújo (2022), que deu origem ao Redis-IR. A tese também é a referência para o protocolo experimental e para o formato dos gráficos.
 
-1. **Camada de Banco de Dados (Redis-IR):** Núcleo escrito em C que implementa a lógica do motor de banco de dados em memória, a indexação B-Tree com Berkeley DB e a lógica de recuperação incremental (on-demand e incremental loading threads).
-2. **Camada de Controle e Telemetria (Backend):** Servidor local desenvolvido em Node.js responsável por gerenciar a configuração dinâmica do Redis (`redis_ir.conf`), controlar o processo do servidor via chamadas de sistema, processar arquivos de logs e telemetria (CSV), e transmitir os dados para a interface via conexões estáveis de WebSockets.
-3. **Camada de Apresentação (Frontend):** Dashboard desenvolvido em React, TypeScript e Tailwind CSS, que consome as transmissões do backend via WebSockets para desenhar os gráficos em tempo real utilizando componentes locais baseados em Chart.js, permitindo a operação do ensaio e a exportação dos artefatos.
-
-## Tecnologias Utilizadas
-
-* **Motor de Banco de Dados:** C (base de código Redis-IR), Berkeley DB (libdb-dev)
-* **Backend de Controle:** Node.js, Express, WS (WebSockets), Tail (monitoramento de arquivos de log)
-* **Frontend Analítico:** React, TypeScript, Vite, Tailwind CSS, Chart.js, React-Chartjs-2
-* **Ambiente de Validação:** Ubuntu Linux (foco em distribuições baseadas em Debian)
-
-## Estrutura do Repositório
+## Arquitetura
 
 ```
-.
-├── _arquivo                    # Material histórico (scripts, logs e testes antigos); não usado pelo sistema
-├── docs                        # Documentação de apoio
-│   ├── manuais                 # Manuais do Redis-IR (pt-br e en) e opções do memtier_benchmark
-│   ├── imagens                 # Gráficos de referência do Redis-IR
-│   └── exemplos-relatorios     # Exemplos de relatório e comparação em PDF gerados pelo painel
-├── config-mm-direct.js         # Módulo de parametrização do arquivo de configuração do Redis
-├── package.json                # Gerenciamento de scripts e dependências do backend
-├── redis.conf                  # Configuração base padrão do Redis
-├── redis_ir.conf               # Configuração ativa modificada pelo painel de setup
-├── server.js                   # Servidor backend de controle e streaming de dados
-├── src                         # Código-fonte do banco de dados MM-DIRECT (C)
-│   ├── Makefile                # Diretivas de compilação da base do Redis
-│   ├── instant_recovery.c      # Mecanismo principal de recuperação e threads do restorer
-│   ├── logs                    # Log sequencial (AOF) e log indexado em uso pelo Redis-IR
-│   ├── backups                 # Base experimental salva, restaurada a cada START
-│   ├── datasets                # Diretório temporário do pipeline de telemetria
-│   │   └── datasets.csv        # Telemetria padronizada de comandos e tempos
-│   ├── system_monitoring       # Diretório de telemetria de recursos
-│   │   └── system_monitoring.csv # Uso de CPU e RAM coletado do sistema operacional
-│   └── runs                    # Persistência histórica dos ensaios realizados
-│       └── run_<timestamp>     # Diretório individual de um ensaio específico
-│           ├── datasets.csv    # Cópia da telemetria de throughput do ensaio
-│           ├── logs.txt        # Logs de console capturados do redis-server
-│           ├── metadata.json   # Parâmetros experimentais submetidos no setup
-│           ├── results.json    # Marcos analíticos identificados no ensaio
-│           ├── system_monitoring.csv # Telemetria de CPU e RAM do ensaio
-│           └── export
-│               └── report.json # Consolidado estruturado para exportação científica
-└── web                         # Código-fonte da aplicação frontend (React)
-    ├── package.json            # Dependências e scripts do painel de controle
-    ├── src                     # Componentes e views da interface gráfica
-    └── vite.config.ts          # Arquivo de configuração de empacotamento do Vite
+┌──────────────────────────── Navegador ────────────────────────────┐
+│  Workbench (React + TypeScript + Vite + Tailwind + Chart.js)      │
+│  http://localhost:5173                                             │
+└──────────────┬───────────────────────────────▲─────────────────────┘
+               │ HTTP (configuração, histórico)│ WebSocket (telemetria, eventos)
+┌──────────────▼───────────────────────────────┴─────────────────────┐
+│  Backend de controle (Node.js + Express + ws) — server.js :8081   │
+│  • grava o redis_ir.conf  • inicia/encerra o redis-server          │
+│  • lê os CSV e o log do Redis-IR  • salva cada ensaio em src/runs │
+└──────────────┬─────────────────────────────────────────────────────┘
+               │ processo filho (RUN_ID no ambiente)
+┌──────────────▼─────────────────────────────────────────────────────┐
+│  Redis-IR (C) — src/redis-server :6379                             │
+│  • log sequencial (AOF)  • log indexado (Berkeley DB, B+-tree)     │
+│  • indexador, checkpointer, restaurador, falha simulada            │
+│  • dispara o memtier_benchmark como carga de trabalho              │
+└────────────────────────────────────────────────────────────────────┘
 ```
 
-## Pré-requisitos
+Detalhes de cada camada estão em [docs/arquitetura.md](docs/arquitetura.md).
 
-Para preparar o ambiente de execução no Ubuntu Linux, instale as dependências de compilação e as bibliotecas de desenvolvimento de banco de dados necessárias:
+## Requisitos
+
+| Item | Versão verificada | Observação |
+| --- | --- | --- |
+| Sistema operacional | **Ubuntu 24.04 LTS** (também roda no 20.04) | Testado em máquina virtual (VirtualBox) e em instalação limpa, em 14/11/2026 |
+| Compilador | GCC 13.3 (`build-essential`) | |
+| Berkeley DB | 5.3.28 (`libdb-dev`) | Log indexado |
+| libconfig | 1.5 (`libconfig-dev`) | Leitura do `redis_ir.conf` |
+| memtier_benchmark | 1.3.0 (código em `src/memtier_benchmark`) | Precisa de `libevent-dev`, `libssl-dev`, `zlib1g-dev`, `libpcre3-dev` e autotools |
+| Node.js | 18 ou mais novo | Backend e painel |
+| Utilitários | `psmisc` (`fuser`), `lsof`, `top` (procps) | Liberação de portas e monitoramento de CPU/memória |
+
+O relatório de compatibilidade com o Ubuntu 24.04 está em [docs/compatibilidade-ubuntu-24.md](docs/compatibilidade-ubuntu-24.md).
+
+## Instalação
 
 ```bash
+# 1. Pacotes do sistema
 sudo apt-get update
-sudo apt-get install build-essential libdb-dev nodejs npm
-```
+sudo apt-get install build-essential libdb-dev libconfig-dev \
+  autoconf automake libtool pkg-config libevent-dev libssl-dev zlib1g-dev libpcre3-dev \
+  psmisc lsof nodejs npm
 
-*Nota: Certifique-se de que o gerenciador de pacotes do Node.js (npm) e o Node.js correspondam a versões de suporte de longo prazo estáveis (LTS).*
-
-## Como Executar no Ubuntu
-
-### Passo 1: Compilação do Banco de Dados (Redis-IR)
-
-Compile os binários do Redis-IR na pasta raiz do projeto usando as diretivas do Makefile:
-
-```bash
+# 2. Redis-IR (na raiz do projeto)
+cd ~/Documentos/projeto/MM-DIRECT
+make distclean   # só necessário se já houve uma compilação anterior
 make
-```
 
-Para compilar apenas os binários específicos do servidor na subpasta `src`:
+# 3. memtier_benchmark — precisa ficar no PATH, pois o Redis-IR o chama pelo nome
+cd src/memtier_benchmark
+autoreconf -ivf
+./configure
+make
+sudo make install
+memtier_benchmark --version     # deve mostrar 1.3.0
 
-```bash
-cd src
-make redis-server
-cd ..
-```
-
-### Passo 2: Inicialização do Backend de Controle
-
-Instale as dependências do Node.js a partir da raiz do projeto e inicie o servidor de controle:
-
-```bash
+# 4. Dependências do backend (as do painel são instaladas na primeira execução)
+cd ~/Documentos/projeto/MM-DIRECT
 npm install
+```
+
+Passo a passo comentado, verificação e solução de erros de instalação: [docs/instalacao.md](docs/instalacao.md).
+
+## Execução
+
+```bash
+cd ~/Documentos/projeto/MM-DIRECT
 npm start
 ```
 
-*Nota: O script de inicialização do backend finaliza processos órfãos nas portas de controle de forma síncrona antes de liberar a execução do servidor.*
+O `npm start` libera as portas 6379 e 8081 (pede a senha do `sudo`), inicia o backend e, a partir dele, o painel. Abra **http://localhost:5173** no navegador. Não é preciso rodar `npm run dev` em outro terminal.
 
-### Passo 3: Inicialização da Interface Analítica (Frontend)
+Sempre que alterar arquivos em `src/*.c`, recompile com `make` antes do `npm start`.
 
-Abra outro terminal, navegue até a pasta do frontend, instale as dependências e inicie o servidor de desenvolvimento do Vite:
+## Uso em cinco passos
 
-```bash
-cd web
-npm install
-npm run dev
+1. **Base de dados.** Na seção *Indexed database* da barra lateral, escolha o tamanho (Small, Medium, Large ou X-Large) e use a base da biblioteca ou gere uma nova com *Load database*. A base é restaurada automaticamente antes de cada experimento.
+2. **Experimento.** Na seção *Experiment*, escolha a técnica (Instant, Instant (sync) ou Standard), o checkpoint e a falha simulada (instante e número de falhas). Os demais parâmetros ficam em *Advanced settings*.
+3. **Start.** O painel mostra a fase atual (Preload, Stable operation, Simulated failure, Restart, Recovering, Running after recovery) e desenha a vazão, CPU, memória e latência em tempo real.
+4. **Fim.** O experimento termina sozinho quando a carga reenviada após a última falha acaba. *End experiment* interrompe antes, se necessário.
+5. **Histórico.** Em *History*, cada ensaio tem relatório em PDF, exportação em JSON/CSV, anotações e comparação de até três ensaios (RUN A, B e C), com as curvas alinhadas no início ou no instante da falha.
+
+O guia completo da interface está em [docs/guia-de-uso.md](docs/guia-de-uso.md).
+
+## O que é medido
+
+| Medida | Definição |
+| --- | --- |
+| Duração do preload | Do início ao fim do carregamento inicial da base na memória |
+| Operação estável até a falha | Do início da operação estável até a falha simulada |
+| Intervalo falha → recuperação | Da falha ao início da recuperação (inclui o reinício do processo) |
+| Tempo de recuperação | Do início ao fim da recuperação. Na IR, o banco já atende durante esse período; na SRSL, não |
+| Execução da carga após a falha | Da falha até o fim da carga reenviada (*workload runtime*, como na tese) |
+| Vazão, CPU, memória, latência | Séries por segundo; médias por fase (estável, recuperação, pós-recuperação) |
+| Tuplas e inconsistências | Tuplas carregadas (incrementais e sob demanda) e falhas de carga |
+
+Todos os tempos vêm de eventos estruturados (`EVENT_JSON`) gravados pelo Redis-IR com resolução de microssegundos. A lista de eventos, os arquivos de cada ensaio e os parâmetros do `redis_ir.conf` estão em [docs/referencia.md](docs/referencia.md). O protocolo experimental está em [docs/protocolo-experimental.md](docs/protocolo-experimental.md).
+
+## Estrutura do repositório
+
+```
+MM-DIRECT/
+├── server.js                 # Backend de controle: API HTTP, WebSockets, ciclo de vida do ensaio
+├── config-mm-direct.js       # Gera o redis_ir.conf a partir da configuração do painel
+├── redis_ir.conf             # Configuração ativa do Redis-IR (reescrita pelo painel a cada Start)
+├── package.json              # Scripts (npm start) e dependências do backend
+├── Makefile                  # Compila src/ e deps/
+├── src/                      # Redis-IR (C)
+│   ├── instant_recovery.c    # Indexador, checkpointer, restaurador, falha simulada, eventos
+│   ├── server.c / server.h   # Núcleo do Redis com o estado do experimento
+│   ├── memtier_benchmark/    # Código do gerador de carga (versão 1.3.0)
+│   ├── logs/                 # (local) log sequencial e log indexado em uso
+│   ├── backups/              # (local) base ativa e biblioteca de bases por tamanho
+│   └── runs/                 # (local) um diretório por ensaio
+├── deps/                     # Dependências do Redis (hiredis, jemalloc, Lua, linenoise)
+├── web/                      # Painel (React + TypeScript + Vite)
+│   └── src/componentes/      # Charts, Form (barra lateral), History, Report (PDF)
+├── docs/                     # Documentação, manuais e exemplos de relatório
+├── tests/, utils/            # Testes e utilitários do Redis original
+└── _arquivo/                 # Material histórico, não usado pelo sistema
 ```
 
-Acesse o endereço da aplicação exibido no console (geralmente `http://localhost:5173`) no navegador de sua preferência.
+Pastas marcadas como *(local)* contêm dados gerados na máquina e não vão para o Git (veja `.gitignore`).
 
-## Fluxo de Uso do Experimento
+## Documentação detalhada
 
-A instrumentação científica de um ensaio obedece a um fluxo manual sequencial:
+| Documento | Conteúdo |
+| --- | --- |
+| [docs/instalacao.md](docs/instalacao.md) | Instalação comentada, verificação e erros de compilação |
+| [docs/guia-de-uso.md](docs/guia-de-uso.md) | Cada seção do Workbench e do histórico |
+| [docs/protocolo-experimental.md](docs/protocolo-experimental.md) | Fases do ensaio, métricas, boas práticas para a dissertação |
+| [docs/arquitetura.md](docs/arquitetura.md) | Camadas, fluxo de um ensaio, comunicação entre processos |
+| [docs/referencia.md](docs/referencia.md) | Eventos, arquivos de cada ensaio, parâmetros do `redis_ir.conf`, API do backend |
+| [docs/compatibilidade-ubuntu-24.md](docs/compatibilidade-ubuntu-24.md) | Verificação no Ubuntu 24.04 (14/11/2026) |
+| [docs/manuais/](docs/manuais/) | Manual original do Redis-IR (pt-br e en) e opções do memtier |
+| [docs/exemplos-relatorios/](docs/exemplos-relatorios/) | Exemplos de relatório e comparação em PDF |
 
-1. **Configuração de Parâmetros (Setup):** Na tela inicial do painel de controle, ajuste as abas de parâmetros experimentais (Indexer, Checkpointer, Failure, Memtier, etc.) de acordo com a meta da rodada de testes.
-2. **Inicialização do Ensaio:** Clique no botão **START** para gravar a configuração no `redis_ir.conf` e disparar a execução do servidor `redis-server`. Os WebSockets de monitoramento abrirão conexões ativas.
-3. **Fase Pré-Falha (Carga):** A telemetria iniciará o monitoramento da vazão da carga aplicada pelo `memtier_benchmark` (se configurado como ON) no gráfico de Throughput, além do consumo de CPU e memória RAM. O status indicará "Executando Carga".
-4. **Fase de Falha:** O sistema aplicará a falha física simulada (desligamento forçado controlado). O status mudará para "Falha Simulada" e a curva do Throughput sofrerá queda abrupta até zero.
-5. **Fase de Recuperação:** O servidor é reiniciado automaticamente para restaurar o estado estável. O status mudará para "Recuperando (X%)". O acompanhamento percentual e a barra de progresso do restorer atualizarão na tela de segundo em segundo com base nos registros lidos pelo indexador no Berkeley DB. Durante essa fase, o campo "Tempo de Recuperação" exibe um contador de tempo (cronômetro) do tempo total de recuperação.
-6. **Estabilização:** Após a conclusão total do carregamento pelo indexador, o status transiciona para "Estável". O Throughput de gravação/leitura será plenamente restabelecido e a telemetria será mantida até a finalização da execução.
-7. **Finalização do Experimento:** Clique no botão **RETURN** na barra de navegação. A aplicação enviará um comando de desligamento ordenado ao Redis (`redis-cli shutdown`), fechará os WebSockets e consolidará os resultados salvando os relatórios de forma ordenada na estrutura de pastas físicas de ensaio (`runs`).
+## Problemas comuns
 
-## Parâmetros Experimentais
+| Sintoma | Causa provável | Solução |
+| --- | --- | --- |
+| `fatal error: libconfig.h: No such file or directory` | `libconfig-dev` não instalado | `sudo apt-get install libconfig-dev` |
+| Carga termina em 0,002 s; log mostra `memtier_benchmark: not found` | memtier não instalado no PATH | `cd src/memtier_benchmark && sudo make install` |
+| Experimento não termina depois da recuperação | Backend antigo, sem leitura da saída de erro do memtier | Atualize o código, rode `make` e reinicie o `npm start` |
+| Mudança no C não tem efeito | `redis-server` não recompilado | `make` na raiz e reinicie o `npm start` |
+| `npm` não encontra `package.json` | Comando rodado fora da pasta do projeto | `cd ~/Documentos/projeto/MM-DIRECT` antes do `npm start` |
 
-O comportamento do MM-DIRECT é governado por parâmetros organizados nas seguintes seções de setup:
+Mais casos em [docs/instalacao.md](docs/instalacao.md#solução-de-problemas).
 
-* **Indexer:** Ativação/Desativação da recuperação instantânea (Instant Recovery), execução síncrona/assíncrona e ajuste da taxa de intervalo de indexação (Time interval).
-* **Checkpointer:** Configuração da frequência e limites de persistência em checkpoints físicos no disco para limitar o tempo de restauração do log.
-* **Failure:** Definição da simulação de falha controlada, tempo de atraso de reinicialização (restartAfterTime) e parâmetros de pré-carregamento.
-* **Memtier:** Ativação da carga sintética e passagem de parâmetros do utilitário benchmark (chaves máximas, proporção de comandos e padrões de chave).
-* **System Monitoring:** Frequência de varredura do sistema operacional para acompanhamento de taxas físicas de uso de RAM e CPU.
+## Limitações conhecidas
 
-## Arquivos Gerados por Ensaio
+- **Validação da recuperação instantânea sob alta concorrência.** Se uma chave é carregada sob demanda no mesmo instante em que o restaurador a carrega, a contagem a registra como inconsistência e o ensaio pode ser marcado como falho. Ocorreu em 1 de 6 ensaios IRAIL numa máquina rápida de 2 núcleos; não ocorreu na máquina virtual usada nos experimentos. Detalhes em [docs/compatibilidade-ubuntu-24.md](docs/compatibilidade-ubuntu-24.md).
+- **Tempos dependem da máquina.** A mesma base levou cerca de 242 s para ser recuperada (IRAIL) na máquina virtual e cerca de 11 s numa máquina física. Compare apenas ensaios feitos no mesmo ambiente.
+- **Cache do sistema operacional.** A base é restaurada do backup antes de cada Start, então o log costuma estar no cache de disco (cache quente). Isso é registrado no relatório.
+- **Somente Linux.** O controle de processos e o monitoramento usam `fuser`, `lsof` e `top`.
 
-Ao encerrar cada rodada, o backend de controle cria um diretório autossuficiente em `src/runs/run_<timestamp>/` contendo os seguintes arquivos estruturados:
+## Contexto acadêmico e créditos
 
-| Arquivo | Formato | Descrição |
-| :--- | :--- | :--- |
-| `metadata.json` | JSON | Registro dos parâmetros submetidos nas abas de configuração e modo de recuperação. |
-| `logs.txt` | Texto Plano | Cópia fiel da saída padrão (stdout/stderr) capturada do processo do `redis-server`. |
-| `datasets.csv` | CSV | Registro de carimbos de término e contagem das operações do benchmark executadas ao longo do tempo. |
-| `system_monitoring.csv` | CSV | Telemetria contendo carimbo de tempo, percentual de CPU e consumo de memória RAM do processo. |
-| `results.json` | JSON | Sumário contendo marcos temporais relativos de falha, início de recuperação, fim de recuperação e estabilidade. |
-| `export/report.json` | JSON | Consolidação analítica final com tempos de recuperação absoluto, picos de CPU, pico de RAM e vazão média de transações. |
+O MM-DIRECT é desenvolvido como ferramenta de instrumentação e coleta de dados para pesquisa em bancos de dados em memória e recuperação instantânea na Universidade Federal do Piauí (UFPI).
 
-## Histórico, Comparação e Relatórios
+* **Redis-IR** (recuperação instantânea com log indexado), base do motor de banco de dados: Prof. Arlino Henrique Magalhães de Araújo (UFPI), desenvolvido em sua tese de doutorado.
+* **Primeira versão do painel de monitoramento** (2023–2024): Manoel Rocha ([@ManoelRochadev](https://github.com/ManoelRochadev)) e Airck Lima ([@AirckLima](https://github.com/AirckLima)). O histórico de commits dessa fase está preservado no repositório anterior do projeto.
+* **Desenvolvimento atual do MM-DIRECT**: Cleriston ([@cleristoncramos](https://github.com/cleristoncramos)).
 
-Na aba **Histórico & Comparação** é possível gerenciar a base de dados científicos de rodadas anteriores:
+Referência do protocolo experimental: ARAÚJO, Arlino Henrique Magalhães de. *Main Memory Database Instant Recovery*. Tese (Doutorado em Ciência da Computação) – Universidade Federal do Ceará, Fortaleza, 2022.
 
-* **Controle de Rodadas:** Exibição cronológica de ensaios salvos com opção de visualização detalhada de metadados experimentais.
-* **Comparação Cruzada (A vs B):** Seleção de dois cenários específicos (ex: uma rodada usando recuperação instantânea MM-DIRECT vs outra em recuperação convencional AOF). O sistema plota as curvas de Throughput sobrepostas de ambos os cenários no mesmo gráfico, calcula o speedup absoluto do tempo de restabelecimento transacional e exibe uma tabela comparativa com médias de uso de recursos físicos.
-* **Consolidação de Artefatos:** Acesso rápido ao histórico de relatórios formatados.
+## Licença
 
-## Exportação de Resultados
-
-A exportação de dados científicos pode ser feita na barra superior do Workbench:
-
-* **Exportar JSON:** Download direto do arquivo consolidado de resultados estruturados (`report.json`) do ensaio ativo.
-* **Exportar PDF:** Emissão de relatório científico diagramado sob regras estritas de design acadêmico (estilo IEEE/ACM) contendo metadados completos, tabela detalhada de parâmetros e os gráficos de Throughput, CPU e RAM em alta definição.
-
-## Observações sobre Reprodutibilidade
-
-Para garantir a confiabilidade acadêmica dos experimentos, o MM-DIRECT obedece às seguintes regras operacionais:
-
-* O backend executa uma limpeza e higienização física rigorosa do pipeline (`rm -f sequentialLog.aof` e reinicialização de portas TCP) antes de cada rodada para evitar poluição ou reaproveitamento de dados residuais entre execuções.
-* As escalas de tempo e marcos temporais são calculados no backend tomando como base cronômetros do sistema de alta resolução em microsegundos (`ustime()`), minimizando distorções introduzidas por latência de interface.
-* Os dados brutos salvos na pasta individual do ensaio são gravados de forma imutável assim que o experimento se encerra, servindo como registro auditável das execuções.
-
-## Limitações Conhecidas
-
-* O ambiente experimental de controle e medição de telemetria é otimizado para sistemas operacionais baseados em Unix (Ubuntu Linux), dependendo de chamadas nativas do kernel para amostragem física de processos e fuser de rede.
-* O processo do Redis necessita de privilégios elevados para a correta inicialização em portas locais controladas caso processos residuais não sejam terminados.
-
-## Contexto Acadêmico
-
-O MM-DIRECT foi concebido e implementado como ferramenta de instrumentação e coleta de dados científicos para pesquisas científicas na área de Computação de Alto Desempenho e Bancos de Dados em Memória no âmbito da Universidade Federal do Piauí (UFPI).
+O código derivado do Redis segue a licença BSD de 3 cláusulas do projeto original (arquivo [COPYING](COPYING)).
