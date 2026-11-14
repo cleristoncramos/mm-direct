@@ -1,0 +1,123 @@
+33617:C 29 Sep 2026 17:00:55.616 * Indexed log Environment started!
+33617:C 29 Sep 2026 17:00:55.617 # oO0OoO0OoO0Oo Redis-IR is starting oO0OoO0OoO0Oo: arlino@ufpi.edu.br
+33617:C 29 Sep 2026 17:00:55.617 # Redis version=5.0.7, bits=64, commit=2efa5fd3, modified=1, pid=33617, just started
+33617:C 29 Sep 2026 17:00:55.617 # Warning: no config file specified, using the default config. In order to specify a config file use ./redis-server /path/to/redis.conf
+33617:M 29 Sep 2026 17:00:55.618 * Running mode=standalone, port=6379.
+33617:M 29 Sep 2026 17:00:55.618 # Server initialized
+33617:M 29 Sep 2026 17:00:55.618 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+33617:M 29 Sep 2026 17:00:55.619 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+33617:M 29 Sep 2026 17:00:55.619 * RUN_CONTINUED_AFTER_FAILURE runId=run_1790709874647577 runStartUs=1790709874647577
+33617:M 29 Sep 2026 17:00:55.619 * EVENT_JSON {"event":"RUN_CONTINUED_AFTER_FAILURE","runId":"run_1790709874647577","runStartUs":1790709874647577,"timestampUs":1790712055619178}
+33617:M 29 Sep 2026 17:00:55.635 * The server will be restarted 1 times!
+33617:M 29 Sep 2026 17:00:55.636 * The initial indexing could not start since sequential log was removed! However, it is still possible to recover the database from indexed log.
+33617:M 29 Sep 2026 17:00:55.636 * Ready to accept connections
+33617:M 29 Sep 2026 17:00:55.636 * 
+    The Asynchronous logging is ON!
+    The indexed log replication is OFF!
+    The log corruption is OFF!
+    The checkpoint is ON! The auto tune of time interval of checkpoints is ON!!
+    Memtier benckmark is ON!
+    Report generation is ON!
+    CSV file generation is ON!
+
+33617:M 29 Sep 2026 17:00:55.638 * Generating information about the indexing write ...
+33617:M 29 Sep 2026 17:00:55.639 * Generating information about executed database commands ...
+33617:M 29 Sep 2026 17:00:55.646 * Generating system monitoring ... 
+33617:M 29 Sep 2026 17:00:55.775 * INDEXED_LOG_VALIDATED path=logs/indexedLog.db records=171677 distinct_tuples=1334
+33617:M 29 Sep 2026 17:00:55.775 * EXECUTION_BRANCH INITIAL_PRELOAD
+33617:M 29 Sep 2026 17:00:55.775 * EVENT PRELOAD_STARTED runId=run_1790709874647577 timestamp=1790712055640221 timestampUs=1790712055640221 runStartUs=1790709874647577 relativeMs=2180992.644 benchmark_expected_tuples=5000 indexed_log_distinct_tuples=1334
+33617:M 29 Sep 2026 17:00:55.775 * EVENT_JSON {"event":"PRELOAD_STARTED","runId":"run_1790709874647577","timestampUs":1790712055640221,"runStartUs":1790709874647577,"relativeMs":2180992.644,"expectedTuples":5000,"distinctTuples":1334}
+33617:M 29 Sep 2026 17:00:55.776 * PRELOAD_INDEX_OPEN path=logs/indexedLog.db records=171677
+33617:M 29 Sep 2026 17:00:55.776 * PRELOAD_CURSOR_STARTED
+33617:M 29 Sep 2026 17:00:55.778 * PRELOAD_TUPLE_LOADED key=redisIR-1
+33617:M 29 Sep 2026 17:00:55.779 * PRELOAD_TUPLE_LOADED key=redisIR-10
+33617:M 29 Sep 2026 17:00:55.781 * PRELOAD_TUPLE_LOADED key=redisIR-100
+33617:M 29 Sep 2026 17:00:55.783 * PRELOAD_TUPLE_LOADED key=redisIR-1000
+33617:M 29 Sep 2026 17:00:55.784 * PRELOAD_TUPLE_LOADED key=redisIR-1001
+33617:M 29 Sep 2026 17:00:56.144 * PRELOAD_CURSOR_FINISHED records=171677 tuples=1334
+33617:M 29 Sep 2026 17:00:56.145 * DB loaded from Indexed Log: 0.505 seconds. Number of tuples loaded into memory: 1334 (inclementally = 1334, on-demand = 0). Number of records processed: 171677. Inconsistenes: 0 :)
+33617:M 29 Sep 2026 17:00:56.145 * EVENT PRELOAD_COMPLETED runId=run_1790709874647577 timestamp=1790712056145100 timestampUs=1790712056145100 runStartUs=1790709874647577 relativeMs=2181497.523 durationMs=504.879 loaded_tuples=1334 indexed_log_distinct_tuples=1334 records_processed=171677 inconsistencies=0 duration=0.505s
+33617:M 29 Sep 2026 17:00:56.145 * EVENT_JSON {"event":"PRELOAD_COMPLETED","runId":"run_1790709874647577","timestampUs":1790712056145100,"runStartUs":1790709874647577,"relativeMs":2181497.523,"durationMs":504.879,"loadedTuples":1334,"distinctTuples":1334,"recordsProcessed":171677,"inconsistencies":0}
+33617:M 29 Sep 2026 17:00:56.145 * EVENT STABLE_OPERATION_STARTED runId=run_1790709874647577 timestamp=1790712056145590 timestampUs=1790712056145590 runStartUs=1790709874647577 relativeMs=2181498.013
+33617:M 29 Sep 2026 17:00:56.145 * EVENT_JSON {"event":"STABLE_OPERATION_STARTED","runId":"run_1790709874647577","timestampUs":1790712056145590,"runStartUs":1790709874647577,"relativeMs":2181498.013}
+33617:M 29 Sep 2026 17:00:56.145 * Memtier benchmark (round 1) started! Parameters = " --hide-histogram -n 5000 --key-prefix='redisIR-' --key-minimum=1 --key-maximum=5000 --command='set  __key__ __data__' --command-ratio=5000 --command-key-pattern=S"
+33617:M 29 Sep 2026 17:00:56.145 * EVENT FAILURE_TIMER_STARTED runId=run_1790709874647577 timestamp=1790712056145676 timestampUs=1790712056145676 runStartUs=1790709874647577 relativeMs=2181498.099 durationMs=30000.000 duration_seconds=30
+33617:M 29 Sep 2026 17:00:56.145 * EVENT_JSON {"event":"FAILURE_TIMER_STARTED","runId":"run_1790709874647577","timestampUs":1790712056145676,"runStartUs":1790709874647577,"relativeMs":2181498.099,"durationMs":30000.000,"durationSeconds":30}
+33617:M 29 Sep 2026 17:00:56.145 * Initial database loading completed. Failure timer started: the system is programmed to restart in 30 seconds!
+33617:M 29 Sep 2026 17:00:56.147 * Checkpointer thread started! The first checkpointed wiil start in 0 seconds.
+33617:M 29 Sep 2026 17:00:56.147 * Checkpoint process 1 started! Checkpointing ...
+Writing results to stdout
+[RUN #1] Preparing benchmark client...
+[RUN #1] Launching threads now...
+33617:M 29 Sep 2026 17:00:56.246 * Indexer thread V2 started!
+[RUN #1 1%,   1 secs]  4 threads:       13783 ops,   13699 (avg:   13699) ops/sec, 986.56KB/sec (avg: 986.56KB/sec), 14.41 (avg: 14.41) msec latency[RUN #1 3%,   2 secs]  4 threads:       26192 ops,   12402 (avg:   13052) ops/sec, 902.47KB/sec (avg: 944.63KB/sec), 16.14 (avg: 15.23) msec latency[RUN #1 4%,   3 secs]  4 threads:       38451 ops,   12253 (avg:   12786) ops/sec, 897.44KB/sec (avg: 928.93KB/sec), 16.19 (avg: 15.53) msec latency[RUN #1 4%,   4 secs]  4 threads:       44036 ops,    5575 (avg:   10984) ops/sec, 408.35KB/sec (avg: 798.85KB/sec), 35.65 (avg: 18.09) msec latency[RUN #1 5%,   5 secs]  4 threads:       48694 ops,    4652 (avg:    9719) ops/sec, 340.79KB/sec (avg: 707.32KB/sec), 41.96 (avg: 20.37) msec latency[RUN #1 5%,   6 secs]  4 threads:       52606 ops,    3897 (avg:    8747) ops/sec, 285.44KB/sec (avg: 636.90KB/sec), 52.25 (avg: 22.74) msec latency[RUN #1 6%,   7 secs]  4 threads:       57130 ops,    4518 (avg:    8144) ops/sec, 330.93KB/sec (avg: 593.23KB/sec), 44.44 (avg: 24.46) msec latency[RUN #1 6%,   8 secs]  4 threads:       60787 ops,    3655 (avg:    7583) ops/sec, 267.73KB/sec (avg: 552.60KB/sec), 54.17 (avg: 26.25) msec latency[RUN #1 7%,   9 secs]  4 threads:       65314 ops,    4521 (avg:    7243) ops/sec, 331.16KB/sec (avg: 528.01KB/sec), 44.52 (avg: 27.51) msec latency[RUN #1 7%,  10 secs]  4 threads:       69205 ops,    3887 (avg:    6908) ops/sec, 284.76KB/sec (avg: 503.71KB/sec), 51.46 (avg: 28.86) msec latency[RUN #1 7%,  11 secs]  4 threads:       73288 ops,    4082 (avg:    6651) ops/sec, 298.98KB/sec (avg: 485.12KB/sec), 47.30 (avg: 29.89) msec latency[RUN #1 8%,  12 secs]  4 threads:       77651 ops,    4361 (avg:    6461) ops/sec, 319.42KB/sec (avg: 471.33KB/sec), 46.50 (avg: 30.82) msec latency[RUN #1 8%,  13 secs]  4 threads:       81826 ops,    4170 (avg:    6285) ops/sec, 305.48KB/sec (avg: 458.58KB/sec), 49.16 (avg: 31.76) msec latency[RUN #1 9%,  14 secs]  4 threads:       86897 ops,    5048 (avg:    6196) ops/sec, 369.75KB/sec (avg: 452.22KB/sec), 39.40 (avg: 32.20) msec latency[RUN #1 9%,  15 secs]  4 threads:       92540 ops,    5641 (avg:    6159) ops/sec, 413.18KB/sec (avg: 449.62KB/sec), 35.66 (avg: 32.41) msec latency[RUN #1 10%,  16 secs]  4 threads:       98195 ops,    5651 (avg:    6127) ops/sec, 413.96KB/sec (avg: 447.39KB/sec), 33.82 (avg: 32.49) msec latency[RUN #1 10%,  17 secs]  4 threads:      103605 ops,    5405 (avg:    6085) ops/sec, 395.90KB/sec (avg: 444.36KB/sec), 37.77 (avg: 32.77) msec latency[RUN #1 11%,  18 secs]  4 threads:      108569 ops,    4961 (avg:    6023) ops/sec, 363.41KB/sec (avg: 439.87KB/sec), 40.80 (avg: 33.14) msec latency[RUN #1 11%,  19 secs]  4 threads:      113339 ops,    4766 (avg:    5956) ops/sec, 349.13KB/sec (avg: 435.10KB/sec), 41.54 (avg: 33.49) msec latency[RUN #1 12%,  20 secs]  4 threads:      117939 ops,    4597 (avg:    5889) ops/sec, 336.70KB/sec (avg: 430.18KB/sec), 43.07 (avg: 33.86) msec latency[RUN #1 12%,  21 secs]  4 threads:      121809 ops,    3866 (avg:    5792) ops/sec, 283.22KB/sec (avg: 423.19KB/sec), 51.47 (avg: 34.42) msec latency[RUN #1 13%,  22 secs]  4 threads:      126835 ops,    5024 (avg:    5757) ops/sec, 367.99KB/sec (avg: 420.68KB/sec), 40.37 (avg: 34.66) msec latency[RUN #1 13%,  23 secs]  4 threads:      131619 ops,    4779 (avg:    5715) ops/sec, 350.09KB/sec (avg: 417.61KB/sec), 41.94 (avg: 34.92) msec latency[RUN #1 14%,  24 secs]  4 threads:      136015 ops,    4392 (avg:    5660) ops/sec, 321.74KB/sec (avg: 413.62KB/sec), 44.50 (avg: 35.23) msec latency[RUN #1 14%,  25 secs]  4 threads:      140154 ops,    4137 (avg:    5599) ops/sec, 303.06KB/sec (avg: 409.20KB/sec), 49.23 (avg: 35.65) msec latency[RUN #1 14%,  26 secs]  4 threads:      143631 ops,    3475 (avg:    5517) ops/sec, 254.53KB/sec (avg: 403.26KB/sec), 56.23 (avg: 36.14) msec latency[RUN #1 15%,  27 secs]  4 threads:      147575 ops,    3941 (avg:    5459) ops/sec, 288.71KB/sec (avg: 399.02KB/sec), 51.61 (avg: 36.56) msec latency[RUN #1 15%,  28 secs]  4 threads:      151299 ops,    3721 (33617:M 29 Sep 2026 17:01:26.146 * EVENT FAILURE_TRIGGERED runId=run_1790709874647577 timestamp=1790712086146414 timestampUs=1790712086146414 runStartUs=1790709874647577 relativeMs=2211498.837
+33617:M 29 Sep 2026 17:01:26.146 * EVENT_JSON {"event":"FAILURE_TRIGGERED","runId":"run_1790709874647577","timestampUs":1790712086146414,"runStartUs":1790709874647577,"relativeMs":2211498.837}
+33617:M 29 Sep 2026 17:01:26.146 * Preparing to restart ...
+33617:M 29 Sep 2026 17:01:26.146 * Restarting the system now!
+33617:M 29 Sep 2026 17:01:26.146 # User requested shutdown...
+33617:M 29 Sep 2026 17:01:26.180 * Generation of executed database commands finished! See the file 'src/datasets/datasets.csv' on Redis instalation path. 
+33617:M 29 Sep 2026 17:01:26.199 * Memtier benchmark process was interrupted before its execution was finished !
+33617:M 29 Sep 2026 17:01:26.199 * Checkpoint is disabled and the Checkpointer thread will stop in few minutes!
+33617:M 29 Sep 2026 17:01:26.200 * Memtier benchmark execution finished: 30.055 seconds.
+33617:M 29 Sep 2026 17:01:26.200 * Generating recovery report ...
+33617:M 29 Sep 2026 17:01:26.200 * The recovery report was generated! See the file 'src/recovery_report/recovery_report.txt' on Redis instalation path.
+33617:M 29 Sep 2026 17:01:26.207 * Indexing report generation finished!  See the file 'src/indexing_report/indexing.csv' on Redis instalation path. 
+33617:M 29 Sep 2026 17:01:26.209 # Indexer thread stopped! Number of log records processed = 158272. Number of log records indexed = 158271
+33617:M 29 Sep 2026 17:01:26.261 * The checkpoint process was stopped before finishing! 
+33617:M 29 Sep 2026 17:01:26.270 * Checkpoint process 1 finished!
+33617:M 29 Sep 2026 17:01:26.270 * Checkpointer thread finished!
+33617:M 29 Sep 2026 17:01:26.405 * System monitoring collecting finished! See the file system_monitoring/system_monitoring.csv.
+
+33617:M 29 Sep 2026 17:01:26.407 * The RedisIR threads were cleanly joined and finished!
+33617:M 29 Sep 2026 17:01:26.407 * Calling fsync() on the AOF file.
+33617:M 29 Sep 2026 17:01:26.446 # Redis is now ready to exit, bye bye...
+---------------------------------------------
+REDIS INSTANT RECOVERY
+Arlino Magalhães - arlino@ufpi.edu.br
+---------------------------------------------
+
+
+33617:C 29 Sep 2026 17:01:27.461 * Indexed log Environment started!
+33617:C 29 Sep 2026 17:01:27.461 # oO0OoO0OoO0Oo Redis-IR is starting oO0OoO0OoO0Oo: arlino@ufpi.edu.br
+33617:C 29 Sep 2026 17:01:27.461 # Redis version=5.0.7, bits=64, commit=2efa5fd3, modified=1, pid=33617, just started
+33617:C 29 Sep 2026 17:01:27.461 # Warning: no config file specified, using the default config. In order to specify a config file use /home/cleriston/Documentos/projeto/MM-DIRECT/src/./redis-server /path/to/redis.conf
+33617:M 29 Sep 2026 17:01:27.462 * Running mode=standalone, port=6379.
+33617:M 29 Sep 2026 17:01:27.462 # Server initialized
+33617:M 29 Sep 2026 17:01:27.462 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+33617:M 29 Sep 2026 17:01:27.462 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+33617:M 29 Sep 2026 17:01:27.463 * RUN_CONTINUED_AFTER_FAILURE runId=run_1790709874647577 runStartUs=1790709874647577
+33617:M 29 Sep 2026 17:01:27.463 * EVENT_JSON {"event":"RUN_CONTINUED_AFTER_FAILURE","runId":"run_1790709874647577","runStartUs":1790709874647577,"timestampUs":1790712087463076}
+33617:M 29 Sep 2026 17:01:27.463 * Indexing the remaining log records after the last shutdown/crash ... Wait!
+33617:M 29 Sep 2026 17:01:27.529 * Initial log indexing finished: 0.004 seconds. Number of log records processed = 82. Number of records on indexed log = 80.
+33617:M 29 Sep 2026 17:01:27.529 * Ready to accept connections
+33617:M 29 Sep 2026 17:01:27.529 * 
+    The Asynchronous logging is ON!
+    The indexed log replication is OFF!
+    The log corruption is OFF!
+    The checkpoint is ON! The auto tune of time interval of checkpoints is ON!!
+    Memtier benckmark is ON!
+    Report generation is ON!
+    CSV file generation is ON!
+
+33617:M 29 Sep 2026 17:01:27.532 * Generating system monitoring ... 
+33617:M 29 Sep 2026 17:01:27.548 * Generating information about executed database commands ...
+33617:M 29 Sep 2026 17:01:27.552 * Generating information about the indexing write ...
+33617:M 29 Sep 2026 17:01:27.833 * INDEXED_LOG_VALIDATED path=logs/indexedLog.db records=157098 distinct_tuples=1334
+33617:M 29 Sep 2026 17:01:27.833 * EXECUTION_BRANCH POST_FAILURE_RECOVERY
+33617:M 29 Sep 2026 17:01:27.833 * EVENT RECOVERY_STARTED runId=run_1790709874647577 timestamp=1790712087530799 timestampUs=1790712087530799 runStartUs=1790709874647577 relativeMs=2212883.222 benchmark_expected_tuples=5000 indexed_log_distinct_tuples=1334
+33617:M 29 Sep 2026 17:01:27.833 * EVENT_JSON {"event":"RECOVERY_STARTED","runId":"run_1790709874647577","timestampUs":1790712087530799,"runStartUs":1790709874647577,"relativeMs":2212883.222,"expectedTuples":5000,"distinctTuples":1334}
+33617:M 29 Sep 2026 17:01:27.834 * PRELOAD_INDEX_OPEN path=logs/indexedLog.db records=157098
+33617:M 29 Sep 2026 17:01:27.834 * PRELOAD_CURSOR_STARTED
+33617:M 29 Sep 2026 17:01:27.834 * PRELOAD_TUPLE_LOADED key=redisIR-1
+33617:M 29 Sep 2026 17:01:27.835 * PRELOAD_TUPLE_LOADED key=redisIR-10
+33617:M 29 Sep 2026 17:01:27.835 * PRELOAD_TUPLE_LOADED key=redisIR-100
+33617:M 29 Sep 2026 17:01:27.835 * PRELOAD_TUPLE_LOADED key=redisIR-1000
+33617:M 29 Sep 2026 17:01:27.835 * PRELOAD_TUPLE_LOADED key=redisIR-1001
+33617:M 29 Sep 2026 17:01:28.677 * PRELOAD_CURSOR_FINISHED records=157098 tuples=1334
+33617:M 29 Sep 2026 17:01:28.696 * DB loaded from Indexed Log: 1.166 seconds. Number of tuples loaded into memory: 1334 (inclementally = 1334, on-demand = 0). Number of records processed: 157098. Inconsistenes: 0 :)
+33617:M 29 Sep 2026 17:01:28.696 * EVENT RECOVERY_COMPLETED runId=run_1790709874647577 timestamp=1790712088696456 timestampUs=1790712088696456 runStartUs=1790709874647577 relativeMs=2214048.879 durationMs=1165.657 loaded_tuples=1334 indexed_log_distinct_tuples=1334 records_processed=157098 inconsistencies=0 duration=1.166s
+33617:M 29 Sep 2026 17:01:28.696 * EVENT_JSON {"event":"RECOVERY_COMPLETED","runId":"run_1790709874647577","timestampUs":1790712088696456,"runStartUs":1790709874647577,"relativeMs":2214048.879,"durationMs":1165.657,"loadedTuples":1334,"distinctTuples":1334,"recordsProcessed":157098,"inconsistencies":0}
+33617:M 29 Sep 2026 17:01:28.696 * EVENT THREADS_CLEANUP_COMPLETED runId=run_1790709874647577 timestamp=1790712088696895 timestampUs=1790712088696895 runStartUs=1790709874647577 relativeMs=2214049.318
+33617:M 29 Sep 2026 17:01:28.696 * EVENT_JSON {"event":"THREADS_CLEANUP_COMPLETED","runId":"run_1790709874647577","timestampUs":1790712088696895,"runStartUs":1790709874647577,"relativeMs":2214049.318}
+33617:M 29 Sep 2026 17:01:28.696 * EVENT EXPERIMENT_COMPLETED runId=run_1790709874647577 timestamp=1790712088696904 timestampUs=1790712088696904 runStartUs=1790709874647577 relativeMs=2214049.327
+33617:M 29 Sep 2026 17:01:28.696 * EVENT_JSON {"event":"EXPERIMENT_COMPLETED","runId":"run_1790709874647577","timestampUs":1790712088696904,"runStartUs":1790709874647577,"relativeMs":2214049.327}

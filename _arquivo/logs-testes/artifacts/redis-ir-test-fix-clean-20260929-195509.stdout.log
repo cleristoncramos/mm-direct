@@ -1,0 +1,38 @@
+165430:C 29 Sep 2026 19:55:09.734 * Indexed log Environment started!
+165430:C 29 Sep 2026 19:55:09.735 # oO0OoO0OoO0Oo Redis-IR is starting oO0OoO0OoO0Oo: arlino@ufpi.edu.br
+165430:C 29 Sep 2026 19:55:09.735 # Redis version=5.0.7, bits=64, commit=2efa5fd3, modified=1, pid=165430, just started
+165430:C 29 Sep 2026 19:55:09.735 # Warning: no config file specified, using the default config. In order to specify a config file use ./redis-server /path/to/redis.conf
+165430:M 29 Sep 2026 19:55:09.735 * Running mode=standalone, port=6379.
+165430:M 29 Sep 2026 19:55:09.736 # Server initialized
+165430:M 29 Sep 2026 19:55:09.736 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+165430:M 29 Sep 2026 19:55:09.738 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+165430:M 29 Sep 2026 19:55:09.738 * RUN_STARTED runId=run_1790722509734046 runStartUs=1790722509734046
+165430:M 29 Sep 2026 19:55:09.738 * EVENT_JSON {"event":"RUN_STARTED","runId":"run_1790722509734046","runStartUs":1790722509734046,"timestampUs":1790722509738967}
+165430:M 29 Sep 2026 19:55:09.739 * Preloading the database ...
+165430:M 29 Sep 2026 19:55:09.739 * The server will be restarted 1 time(s)!
+165430:M 29 Sep 2026 19:55:09.739 * Fail to open 'finalLogSeek.dat' file!
+165430:M 29 Sep 2026 19:55:09.739 * Error while openning the BerkeleyDB database! No such file or directory
+165430:M 29 Sep 2026 19:55:09.739 * Cannot open the indexed log1!
+165430:M 29 Sep 2026 19:55:09.798 * The indexing could not start since sequential log file is empty!
+165430:M 29 Sep 2026 19:55:09.798 * Ready to accept connections
+165430:M 29 Sep 2026 19:55:09.798 * 
+    The Asynchronous logging is ON!
+    The indexed log replication is OFF!
+    The log corruption is OFF!
+    The checkpoint is ON! The auto tune of time interval of checkpoints is ON!!
+    Memtier benckmark is ON!
+    Report generation is ON!
+    CSV file generation is ON!
+
+165430:M 29 Sep 2026 19:55:09.801 * INDEXED_LOG_VALIDATED path=logs/indexedLog.db records=0 distinct_tuples=0
+165430:M 29 Sep 2026 19:55:09.801 * EXECUTION_BRANCH INITIAL_PRELOAD
+165430:M 29 Sep 2026 19:55:09.801 * EVENT PRELOAD_STARTED runId=run_1790722509734046 timestamp=1790722509800971 timestampUs=1790722509800971 runStartUs=1790722509734046 relativeMs=66.925 benchmark_expected_tuples=5000 indexed_log_distinct_tuples=0
+165430:M 29 Sep 2026 19:55:09.801 * EVENT_JSON {"event":"PRELOAD_STARTED","runId":"run_1790722509734046","timestampUs":1790722509800971,"runStartUs":1790722509734046,"relativeMs":66.925,"expectedTuples":5000,"distinctTuples":0}
+165430:M 29 Sep 2026 19:55:09.801 * EVENT PRELOAD_FAILED timestamp=1790722509801143 loaded_tuples=0 indexed_log_distinct_tuples=0 records_processed=0 inconsistencies=0 reason="Indexed log file missing or empty (logs/indexedLog.db)"
+165430:M 29 Sep 2026 19:55:09.801 * EVENT EXPERIMENT_FAILED runId=run_1790722509734046 timestamp=1790722509801145 timestampUs=1790722509801145 runStartUs=1790722509734046 relativeMs=67.099 reason="Indexed log contains no tuples for preload"
+165430:M 29 Sep 2026 19:55:09.801 * EVENT_JSON {"event":"EXPERIMENT_FAILED","runId":"run_1790722509734046","timestampUs":1790722509801145,"runStartUs":1790722509734046,"relativeMs":67.099,"reason":"Indexed log contains no tuples for preload"}
+165430:M 29 Sep 2026 19:55:09.801 * Failure timer aborted: Preload or experiment failed.
+165430:M 29 Sep 2026 19:55:09.801 * Generating information about the indexing write ...
+165430:M 29 Sep 2026 19:55:09.801 * Generating system monitoring ... 
+165430:M 29 Sep 2026 19:55:09.802 * Memtier benchmark aborted: Preload failed or experiment failed state.
+165430:M 29 Sep 2026 19:55:09.804 * Generating information about executed database commands ...

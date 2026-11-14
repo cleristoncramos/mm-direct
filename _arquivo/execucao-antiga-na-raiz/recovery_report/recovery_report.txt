@@ -1,0 +1,868 @@
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 0.002604 seconds.
+    Initial indexing end time = 0.003135 seconds.
+    Initial indexing time = 0.000531 seconds.
+
+    Initial number of log records indexed = 102.
+
+    Initial number of log records processed = 103.
+    Recovey start time = 0.045471 seconds.
+    Recovey finish time = 0.083633 seconds.
+    Recovey time = 0.038162 seconds.
+    Tuples loaded into memory incrementally = 102
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 102
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790445184.000000 seconds.
+    Initial indexing end time = 1790445184.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 102.
+
+    Initial number of log records processed = 103.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 102
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 102
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790445824.000000 seconds.
+    Initial indexing end time = 1790445824.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 102.
+
+    Initial number of log records processed = 103.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 102
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 102
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790446336.000000 seconds.
+    Initial indexing end time = 1790446336.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 102.
+
+    Initial number of log records processed = 103.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 102
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 102
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790447360.000000 seconds.
+    Initial indexing end time = 1790447360.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 102.
+
+    Initial number of log records processed = 103.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 102
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 102
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790448384.000000 seconds.
+    Initial indexing end time = 1790448384.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 102.
+
+    Initial number of log records processed = 103.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 102
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 102
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790448512.000000 seconds.
+    Initial indexing end time = 1790448512.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 50.
+
+    Initial number of log records processed = 51.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 50
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 50
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790448512.000000 seconds.
+    Initial indexing end time = 1790448512.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 0.
+
+    Initial number of log records processed = 0.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 220
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 220
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 3.358119 seconds.
+    Initial indexing end time = 3.358523 seconds.
+    Initial indexing time = 0.000404 seconds.
+
+    Initial number of log records indexed = 50.
+
+    Initial number of log records processed = 51.
+    Recovey start time = 3.398098 seconds.
+    Recovey finish time = 3.443304 seconds.
+    Recovey time = 0.045206 seconds.
+    Tuples loaded into memory incrementally = 50
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 50
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790448768.000000 seconds.
+    Initial indexing end time = 1790448768.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 0.
+
+    Initial number of log records processed = 0.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 290
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 290
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 0.002090 seconds.
+    Initial indexing end time = 0.002384 seconds.
+    Initial indexing time = 0.000294 seconds.
+
+    Initial number of log records indexed = 50.
+
+    Initial number of log records processed = 51.
+    Recovey start time = 0.041338 seconds.
+    Recovey finish time = 0.093244 seconds.
+    Recovey time = 0.051906 seconds.
+    Tuples loaded into memory incrementally = 50
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 50
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790448768.000000 seconds.
+    Initial indexing end time = 1790448768.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 0.
+
+    Initial number of log records processed = 0.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 313
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 313
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790448768.000000 seconds.
+    Initial indexing end time = 1790448768.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 0.
+
+    Initial number of log records processed = 0.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 50
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 50
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 0.001930 seconds.
+    Initial indexing end time = 0.002202 seconds.
+    Initial indexing time = 0.000272 seconds.
+
+    Initial number of log records indexed = 50.
+
+    Initial number of log records processed = 51.
+    Recovey start time = 0.042991 seconds.
+    Recovey finish time = 0.060972 seconds.
+    Recovey time = 0.017981 seconds.
+    Tuples loaded into memory incrementally = 50
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 50
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790448896.000000 seconds.
+    Initial indexing end time = 1790448896.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 0.
+
+    Initial number of log records processed = 0.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 216
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 216
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790448896.000000 seconds.
+    Initial indexing end time = 1790448896.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 0.
+
+    Initial number of log records processed = 0.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 50
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 50
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 0.001924 seconds.
+    Initial indexing end time = 0.002104 seconds.
+    Initial indexing time = 0.000180 seconds.
+
+    Initial number of log records indexed = 50.
+
+    Initial number of log records processed = 51.
+    Recovey start time = 0.043293 seconds.
+    Recovey finish time = 0.103454 seconds.
+    Recovey time = 0.060161 seconds.
+    Tuples loaded into memory incrementally = 50
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 50
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790448896.000000 seconds.
+    Initial indexing end time = 1790448896.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 0.
+
+    Initial number of log records processed = 0.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 339
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 339
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790448896.000000 seconds.
+    Initial indexing end time = 1790448896.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 0.
+
+    Initial number of log records processed = 0.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 50
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 50
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 0.001659 seconds.
+    Initial indexing end time = 0.001935 seconds.
+    Initial indexing time = 0.000276 seconds.
+
+    Initial number of log records indexed = 50.
+
+    Initial number of log records processed = 51.
+    Recovey start time = 0.044437 seconds.
+    Recovey finish time = 0.087011 seconds.
+    Recovey time = 0.042574 seconds.
+    Tuples loaded into memory incrementally = 50
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 50
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790449024.000000 seconds.
+    Initial indexing end time = 1790449024.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 0.
+
+    Initial number of log records processed = 0.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 240
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 240
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790449024.000000 seconds.
+    Initial indexing end time = 1790449024.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 0.
+
+    Initial number of log records processed = 0.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 50
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 50
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 0.001631 seconds.
+    Initial indexing end time = 0.001809 seconds.
+    Initial indexing time = 0.000178 seconds.
+
+    Initial number of log records indexed = 50.
+
+    Initial number of log records processed = 51.
+    Recovey start time = 0.042527 seconds.
+    Recovey finish time = 0.060128 seconds.
+    Recovey time = 0.017601 seconds.
+    Tuples loaded into memory incrementally = 50
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 50
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790449024.000000 seconds.
+    Initial indexing end time = 1790449024.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 0.
+
+    Initial number of log records processed = 0.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 275
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 275
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790449152.000000 seconds.
+    Initial indexing end time = 1790449152.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 0.
+
+    Initial number of log records processed = 0.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 50
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 50
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 0.002267 seconds.
+    Initial indexing end time = 0.002661 seconds.
+    Initial indexing time = 0.000394 seconds.
+
+    Initial number of log records indexed = 50.
+
+    Initial number of log records processed = 51.
+    Recovey start time = 0.030547 seconds.
+    Recovey finish time = 0.127562 seconds.
+    Recovey time = 0.097015 seconds.
+    Tuples loaded into memory incrementally = 50
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 50
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790449152.000000 seconds.
+    Initial indexing end time = 1790449152.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 0.
+
+    Initial number of log records processed = 0.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 211
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 211
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+
+DATABASE RECOVERY REPORT
+
+Database restated using indexed log (Instant recovery):
+    Sequential log filename = logs/sequentialLog.aof
+    Data structure of the indexed log = B+-tree
+
+    Indexed log filename = logs/indexedLog.db
+    Asynchronous indexing
+
+    Initial indexing start time = 1790449152.000000 seconds.
+    Initial indexing end time = 1790449152.000000 seconds.
+    Initial indexing time = 0.000000 seconds.
+
+    Initial number of log records indexed = 0.
+
+    Initial number of log records processed = 0.
+    Recovey start time = 0.000000 seconds.
+    Recovey finish time = 0.000000 seconds.
+    Recovey time = 0.000000 seconds.
+    Tuples loaded into memory incrementally = 50
+    Tuples loaded into memory on demand = 0
+    Total of tuples loaded into memory = 50
+    Number of inconsistent load attempts during incremental recovery  = 0
+    Number of inconsistent load attempts during on on-demand recovery  = 0
+    Total of inconsistent load attempts = 0
+    Tuples requested but already loaded previouslly, during recovery = 0
+    Tuples requested but not found in the log, during recovery = 0
+
+
+
+

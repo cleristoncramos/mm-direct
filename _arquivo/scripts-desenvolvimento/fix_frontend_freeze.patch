@@ -1,0 +1,284 @@
+--- web/src/componentes/Charts/ChartBoard.tsx
++++ web/src/componentes/Charts/ChartBoard.tsx
+@@ -121,6 +121,20 @@
+     const timestampsMemory = useRef<number[]>([]);
+     const memoryUsage = useRef<number[]>([]);
+ 
++    // Variáveis de estado mantidas via useRef para evitar reprocessamento O(N^2)
++    const lastParsedLogIndex = useRef<number>(0);
++    const parsedState = useRef({
++        detectedStatus: "Idle",
++        detectedFail: null as number | null,
++        detectedRecStart: null as number | null,
++        detectedRecEnd: null as number | null,
++        detectedStability: null as number | null,
++        recStartUtc: null as string | null,
++        recEndUtc: null as string | null,
++        initLoadEndUtc: null as string | null,
++        initLoadDuration: null as number | null,
++        stableDuration: null as number | null,
++        detectedTuplesLoaded: 0,
++        detectedInitialTuplesLoaded: 0,
++        firstLogUtc: null as string | null,
++    });
++
+     // 1. Detecção automática de marcos e estados a partir dos logs de terminal
+     useEffect(() => {
+         if (terminalLog.length === 0) return;
+ 
+-        let detectedStatus = "Idle";
+-        let detectedFail: number | null = null;
+-        let detectedRecStart: number | null = null;
+-        let detectedRecEnd: number | null = null;
+-        let detectedStability: number | null = null;
+-        let recStartUtc: string | null = null;
+-        let recEndUtc: string | null = null;
+-        let initLoadEndUtc: string | null = null;
+-        let initLoadDuration: number | null = null;
+-        let stableDuration: number | null = null;
+         let detectedTotalTuples = configData?.keyMaximum ? parseInt(configData.keyMaximum, 10) : 5000;
+-        let detectedTuplesLoaded = 0;
+-        let detectedInitialTuplesLoaded = 0;
+ 
++        // Pega os logs novos que ainda não processamos
+         const lines: string[] = [];
+-        terminalLog.forEach((log) => {
++        for (let i = lastParsedLogIndex.current; i < terminalLog.length; i++) {
++            const log = terminalLog[i];
+             log.split("\n").forEach((line) => {
+                 if (line.trim()) lines.push(line);
+             });
+-        });
++        }
++        lastParsedLogIndex.current = terminalLog.length;
+ 
+-        let firstLogUtc: string | null = null;
++        const state = parsedState.current;
+ 
+         lines.forEach((log) => {
+             const text = log.toLowerCase();
+             
+             // Parse tuples loaded into memory
+             const matchTuples = log.match(/Number of tuples loaded into memory:\s*(\d+)/i);
+             if (matchTuples) {
+                 const loadedVal = parseInt(matchTuples[1], 10);
+-                if (detectedFail !== null) {
+-                    if (loadedVal > detectedTuplesLoaded) {
+-                        detectedTuplesLoaded = loadedVal;
++                if (state.detectedFail !== null) {
++                    if (loadedVal > state.detectedTuplesLoaded) {
++                        state.detectedTuplesLoaded = loadedVal;
+                     }
+                 } else {
+-                    if (loadedVal > detectedInitialTuplesLoaded) {
+-                        detectedInitialTuplesLoaded = loadedVal;
++                    if (loadedVal > state.detectedInitialTuplesLoaded) {
++                        state.detectedInitialTuplesLoaded = loadedVal;
+                     }
+                 }
+             }
+             
+             // Extrai timestamp UTC se presente no log
+             const redisTimeRegex = /^\d+:[M|S|C]\s+([\d\s\w\:\.]+)\s+[\*\#\-]/;
+             const matchTime = log.match(redisTimeRegex);
+             let logUtcStr: string | null = null;
+             if (matchTime) {
+                 const parts = matchTime[1].trim().split(/\s+/);
+                 if (parts.length >= 4) {
+                     const day = parseInt(parts[0], 10);
+                     const monthStr = parts[1].toLowerCase();
+                     const year = parseInt(parts[2], 10);
+                     const timeParts = parts[3].split(":");
+                     if (timeParts.length >= 3) {
+                         const hours = parseInt(timeParts[0], 10);
+                         const minutes = parseInt(timeParts[1], 10);
+                         const secondsParts = timeParts[2].split(".");
+                         const seconds = parseInt(secondsParts[0], 10);
+                         const ms = secondsParts[1] ? parseInt(secondsParts[1], 10) : 0;
+ 
+                         const months: { [key: string]: number } = {
+                             jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+                             jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
+                             fev: 1, abr: 3, mai: 4, ago: 7, set: 8, out: 9, dez: 11
+                         };
+ 
+                         const month = months[monthStr.substring(0, 3)];
+                         if (month !== undefined) {
+                             const date = new Date(year, month, day, hours, minutes, seconds, ms);
+                             logUtcStr = date.toISOString();
+-                            if (!firstLogUtc) {
+-                                firstLogUtc = logUtcStr;
++                            if (!state.firstLogUtc) {
++                                state.firstLogUtc = logUtcStr;
+                             }
+                         }
+                     }
+                 }
+             }
+ 
+             const getRelativeSeconds = (utcStr: string | null) => {
+-                if (!utcStr || !firstLogUtc) return null;
+-                const diff = new Date(utcStr).getTime() - new Date(firstLogUtc).getTime();
++                if (!utcStr || !state.firstLogUtc) return null;
++                const diff = new Date(utcStr).getTime() - new Date(state.firstLogUtc).getTime();
+                 return diff / 1000;
+             };
+ 
+             // ─── MÁQUINA DE ESTADOS E FASES ───
+             // 1. Inicialização (servidor iniciando a carga em memória)
+             if (text.includes("indexed log environment started") || text.includes("redis-ir is starting")) {
+-                if (detectedFail === null) {
+-                    detectedStatus = "Carregando Banco";
+-                } else if (detectedStatus !== "Experimento Concluído") {
+-                    detectedStatus = "Recuperando";
+-                    if (logUtcStr && !recStartUtc) {
+-                        recStartUtc = logUtcStr;
++                if (state.detectedFail === null) {
++                    state.detectedStatus = "Carregando Banco";
++                } else if (state.detectedStatus !== "Experimento Concluído") {
++                    state.detectedStatus = "Recuperando";
++                    if (logUtcStr && !state.recStartUtc) {
++                        state.recStartUtc = logUtcStr;
+                         const relSec = getRelativeSeconds(logUtcStr);
+-                        if (relSec !== null) detectedRecStart = relSec;
++                        if (relSec !== null) state.detectedRecStart = relSec;
+                     }
+                 }
+             }
+ 
+             // 2. Término da Carga Inicial → Transição para Operação Estável
+             else if (text.includes("initial database loading completed")) {
+-                if (detectedFail === null) {
+-                    detectedStatus = "Operação Estável";
++                if (state.detectedFail === null) {
++                    state.detectedStatus = "Operação Estável";
+                     if (logUtcStr) {
+-                        initLoadEndUtc = logUtcStr;
++                        state.initLoadEndUtc = logUtcStr;
+                         const relSec = getRelativeSeconds(logUtcStr);
+-                        if (relSec !== null) initLoadDuration = relSec;
++                        if (relSec !== null) state.initLoadDuration = relSec;
+                     }
+                 }
+             }
+ 
+             // 3. Execução da carga Memtier (Operação Estável)
+             else if (text.includes("memtier benchmark") && text.includes("started")) {
+-                if (detectedFail === null && detectedStatus !== "Operação Estável" && detectedStatus !== "Carregando Banco") {
+-                    detectedStatus = "Operação Estável";
++                if (state.detectedFail === null && state.detectedStatus !== "Operação Estável" && state.detectedStatus !== "Carregando Banco") {
++                    state.detectedStatus = "Operação Estável";
+                 }
+             }
+ 
+             // 4. Falha Simulada (shutdown ou restart programado)
+             else if (text.includes("user requested shutdown") || text.includes("restarting the system now") || text.includes("redis is now ready to exit")) {
+-                if (detectedStatus !== "Experimento Concluído") {
+-                    detectedStatus = "Falha Simulada";
++                if (state.detectedStatus !== "Experimento Concluído") {
++                    state.detectedStatus = "Falha Simulada";
+                 }
+                 const relSec = getRelativeSeconds(logUtcStr);
+-                if (relSec !== null && detectedFail === null) {
+-                    detectedFail = relSec;
+-                    if (initLoadDuration !== null) {
+-                        stableDuration = Math.max(0, detectedFail - initLoadDuration);
++                if (relSec !== null && state.detectedFail === null) {
++                    state.detectedFail = relSec;
++                    if (state.initLoadDuration !== null) {
++                        state.stableDuration = Math.max(0, state.detectedFail - state.initLoadDuration);
+                     }
+                 }
+             }
+ 
+             // 5. Início de Recuperação pós-falha
+             else if (text.includes("loading the database from indexed log") || text.includes("loading the database from")) {
+-                if (detectedFail !== null && detectedStatus !== "Experimento Concluído") {
+-                    detectedStatus = "Recuperando";
+-                    if (logUtcStr && !recStartUtc) {
+-                        recStartUtc = logUtcStr;
++                if (state.detectedFail !== null && state.detectedStatus !== "Experimento Concluído") {
++                    state.detectedStatus = "Recuperando";
++                    if (logUtcStr && !state.recStartUtc) {
++                        state.recStartUtc = logUtcStr;
+                         const relSec = getRelativeSeconds(logUtcStr);
+-                        if (relSec !== null) detectedRecStart = relSec;
++                        if (relSec !== null) state.detectedRecStart = relSec;
+                     }
+                 }
+             }
+ 
+             // 6. Conclusão da Recuperação Pós-Falha → Estado Final: Experimento Concluído
+             else if (text.includes("inconsistenes:") || text.includes("inconsistenes")) {
+-                if (detectedFail !== null && detectedStatus !== "Experimento Concluído") {
+-                    detectedStatus = "Experimento Concluído";
+-                    if (logUtcStr && !recEndUtc) {
+-                        recEndUtc = logUtcStr;
++                if (state.detectedFail !== null && state.detectedStatus !== "Experimento Concluído") {
++                    state.detectedStatus = "Experimento Concluído";
++                    if (logUtcStr && !state.recEndUtc) {
++                        state.recEndUtc = logUtcStr;
+                         const relSec = getRelativeSeconds(logUtcStr);
+                         if (relSec !== null) {
+-                            detectedRecEnd = relSec;
+-                            detectedStability = detectedRecEnd + 2;
++                            state.detectedRecEnd = relSec;
++                            state.detectedStability = state.detectedRecEnd + 2;
+                         }
+                     }
+                 }
+             }
+         });
+ 
+         let finalPercent = 0;
+-        if (detectedStatus === "Recuperando") {
++        if (state.detectedStatus === "Recuperando") {
+             if (detectedTotalTuples > 0) {
+-                finalPercent = Math.min(99, Math.round((detectedTuplesLoaded / detectedTotalTuples) * 100));
++                finalPercent = Math.min(99, Math.round((state.detectedTuplesLoaded / detectedTotalTuples) * 100));
+             }
+-        } else if ((detectedStatus === "Experimento Concluído" || detectedStatus === "Estável") && detectedFail !== null) {
++        } else if ((state.detectedStatus === "Experimento Concluído" || state.detectedStatus === "Estável") && state.detectedFail !== null) {
+             finalPercent = 100;
+         }
+ 
+         let initialPercent = 0;
+-        if (detectedStatus === "Carregando Banco") {
++        if (state.detectedStatus === "Carregando Banco") {
+             if (detectedTotalTuples > 0) {
+-                initialPercent = Math.min(99, Math.round((detectedInitialTuplesLoaded / detectedTotalTuples) * 100));
++                initialPercent = Math.min(99, Math.round((state.detectedInitialTuplesLoaded / detectedTotalTuples) * 100));
+             }
+-        } else if (detectedStatus !== "Idle" && detectedStatus !== "Carregando Banco") {
++        } else if (state.detectedStatus !== "Idle" && state.detectedStatus !== "Carregando Banco") {
+             initialPercent = 100;
+         }
+ 
+-        if (firstLogUtc && firstLogUtc !== firstLogAtUtc) setFirstLogAtUtc(firstLogUtc);
+-        if (initLoadEndUtc && initLoadEndUtc !== initialLoadEndUtc) setInitialLoadEndUtc(initLoadEndUtc);
+-        if (initLoadDuration !== null && initLoadDuration !== fixedInitialLoadDuration) setFixedInitialLoadDuration(initLoadDuration);
+-        if (stableDuration !== null && stableDuration !== fixedStableDuration) setFixedStableDuration(stableDuration);
++        if (state.firstLogUtc && state.firstLogUtc !== firstLogAtUtc) setFirstLogAtUtc(state.firstLogUtc);
++        if (state.initLoadEndUtc && state.initLoadEndUtc !== initialLoadEndUtc) setInitialLoadEndUtc(state.initLoadEndUtc);
++        if (state.initLoadDuration !== null && state.initLoadDuration !== fixedInitialLoadDuration) setFixedInitialLoadDuration(state.initLoadDuration);
++        if (state.stableDuration !== null && state.stableDuration !== fixedStableDuration) setFixedStableDuration(state.stableDuration);
+ 
+-        if (detectedStatus !== systemStatus) setSystemStatus(detectedStatus);
++        if (state.detectedStatus !== systemStatus) setSystemStatus(state.detectedStatus);
+         if (finalPercent !== recoveryPercent) setRecoveryPercent(finalPercent);
+         if (initialPercent !== initialLoadPercent) setInitialLoadPercent(initialPercent);
+-        if (detectedFail !== failureTime) setFailureTime(detectedFail);
+-        if (detectedRecStart !== recoveryStartTime) setRecoveryStartTime(detectedRecStart);
+-        if (detectedRecEnd !== recoveryEndTime) setRecoveryEndTime(detectedRecEnd);
+-        if (detectedStability !== stabilityTime) setStabilityTime(detectedStability);
+-        if (recStartUtc !== recoveryStartAtUtc) setRecoveryStartAtUtc(state.recStartUtc);
+-        if (recEndUtc !== recoveryEndAtUtc) setRecoveryEndAtUtc(state.recEndUtc);
++        if (state.detectedFail !== failureTime) setFailureTime(state.detectedFail);
++        if (state.detectedRecStart !== recoveryStartTime) setRecoveryStartTime(state.detectedRecStart);
++        if (state.detectedRecEnd !== recoveryEndTime) setRecoveryEndTime(state.detectedRecEnd);
++        if (state.detectedStability !== stabilityTime) setStabilityTime(state.detectedStability);
++        if (state.recStartUtc !== recoveryStartAtUtc) setRecoveryStartAtUtc(state.recStartUtc);
++        if (state.recEndUtc !== recoveryEndAtUtc) setRecoveryEndAtUtc(state.recEndUtc);
+ 
+-    }, [terminalLog, dataTransfer, recoveryPercent]);
++    }, [terminalLog]);

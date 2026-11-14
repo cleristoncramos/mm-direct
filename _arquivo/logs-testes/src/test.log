@@ -1,0 +1,105 @@
+47558:C 30 Sep 2026 13:44:31.745 * Indexed log Environment started!
+47558:C 30 Sep 2026 13:44:31.746 # oO0OoO0OoO0Oo Redis-IR is starting oO0OoO0OoO0Oo: arlino@ufpi.edu.br
+47558:C 30 Sep 2026 13:44:31.746 # Redis version=5.0.7, bits=64, commit=2efa5fd3, modified=1, pid=47558, just started
+47558:C 30 Sep 2026 13:44:31.746 # Warning: no config file specified, using the default config. In order to specify a config file use ./redis-server /path/to/redis.conf
+47558:M 30 Sep 2026 13:44:31.753 * Running mode=standalone, port=6379.
+47558:M 30 Sep 2026 13:44:31.754 # Server initialized
+47558:M 30 Sep 2026 13:44:31.754 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+47558:M 30 Sep 2026 13:44:31.755 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+47558:M 30 Sep 2026 13:44:31.756 * RUN_CONTINUED_AFTER_FAILURE runId=run_1790784252975081 runStartUs=1790784252975081
+47558:M 30 Sep 2026 13:44:31.756 * EVENT_JSON {"event":"RUN_CONTINUED_AFTER_FAILURE","runId":"run_1790784252975081","runStartUs":1790784252975081,"timestampUs":1790786671756531}
+47558:M 30 Sep 2026 13:44:31.757 * Preloading the database ...
+47558:M 30 Sep 2026 13:44:31.757 * The server will be restarted 1 time(s)!
+47558:M 30 Sep 2026 13:44:31.759 * Indexing the remaining log records after the last shutdown/crash ... Wait!
+47558:M 30 Sep 2026 13:44:31.761 * Initial log indexing finished: 0.001 seconds. Number of log records processed = 0. Number of records on indexed log = 0.
+47558:M 30 Sep 2026 13:44:31.761 * Ready to accept connections
+47558:M 30 Sep 2026 13:44:31.762 * 
+    The Asynchronous logging is ON!
+    The indexed log replication is OFF!
+    The log corruption is OFF!
+    The checkpoint is OFF!
+    Memtier benckmark is ON!
+    Report generation is ON!
+    CSV file generation is ON!
+
+47558:M 30 Sep 2026 13:44:31.765 * Generating system monitoring ... 
+47558:M 30 Sep 2026 13:44:31.765 * Generating information about executed database commands ...
+47558:M 30 Sep 2026 13:44:31.766 * Generating information about the indexing write ...
+47558:M 30 Sep 2026 13:44:31.812 * INDEXED_LOG_VALIDATED path=logs/indexedLog.db records=22030 distinct_tuples=115
+47558:M 30 Sep 2026 13:44:31.815 * EXECUTION_BRANCH INITIAL_PRELOAD
+47558:M 30 Sep 2026 13:44:31.817 * EVENT PRELOAD_STARTED runId=run_1790784252975081 timestamp=1790786671763692 timestampUs=1790786671763692 runStartUs=1790784252975081 relativeMs=2418788.611 benchmark_expected_tuples=5000 indexed_log_distinct_tuples=115
+47558:M 30 Sep 2026 13:44:31.821 * EVENT_JSON {"event":"PRELOAD_STARTED","runId":"run_1790784252975081","timestampUs":1790786671763692,"runStartUs":1790784252975081,"relativeMs":2418788.611,"expectedTuples":5000,"distinctTuples":115}
+47558:M 30 Sep 2026 13:44:31.824 * PRELOAD_INDEX_OPEN path=logs/indexedLog.db records=22030
+47558:M 30 Sep 2026 13:44:31.825 * PRELOAD_CURSOR_STARTED
+47558:M 30 Sep 2026 13:44:31.828 * PRELOAD_TUPLE_LOADED key=redisIR-1
+47558:M 30 Sep 2026 13:44:31.829 * PRELOAD_TUPLE_LOADED key=redisIR-10
+47558:M 30 Sep 2026 13:44:31.830 * PRELOAD_TUPLE_LOADED key=redisIR-100
+47558:M 30 Sep 2026 13:44:31.830 * PRELOAD_TUPLE_LOADED key=redisIR-101
+47558:M 30 Sep 2026 13:44:31.831 * PRELOAD_TUPLE_LOADED key=redisIR-102
+47558:M 30 Sep 2026 13:44:32.828 * Number of tuples loaded into memory: 111 (inclementally = 111, on-demand = 0). Number of records processed: 21308. Time spent recovering the database: 1.064 seconds. (redisIR-96) (redisIR-96)
+47558:M 30 Sep 2026 13:44:32.871 * PRELOAD_CURSOR_FINISHED records=22030 tuples=115
+47558:M 30 Sep 2026 13:44:32.873 * DB loaded from Indexed Log: 1.110 seconds. Number of tuples loaded into memory: 115 (inclementally = 115, on-demand = 0). Number of records processed: 22030. Inconsistenes: 0 :)
+47558:M 30 Sep 2026 13:44:32.873 * EVENT PRELOAD_COMPLETED runId=run_1790784252975081 timestamp=1790786672873282 timestampUs=1790786672873282 runStartUs=1790784252975081 relativeMs=2419898.201 durationMs=1109.590 loaded_tuples=115 indexed_log_distinct_tuples=115 records_processed=22030 inconsistencies=0 duration=1.110s
+47558:M 30 Sep 2026 13:44:32.873 * EVENT_JSON {"event":"PRELOAD_COMPLETED","runId":"run_1790784252975081","timestampUs":1790786672873282,"runStartUs":1790784252975081,"relativeMs":2419898.201,"durationMs":1109.590,"loadedTuples":115,"distinctTuples":115,"recordsProcessed":22030,"inconsistencies":0}
+47558:M 30 Sep 2026 13:44:32.895 * EVENT STABLE_OPERATION_STARTED runId=run_1790784252975081 timestamp=1790786672894980 timestampUs=1790786672894980 runStartUs=1790784252975081 relativeMs=2419919.899
+47558:M 30 Sep 2026 13:44:32.896 * EVENT_JSON {"event":"STABLE_OPERATION_STARTED","runId":"run_1790784252975081","timestampUs":1790786672894980,"runStartUs":1790784252975081,"relativeMs":2419919.899}
+47558:M 30 Sep 2026 13:44:32.896 * Memtier benchmark (round 1) started! Parameters = " --hide-histogram -n 5000 --key-prefix='redisIR-' --key-minimum=1 --key-maximum=5000 --command='set  __key__ __data__' --command-ratio=5000 --command-key-pattern=S"
+47558:M 30 Sep 2026 13:44:32.900 * EVENT FAILURE_TIMER_STARTED runId=run_1790784252975081 timestamp=1790786672900043 timestampUs=1790786672900043 runStartUs=1790784252975081 relativeMs=2419924.962 durationMs=10000.000 duration_seconds=10
+47558:M 30 Sep 2026 13:44:32.900 * EVENT_JSON {"event":"FAILURE_TIMER_STARTED","runId":"run_1790784252975081","timestampUs":1790786672900043,"runStartUs":1790784252975081,"relativeMs":2419924.962,"durationMs":10000.000,"durationSeconds":10}
+47558:M 30 Sep 2026 13:44:32.900 * Initial database loading completed. Failure timer started: the system is programmed to restart in 10 seconds!
+47558:M 30 Sep 2026 13:44:32.900 * Indexer thread V2 started!
+memtier_benchmark: error while loading shared libraries: libcrypto.so.1.1: cannot open shared object file: No such file or directory
+47558:M 30 Sep 2026 13:44:33.009 * Memtier benchmark execution finished: 0.113 seconds.
+47558:M 30 Sep 2026 13:44:33.010 * Generating recovery report ...
+47558:M 30 Sep 2026 13:44:33.025 * The recovery report was generated! See the file 'src/recovery_report/recovery_report.txt' on Redis instalation path.
+47558:M 30 Sep 2026 13:44:42.902 * EVENT FAILURE_TRIGGERED runId=run_1790784252975081 timestamp=1790786682902480 timestampUs=1790786682902480 runStartUs=1790784252975081 relativeMs=2429927.399
+47558:M 30 Sep 2026 13:44:42.904 * EVENT_JSON {"event":"FAILURE_TRIGGERED","runId":"run_1790784252975081","timestampUs":1790786682902480,"runStartUs":1790784252975081,"relativeMs":2429927.399}
+47558:M 30 Sep 2026 13:44:42.904 * Preparing to restart ...
+47558:M 30 Sep 2026 13:44:42.904 * Restarting the system now!
+47558:M 30 Sep 2026 13:44:42.918 # User requested shutdown...
+47558:M 30 Sep 2026 13:44:42.921 * Generation of executed database commands finished! See the file 'src/datasets/datasets.csv' on Redis instalation path. 
+47558:M 30 Sep 2026 13:44:43.150 * Memtier benchmark process was interrupted before its execution was finished !
+47558:M 30 Sep 2026 13:44:43.152 * Indexing report generation finished!  See the file 'src/indexing_report/indexing.csv' on Redis instalation path. 
+47558:M 30 Sep 2026 13:44:43.154 # Indexer thread stopped! Number of log records processed = 0. Number of log records indexed = 0
+47558:M 30 Sep 2026 13:44:44.011 * System monitoring collecting finished! See the file system_monitoring/system_monitoring.csv.
+
+47558:M 30 Sep 2026 13:44:44.115 * Backup automatico do log indexado concluido (logs/indexedLog.db.bak).
+47558:M 30 Sep 2026 13:44:44.116 * The RedisIR threads were cleanly joined and finished!
+47558:M 30 Sep 2026 13:44:44.120 * Calling fsync() on the AOF file.
+47558:M 30 Sep 2026 13:44:44.179 # Redis is now ready to exit, bye bye...
+47558:C 30 Sep 2026 13:44:45.353 * Indexed log Environment started!
+47558:C 30 Sep 2026 13:44:45.354 # oO0OoO0OoO0Oo Redis-IR is starting oO0OoO0OoO0Oo: arlino@ufpi.edu.br
+47558:C 30 Sep 2026 13:44:45.354 # Redis version=5.0.7, bits=64, commit=2efa5fd3, modified=1, pid=47558, just started
+47558:C 30 Sep 2026 13:44:45.354 # Warning: no config file specified, using the default config. In order to specify a config file use /home/cleriston/Documentos/projeto/MM-DIRECT/src/./redis-server /path/to/redis.conf
+47558:M 30 Sep 2026 13:44:45.367 * Running mode=standalone, port=6379.
+47558:M 30 Sep 2026 13:44:45.370 # Server initialized
+47558:M 30 Sep 2026 13:44:45.371 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+47558:M 30 Sep 2026 13:44:45.371 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+47558:M 30 Sep 2026 13:44:45.371 * RUN_CONTINUED_AFTER_FAILURE runId=run_1790784252975081 runStartUs=1790784252975081
+47558:M 30 Sep 2026 13:44:45.371 * EVENT_JSON {"event":"RUN_CONTINUED_AFTER_FAILURE","runId":"run_1790784252975081","runStartUs":1790784252975081,"timestampUs":1790786685371290}
+47558:M 30 Sep 2026 13:44:45.372 * Indexing the remaining log records after the last shutdown/crash ... Wait!
+47558:M 30 Sep 2026 13:44:45.373 * Initial log indexing finished: 0.001 seconds. Number of log records processed = 0. Number of records on indexed log = 0.
+47558:M 30 Sep 2026 13:44:45.373 * Ready to accept connections
+47558:M 30 Sep 2026 13:44:45.373 * 
+    The Asynchronous logging is ON!
+    The indexed log replication is OFF!
+    The log corruption is OFF!
+    The checkpoint is OFF!
+    Memtier benckmark is ON!
+    Report generation is ON!
+    CSV file generation is ON!
+
+47558:M 30 Sep 2026 13:44:45.374 * Generating information about executed database commands ...
+47558:M 30 Sep 2026 13:44:45.376 * Generating system monitoring ... 
+47558:M 30 Sep 2026 13:44:45.380 * Generating information about the indexing write ...
+47558:M 30 Sep 2026 13:44:45.426 * INDEXED_LOG_VALIDATED path=logs/indexedLog.db records=22030 distinct_tuples=115
+47558:M 30 Sep 2026 13:44:45.439 * EXECUTION_BRANCH POST_FAILURE_RECOVERY
+47558:M 30 Sep 2026 13:44:45.440 * EVENT RECOVERY_STARTED runId=run_1790784252975081 timestamp=1790786685373250 timestampUs=1790786685373250 runStartUs=1790784252975081 relativeMs=2432398.169 benchmark_expected_tuples=5000 indexed_log_distinct_tuples=115
+47558:M 30 Sep 2026 13:44:45.440 * EVENT_JSON {"event":"RECOVERY_STARTED","runId":"run_1790784252975081","timestampUs":1790786685373250,"runStartUs":1790784252975081,"relativeMs":2432398.169,"expectedTuples":5000,"distinctTuples":115}
+47558:M 30 Sep 2026 13:44:45.442 * PRELOAD_INDEX_OPEN path=logs/indexedLog.db records=22030
+47558:M 30 Sep 2026 13:44:45.443 * PRELOAD_CURSOR_STARTED
+47558:M 30 Sep 2026 13:44:45.448 * PRELOAD_TUPLE_LOADED key=redisIR-1
+47558:M 30 Sep 2026 13:44:45.449 * PRELOAD_TUPLE_LOADED key=redisIR-10
+47558:M 30 Sep 2026 13:44:45.451 * PRELOAD_TUPLE_LOADED key=redisIR-100
+47558:M 30 Sep 2026 13:44:45.453 * PRELOAD_TUPLE_LOADED key=redisIR-101
+47558:M 30 Sep 2026 13:44:45.453 * PRELOAD_TUPLE_LOADED key=redisIR-102

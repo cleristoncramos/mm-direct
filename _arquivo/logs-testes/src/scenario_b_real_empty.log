@@ -1,0 +1,64 @@
+10808:C 26 Sep 2026 12:23:05.075 * Indexed log Environment started!
+10808:C 26 Sep 2026 12:23:05.077 # oO0OoO0OoO0Oo Redis-IR is starting oO0OoO0OoO0Oo: arlino@ufpi.edu.br
+10808:C 26 Sep 2026 12:23:05.077 # Redis version=5.0.7, bits=64, commit=2efa5fd3, modified=1, pid=10808, just started
+10808:C 26 Sep 2026 12:23:05.077 # Warning: no config file specified, using the default config. In order to specify a config file use ./redis-server /path/to/redis.conf
+10808:M 26 Sep 2026 12:23:05.080 * Running mode=standalone, port=6379.
+10808:M 26 Sep 2026 12:23:05.080 # Server initialized
+10808:M 26 Sep 2026 12:23:05.080 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+10808:M 26 Sep 2026 12:23:05.080 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+10808:M 26 Sep 2026 12:23:05.080 * The server will be restarted 1 times!
+10808:M 26 Sep 2026 12:23:05.080 * The initial indexing could not start since sequential log was removed! However, it is still possible to recover the database from indexed log.
+10808:M 26 Sep 2026 12:23:05.081 * Ready to accept connections
+10808:M 26 Sep 2026 12:23:05.081 * 
+    The Asynchronous logging is ON!
+    The indexed log replication is OFF!
+    The log corruption is OFF!
+    The checkpoint is ON! The auto tune of time interval of checkpoints is ON!!
+    Memtier benckmark is ON!
+    Report generation is ON!
+    CSV file generation is ON!
+
+10808:M 26 Sep 2026 12:23:05.081 * Generating information about the indexing write ...
+10808:M 26 Sep 2026 12:23:05.081 * Generating information about executed database commands ...
+10808:M 26 Sep 2026 12:23:05.083 * Generating system monitoring ... 
+10808:M 26 Sep 2026 12:23:05.316 * INDEXED_LOG_VALIDATED path=logs/indexedLog.db records=65315 distinct_tuples=1122
+10808:M 26 Sep 2026 12:23:05.317 * EXECUTION_BRANCH INITIAL_PRELOAD
+10808:M 26 Sep 2026 12:23:05.329 * EVENT PRELOAD_STARTED timestamp=1790436185083137 benchmark_expected_tuples=5000 indexed_log_distinct_tuples=1122
+10808:M 26 Sep 2026 12:23:05.331 * PRELOAD_INDEX_OPEN path=logs/indexedLog.db records=65315
+10808:M 26 Sep 2026 12:23:05.331 * PRELOAD_CURSOR_STARTED
+10808:M 26 Sep 2026 12:23:05.340 * PRELOAD_TUPLE_LOADED key=redisIR-1
+10808:M 26 Sep 2026 12:23:05.343 * PRELOAD_TUPLE_LOADED key=redisIR-10
+10808:M 26 Sep 2026 12:23:05.344 * PRELOAD_TUPLE_LOADED key=redisIR-100
+10808:M 26 Sep 2026 12:23:05.344 * PRELOAD_TUPLE_LOADED key=redisIR-1000
+10808:M 26 Sep 2026 12:23:05.344 * PRELOAD_TUPLE_LOADED key=redisIR-1001
+10808:M 26 Sep 2026 12:23:05.613 * PRELOAD_CURSOR_FINISHED records=65315 tuples=1122
+10808:M 26 Sep 2026 12:23:05.613 * DB loaded from Indexed Log: 0.531 seconds. Number of tuples loaded into memory: 1122 (inclementally = 1122, on-demand = 0). Number of records processed: 65315. Inconsistenes: 0 :)
+10808:M 26 Sep 2026 12:23:05.614 * EVENT STABLE_OPERATION_STARTED timestamp=1790436185614046
+10808:M 26 Sep 2026 12:23:05.614 * Memtier benchmark (round 1) started! Parameters = " --hide-histogram -n 5000 --key-prefix='redisIR-' --key-minimum=1 --key-maximum=5000 --command='set  __key__ __data__' --command-ratio=5000 --command-key-pattern=S"
+10808:M 26 Sep 2026 12:23:05.614 * EVENT FAILURE_TIMER_STARTED timestamp=1790436185614308 duration_seconds=3
+10808:M 26 Sep 2026 12:23:05.614 * Initial database loading completed. Failure timer started: the system is programmed to restart in 3 seconds!
+10808:M 26 Sep 2026 12:23:05.614 * EVENT PRELOAD_COMPLETED timestamp=1790436185613769 loaded_tuples=1122 indexed_log_distinct_tuples=1122 records_processed=65315 inconsistencies=0 duration=0.531s
+10808:M 26 Sep 2026 12:23:05.615 * Checkpointer thread started! The first checkpointed wiil start in 0 seconds.
+10808:M 26 Sep 2026 12:23:05.616 * Checkpoint process 1 started! Checkpointing ...
+10808:M 26 Sep 2026 12:23:05.618 * Indexer thread V2 started!
+Writing results to stdout
+[RUN #1] Preparing benchmark client...
+[RUN #1] Launching threads now...
+[RUN #1 1%,   1 secs]  4 threads:        5214 ops,    5171 (avg:    5171) ops/sec, 370.23KB/sec (avg: 370.23KB/sec), 37.23 (avg: 37.23) msec latency[RUN #1 1%,   2 secs]  4 threads:       13253 ops,    7814 (avg:    6506) ops/sec, 564.69KB/sec (avg: 468.44KB/sec), 26.00 (avg: 30.42) msec latency10808:M 26 Sep 2026 12:23:08.114 # User requested shutdown...
+10808:M 26 Sep 2026 12:23:08.128 * Generation of executed database commands finished! See the file 'src/datasets/datasets.csv' on Redis instalation path. 
+10808:M 26 Sep 2026 12:23:08.131 * Memtier benchmark process was interrupted before its execution was finished !
+10808:M 26 Sep 2026 12:23:08.131 * Checkpoint is disabled and the Checkpointer thread will stop in few minutes!
+10808:M 26 Sep 2026 12:23:08.131 * Indexing report generation finished!  See the file 'src/indexing_report/indexing.csv' on Redis instalation path. 
+10808:M 26 Sep 2026 12:23:08.132 * Memtier benchmark execution finished: 2.519 seconds.
+10808:M 26 Sep 2026 12:23:08.132 * Generating recovery report ...
+10808:M 26 Sep 2026 12:23:08.133 * The recovery report was generated! See the file 'src/recovery_report/recovery_report.txt' on Redis instalation path.
+10808:M 26 Sep 2026 12:23:08.137 # Indexer thread stopped! Number of log records processed = 17242. Number of log records indexed = 17241
+10808:M 26 Sep 2026 12:23:08.216 * The RedisIR threads were canceled! 
+10808:M 26 Sep 2026 12:23:08.217 * Calling fsync() on the AOF file.
+10808:M 26 Sep 2026 12:23:08.306 # Redis is now ready to exit, bye bye...
+---------------------------------------------
+REDIS INSTANT RECOVERY
+Arlino Magalhães - arlino@ufpi.edu.br
+---------------------------------------------
+
+

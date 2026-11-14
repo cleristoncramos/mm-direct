@@ -1,0 +1,22 @@
+ir.csv
+datasets.csv
+logs
+node_modules
+package-lock.json
+database_recovery.txt
+database_startup.txt
+end_time.txt
+other_elements.txt
+# Cópia antiga da pasta .git (não versionar)
+_arquivo/git-salvo/
+# Dados locais de experimentos e bases (grandes demais para o GitHub)
+src/backups/
+src/runs/
+src/datasets/
+src/system_monitoring/
+src/indexing_report/
+src/recovery_report/
+src/temp_ir_files/
+src/__db.*
+*.bak
+web/dist/

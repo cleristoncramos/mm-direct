@@ -1,0 +1,44 @@
+11080:C 26 Sep 2026 12:30:00.903 * Indexed log Environment started!
+11080:C 26 Sep 2026 12:30:00.904 # oO0OoO0OoO0Oo Redis-IR is starting oO0OoO0OoO0Oo: arlino@ufpi.edu.br
+11080:C 26 Sep 2026 12:30:00.904 # Redis version=5.0.7, bits=64, commit=2efa5fd3, modified=1, pid=11080, just started
+11080:C 26 Sep 2026 12:30:00.904 # Warning: no config file specified, using the default config. In order to specify a config file use ./redis-server /path/to/redis.conf
+11080:M 26 Sep 2026 12:30:00.905 * Running mode=standalone, port=6379.
+11080:M 26 Sep 2026 12:30:00.906 # Server initialized
+11080:M 26 Sep 2026 12:30:00.906 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+11080:M 26 Sep 2026 12:30:00.906 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+11080:M 26 Sep 2026 12:30:00.906 * The server will be restarted 1 times!
+11080:M 26 Sep 2026 12:30:00.906 * The initial indexing could not start since sequential log was removed! However, it is still possible to recover the database from indexed log.
+11080:M 26 Sep 2026 12:30:00.906 * Ready to accept connections
+11080:M 26 Sep 2026 12:30:00.907 * 
+    The Asynchronous logging is ON!
+    The indexed log replication is OFF!
+    The log corruption is OFF!
+    The checkpoint is ON! The auto tune of time interval of checkpoints is ON!!
+    Memtier benckmark is ON!
+    Report generation is ON!
+    CSV file generation is ON!
+
+11080:M 26 Sep 2026 12:30:00.907 * Generating information about executed database commands ...
+11080:M 26 Sep 2026 12:30:00.907 * Generating information about the indexing write ...
+11080:M 26 Sep 2026 12:30:00.907 * Generating system monitoring ... 
+11080:M 26 Sep 2026 12:30:00.908 * INDEXED_LOG_VALIDATED path=logs/indexedLog.db records=0 distinct_tuples=0
+11080:M 26 Sep 2026 12:30:00.908 * EXECUTION_BRANCH INITIAL_PRELOAD
+11080:M 26 Sep 2026 12:30:00.908 * EVENT PRELOAD_STARTED timestamp=1790436600907942 benchmark_expected_tuples=5000 indexed_log_distinct_tuples=0
+11080:M 26 Sep 2026 12:30:00.908 * EVENT PRELOAD_FAILED timestamp=1790436600908031 loaded_tuples=0 indexed_log_distinct_tuples=0 records_processed=0 inconsistencies=0 reason="Indexed log file missing or empty (logs/indexedLog.db)"
+11080:M 26 Sep 2026 12:30:00.908 * EVENT EXPERIMENT_FAILED timestamp=1790436600908035 reason="Indexed log contains no tuples for preload"
+11080:M 26 Sep 2026 12:30:00.908 * Failure timer aborted: Preload or experiment failed.
+11080:M 26 Sep 2026 12:30:00.908 * Memtier benchmark aborted: Preload failed or experiment failed state.
+11080:M 26 Sep 2026 12:30:03.845 # User requested shutdown...
+11080:M 26 Sep 2026 12:30:03.865 * Memtier benchmark process was interrupted before its execution was finished !
+11080:M 26 Sep 2026 12:30:03.865 * Checkpoint is disabled and the Checkpointer thread will stop in few minutes!
+11080:M 26 Sep 2026 12:30:03.865 * Indexing report generation finished!  See the file 'src/indexing_report/indexing.csv' on Redis instalation path. 
+11080:M 26 Sep 2026 12:30:03.890 * Generation of executed database commands finished! See the file 'src/datasets/datasets.csv' on Redis instalation path. 
+11080:M 26 Sep 2026 12:30:03.891 * The RedisIR threads were canceled! 
+11080:M 26 Sep 2026 12:30:03.891 * Calling fsync() on the AOF file.
+11080:M 26 Sep 2026 12:30:03.916 # Redis is now ready to exit, bye bye...
+---------------------------------------------
+REDIS INSTANT RECOVERY
+Arlino Magalhães - arlino@ufpi.edu.br
+---------------------------------------------
+
+

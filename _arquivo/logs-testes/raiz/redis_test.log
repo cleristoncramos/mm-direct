@@ -1,0 +1,46 @@
+47061:C 26 Sep 2026 17:00:16.122 * Indexed log Environment started!
+47061:C 26 Sep 2026 17:00:16.122 # oO0OoO0OoO0Oo Redis-IR is starting oO0OoO0OoO0Oo: arlino@ufpi.edu.br
+47061:C 26 Sep 2026 17:00:16.122 # Redis version=5.0.7, bits=64, commit=2efa5fd3, modified=1, pid=47061, just started
+47061:C 26 Sep 2026 17:00:16.122 # Warning: no config file specified, using the default config. In order to specify a config file use ./src/redis-server /path/to/redis.conf
+47061:M 26 Sep 2026 17:00:16.130 * Running mode=standalone, port=6379.
+47061:M 26 Sep 2026 17:00:16.130 # Server initialized
+47061:M 26 Sep 2026 17:00:16.130 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+47061:M 26 Sep 2026 17:00:16.130 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+47061:M 26 Sep 2026 17:00:16.130 * RUN_CONTINUED_AFTER_FAILURE runId=run_1790449249434631 runStartUs=1790449249434631
+47061:M 26 Sep 2026 17:00:16.130 * EVENT_JSON {"event":"RUN_CONTINUED_AFTER_FAILURE","runId":"run_1790449249434631","runStartUs":1790449249434631,"timestampUs":1790452816130643}
+47061:M 26 Sep 2026 17:00:16.130 * The server will be restarted 1 times!
+47061:M 26 Sep 2026 17:00:16.130 * Preloading the database ...
+47061:M 26 Sep 2026 17:00:16.130 * The server will be restarted 1 time(s)!
+47061:M 26 Sep 2026 17:00:16.130 * Fail to open 'finalLogSeek.dat' file!
+47061:M 26 Sep 2026 17:00:16.130 * Error while openning the BerkeleyDB database! No such file or directory
+47061:M 26 Sep 2026 17:00:16.130 * Cannot open the indexed log1!
+47061:M 26 Sep 2026 17:00:16.130 * Checkpointer thread started! The first checkpointed wiil start in 0 seconds.
+47061:M 26 Sep 2026 17:00:16.131 * Indexer thread V2 started!
+47061:M 26 Sep 2026 17:00:16.135 * Checkpoint process 1 started! Checkpointing ...
+47061:M 26 Sep 2026 17:00:16.177 * The indexing could not start since sequential log file is empty!
+47061:M 26 Sep 2026 17:00:16.177 * Ready to accept connections
+47061:M 26 Sep 2026 17:00:16.177 * 
+    The Asynchronous logging is ON!
+    The indexed log replication is OFF!
+    The log corruption is OFF!
+    The checkpoint is ON! The auto tune of time interval of checkpoints is ON!!
+    Memtier benckmark is ON!
+    Report generation is ON!
+    CSV file generation is ON!
+
+47061:M 26 Sep 2026 17:00:16.181 * Generating system monitoring ... 
+47061:M 26 Sep 2026 17:00:16.187 * Generating information about the indexing write ...
+47061:M 26 Sep 2026 17:00:16.181 * Generating information about executed database commands ...
+47061:M 26 Sep 2026 17:00:16.188 * INDEXED_LOG_VALIDATED path=logs/indexedLog.db records=0 distinct_tuples=0
+47061:M 26 Sep 2026 17:00:16.188 * EXECUTION_BRANCH INITIAL_PRELOAD
+47061:M 26 Sep 2026 17:00:16.188 * EVENT PRELOAD_STARTED runId=run_1790449249434631 timestamp=1790452816188261 timestampUs=1790452816188261 runStartUs=1790449249434631 relativeMs=3566753.630 benchmark_expected_tuples=5000 indexed_log_distinct_tuples=0
+47061:M 26 Sep 2026 17:00:16.192 * EVENT_JSON {"event":"PRELOAD_STARTED","runId":"run_1790449249434631","timestampUs":1790452816188261,"runStartUs":1790449249434631,"relativeMs":3566753.630,"expectedTuples":5000,"distinctTuples":0}
+47061:M 26 Sep 2026 17:00:16.192 * EVENT PRELOAD_FAILED timestamp=1790452816192181 loaded_tuples=0 indexed_log_distinct_tuples=0 records_processed=0 inconsistencies=0 reason="Indexed log file missing or empty (logs/indexedLog.db)"
+47061:M 26 Sep 2026 17:00:16.192 * EVENT EXPERIMENT_FAILED runId=run_1790449249434631 timestamp=1790452816192189 timestampUs=1790452816192189 runStartUs=1790449249434631 relativeMs=3566757.558 reason="Indexed log contains no tuples for preload"
+47061:M 26 Sep 2026 17:00:16.192 * EVENT_JSON {"event":"EXPERIMENT_FAILED","runId":"run_1790449249434631","timestampUs":1790452816192189,"runStartUs":1790449249434631,"relativeMs":3566757.558,"reason":"Indexed log contains no tuples for preload"}
+47061:M 26 Sep 2026 17:00:16.192 * Failure timer aborted: Preload or experiment failed.
+47061:M 26 Sep 2026 17:00:16.192 * Memtier benchmark aborted: Preload failed or experiment failed state.
+47061:M 26 Sep 2026 17:00:16.192 * Failure timer aborted: Preload or experiment failed.
+47061:M 26 Sep 2026 17:00:16.186 * Checkpoint process 1 finished!
+47061:M 26 Sep 2026 17:00:17.145 #  aqui Indexing error! Bad file format reading the sequential file. Last log record read: 
+

@@ -1,0 +1,461 @@
+diff --git a/server.js b/server.js
+index a26b87e..e4cdb89 100644
+--- a/server.js
++++ b/server.js
+@@ -143,7 +143,7 @@ const setupTailWatcher = (filePath, onLineCallback) => {
+       } else {
+         scheduleRetry();
+       }
+-    }, 500); // Tenta reconectar a cada 500ms
++    }, 2000); // Tenta reconectar a cada 500ms
+   };
+ 
+   startTailing();
+@@ -191,11 +191,16 @@ const sanitizePipeline = () => {
+ 
+   // b) Remover fisicamente os resíduos e espelhos de logs de execuções anteriores
+   const logFile = path.join(rootPath, "src/logs/sequentialLog.aof");
++  const btreeLogFile = path.join(rootPath, "src/logs/indexedLog.db");
+   try {
+     if (fs.existsSync(logFile)) {
+       fs.unlinkSync(logFile);
+       console.log(`Arquivo de log anterior removido: ${logFile}`);
+     }
++    if (fs.existsSync(btreeLogFile)) {
++      fs.unlinkSync(btreeLogFile);
++      console.log(`Arquivo B-Tree anterior removido: ${btreeLogFile}`);
++    }
+   } catch (e) {
+     console.error(`Erro ao remover arquivo de log: ${e.message}`);
+   }
+@@ -225,6 +230,22 @@ const sanitizePipeline = () => {
+   } catch (e) {
+     console.error(`Erro ao criar monitoramento limpo: ${e.message}`);
+   }
++
++  // Garantir a limpeza dos arquivos temporários de controle de reinício (temp_ir_files)
++  const tempIrDir = path.join(rootPath, "src/temp_ir_files");
++  try {
++    if (fs.existsSync(tempIrDir)) {
++      const files = fs.readdirSync(tempIrDir);
++      for (const f of files) {
++        fs.unlinkSync(path.join(tempIrDir, f));
++      }
++      console.log("Arquivos temporários de controle de reinício (temp_ir_files) limpos com sucesso.");
++    } else {
++      fs.mkdirSync(tempIrDir, { recursive: true });
++    }
++  } catch (e) {
++    console.error(`Erro ao limpar temp_ir_files: ${e.message}`);
++  }
+ };
+ 
+ // Variáveis de controle
+@@ -713,7 +734,7 @@ const processaCSV = async (ws, inputPath, ctx) => {
+       .on('error', (err) => {
+         console.error(`Erro na leitura do stream CSV: ${err.message}`);
+       })
+-      .pipe(csv())
++      .pipe(csv({ headers: ['key', 'command', 'startTime', 'finishTime', 'latency', 'type'], skipLines: 0 }))
+       .on('error', (err) => {
+         console.error(`Erro no parser CSV: ${err.message}`);
+       })
+@@ -722,9 +743,9 @@ const processaCSV = async (ws, inputPath, ctx) => {
+         lendoArquivo = true;
+ 
+         // Processar cada linha do CSV
+-        if (ctx.total === 1) {
+-          ctx.database_startup_time = parseInt(row.startTime);
+-        } else if (ctx.total >= 3) {
++        if (!ctx.database_startup_time && row.key === 'Database startup') {
++          ctx.database_startup_time = parseInt(row.startTime);
++        } else if (ctx.database_startup_time && row.type !== '0' && row.key !== 'Recovery' && row.key !== 'key') {
+           if (row.type !== '0' && !isNaN(row.finishTime)) {
+             const tempoTermino = parseInt(row.finishTime);
+             const tempoEmSegundos = Math.floor((tempoTermino - ctx.database_startup_time) / 1000000);
+@@ -772,7 +793,7 @@ const processaLatencia = async (ws, inputPath, ctx) => {
+       .on('error', (err) => {
+         console.error(`Erro na leitura do stream de Latência: ${err.message}`);
+       })
+-      .pipe(csv())
++      .pipe(csv({ headers: ['key', 'command', 'startTime', 'finishTime', 'latency', 'type'], skipLines: 0 }))
+       .on('error', (err) => {
+         console.error(`Erro no parser de Latência: ${err.message}`);
+       })
+@@ -780,9 +801,9 @@ const processaLatencia = async (ws, inputPath, ctx) => {
+         ctx.totalLatencia++;
+         lendoArquivo = true;
+ 
+-        if (ctx.totalLatencia === 1) {
+-          ctx.database_startup_time_latencia = parseInt(row.startTime);
+-        } else if (ctx.totalLatencia >= 3) {
++        if (!ctx.database_startup_time_latencia && row.key === 'Database startup') {
++          ctx.database_startup_time_latencia = parseInt(row.startTime);
++        } else if (ctx.database_startup_time_latencia && row.type !== '0' && row.key !== 'Recovery' && row.key !== 'key') {
+           if (parseInt(row.type) != '0') {
+             const num = parseInt((parseInt(row.startTime) - ctx.database_startup_time_latencia) / 1000000);
+             if (row.type === 'N') {
+@@ -879,77 +900,75 @@ wss.on('connection', async (ws, req) => {
+   console.log('Client connected');
+   try {
+     // rota websocket para o dataset de comandos por segundo
+-    if (req.url === '/data') {
+-      let initialStartupTime = 0;
+-      try {
+-        if (fs.existsSync(inputPath)) {
+-          const fileContent = fs.readFileSync(inputPath, 'utf8');
+-          const lines = fileContent.split('\n');
+-          for (const line of lines) {
+-            if (line.startsWith("Database startup")) {
+-              const parts = line.split(',');
+-              if (parts.length >= 3 && parts[2]) {
+-                initialStartupTime = parseInt(parts[2], 10);
+-                break;
+-              }
+-            }
+-          }
+-        }
+-      } catch (e) {
+-        console.error("Error reading startup time from CSV:", e);
+-      }
+-
+-      const dataCtx = {
+-        total: 0,
+-        database_startup_time: initialStartupTime,
+-        contagemComandos: [],
+-        arrayParaVerificarSeJaFoiEnviado: []
+-      };
+-
+-      const watcher = setupTailWatcher(inputPath, (data) => {
+-        const line = data.split(',');
+-        const endTime = parseInt(line[2]);
+-
+-        if (line[0] === "Database startup" || line[0] === "Shutdown") {
+-          return;
+-        }
+-
+-        if (line[0] !== '0' && !isNaN(endTime)) {
+-          const baseTime = dataCtx.database_startup_time || endTime;
+-          const tempoEmSegundos = Math.floor((endTime - baseTime) / 1000000);
+-
+-          if (tempoEmSegundos >= 0) {
+-            const entryIndex = dataCtx.contagemComandos.findIndex(entry => entry[0] === tempoEmSegundos);
+-
+-            if (entryIndex === -1) {
+-              dataCtx.contagemComandos.push([tempoEmSegundos, 1]);
+-            } else {
+-              dataCtx.contagemComandos[entryIndex][1]++;
+-            }
+-          }
+-        }
+-
+-        for (let i = 0; i < dataCtx.contagemComandos.length; i++) {
+-          if (dataCtx.contagemComandos.length > dataCtx.arrayParaVerificarSeJaFoiEnviado.length) {
+-            if (i === dataCtx.contagemComandos.length - 2) {
+-              dataCtx.arrayParaVerificarSeJaFoiEnviado.push(dataCtx.contagemComandos[i]);
+-              if (ws.readyState === 1) {
+-                ws.send(JSON.stringify(dataCtx.contagemComandos[i]));
+-              }
+-            }
+-          }
+-        }
+-      });
+-
+-      // Delay para garantir que o frontend processe o onopen/onClearData antes do batch histórico
+-      await new Promise(resolve => setTimeout(resolve, 100));
+-      await processaCSV(ws, inputPath, dataCtx);
+-
+-      ws.on('close', () => {
+-        watcher.close();
+-      });
+-    }
+-    
++    if (req.url === '/data') {
++      let dbStartupTime = 0;
++      const arrayParaVerificarSeJaFoiEnviado = [];
++      let checkInterval = null;
++
++      const lerTudo = () => {
++        if (!fs.existsSync(inputPath)) return;
++        try {
++            const fileContent = fs.readFileSync(inputPath, 'utf8');
++            const lines = fileContent.split('\n');
++            const contagemComandos = [];
++            
++            for (let i = 0; i < lines.length; i++) {
++                const parts = lines[i].split(',');
++                if (parts[0] === 'Database startup' && !dbStartupTime) {
++                    dbStartupTime = parseInt(parts[2], 10);
++                } else if (dbStartupTime && parts[0] !== 'key' && parts[0] !== 'Recovery' && parts[5] !== '0') {
++                    const endTime = parseInt(parts[3], 10);
++                    if (!isNaN(endTime)) {
++                        const tempoEmSegundos = Math.floor((endTime - dbStartupTime) / 1000000);
++                        if (tempoEmSegundos >= 0) {
++                            const entryIndex = contagemComandos.findIndex(e => e[0] === tempoEmSegundos);
++                            if (entryIndex === -1) {
++                                contagemComandos.push([tempoEmSegundos, 1]);
++                            } else {
++                                contagemComandos[entryIndex][1]++;
++                            }
++                        }
++                    }
++                }
++            }
++            
++            // Send fully formed seconds (all except the last one, which might still be accumulating)
++            // But if it's the very end, we should send all. We can't know if it's the end here, so we send length - 1.
++            const len = contagemComandos.length;
++            if (len > 0) {
++                for (let i = 0; i < len - 1; i++) {
++                    const sec = contagemComandos[i][0];
++                    if (!arrayParaVerificarSeJaFoiEnviado.includes(sec)) {
++                        if (ws.readyState === 1) ws.send(JSON.stringify(contagemComandos[i]));
++                        arrayParaVerificarSeJaFoiEnviado.push(sec);
++                    }
++                }
++            }
++            // Send the last item if the file hasn't been modified in 2 seconds
++            try {
++                const stats = fs.statSync(inputPath);
++                const age = Date.now() - stats.mtimeMs;
++                if (age > 2000 && len > 0) {
++                    const lastSec = contagemComandos[len - 1][0];
++                    if (!arrayParaVerificarSeJaFoiEnviado.includes(lastSec)) {
++                        if (ws.readyState === 1) ws.send(JSON.stringify(contagemComandos[len - 1]));
++                        arrayParaVerificarSeJaFoiEnviado.push(lastSec);
++                    }
++                }
++            } catch(e) {}
++            
++        } catch (e) {}
++      };
++
++      if (ws.readyState === 1) ws.send("CLEAR");
++      lerTudo();
++      checkInterval = setInterval(lerTudo, 500);
++
++      ws.on('close', () => {
++        if (checkInterval) clearInterval(checkInterval);
++      });
++    }
++    
+     // rota websocket para o dataset de uso de cpu
+     else if (req.url === '/cpu') {
+       let initialStartupTime = 0;
+@@ -973,190 +992,6 @@ wss.on('connection', async (ws, req) => {
+         x: [],
+         y: []
+       };
+-
+-      const watcher = setupTailWatcher(pathCpu, (data) => {
+-        const lines = data.split(';');
+-        const endTime = parseInt(lines[0]);
+-
+-        if (lines[0] === "Database startup") {
+-          return;
+-        }
+-
+-        if (lines[0].match(/^\d+$/)) {
+-          const baseTime = cpuCtx.databaseStartupCpu || endTime;
+-          const num = Math.floor((endTime - baseTime) / 1000000);
+-          const cpuVal = parseFloat(lines[1].replace(',', '.'));
+-          cpuCtx.x.push(num);
+-          cpuCtx.y.push(cpuVal);
+-          ws.send(JSON.stringify([num, cpuVal]));
+-        }
+-      });
+-
+-      await new Promise(resolve => setTimeout(resolve, 100));
+-      await processaCpu(ws, pathCpu, cpuCtx);
+-
+-      ws.on('close', () => {
+-        watcher.close();
+-      });
+-    }
+-  
+-  // rota para iniciar o servidor MM-DIRECT
+-  else if (req.url === '/start') {
+-    sanitizePipeline();
+-
+-    // 1. Cria diretório do ensaio
+-    const runId = `run_${Date.now()}`;
+-    const runDir = path.join(rootPath, "src/runs", runId);
+-    try {
+-      fs.mkdirSync(runDir, { recursive: true });
+-      console.log(`Diretório do ensaio criado em: ${runDir}`);
+-    } catch(err) {
+-      console.error("Erro ao criar diretório do ensaio:", err.message);
+-    }
+-
+-    currentRunId = runId;
+-    currentRunDir = runDir;
+-    currentRunLogs = [];
+-
+-    // 2. Grava metadata.json
+-    const startTimes = getTimestamps();
+-    const metadata = {
+-      id: runId,
+-      timestamp: startTimes.utc,
+-      timestampLocal: startTimes.local,
+-      timezone: "America/Sao_Paulo",
+-      config: activeConfig,
+-      mode: (activeConfig.instantRecoveryState || "ON").toUpperCase() === "ON" ? "MM-DIRECT (B-Tree)" : "Tradicional (AOF)",
+-      initialExpectedState: "Carregando Banco",
+-      caminhos: {
+-        aof: path.join(rootPath, "src", activeConfig.aofFilename || "logs/sequentialLog.aof"),
+-        datasets: path.join(rootPath, "src", activeConfig.executedCommandsCsvFilename || "datasets/datasets.csv"),
+-        monitoring: path.join(rootPath, "src", activeConfig.systemMonitoringCsvFilename || "system_monitoring/system_monitoring.csv")
+-      }
+-    };
+-
+-    try {
+-      fs.writeFileSync(path.join(runDir, "metadata.json"), JSON.stringify(metadata, null, 2));
+-      console.log("Arquivo metadata.json gravado com sucesso!");
+-    } catch(err) {
+-      console.error("Erro ao gravar metadata.json:", err.message);
+-    }
+-
+-    const redisServerPath = path.join(rootPath, 'src');
+-    const child = child_process.spawn('./redis-server', [], { cwd: redisServerPath });
+-
+-    child.on('error', (err) => {
+-      console.error(`Erro ao iniciar o servidor Redis: ${err}`);
+-      if (ws.readyState === 1) {
+-        ws.send(`Erro ao iniciar o servidor Redis: ${err.message}`);
+-      }
+-    });
+-
+-    child.stdout.on('data', (data) => {
+-      const output = data.toString();
+-      console.log(output);
+-      
+-      // Acumula logs locais do ensaio
+-      currentRunLogs.push(output);
+-      try {
+-        fs.appendFileSync(path.join(currentRunDir, "logs.txt"), output);
+-      } catch(err) {
+-        // Ignorar
+-      }
+-
+-      if (ws.readyState === 1) {
+-        ws.send('Redis server started');
+-        ws.send(output);
+-
+-        const regex2 = /Generating information about executed database commands .../;
+-        const regex3 = /Generating system monitoring .../;
+-
+-        if (regex2.test(output)) {
+-          console.log('Gerando informações sobre os comandos do banco de dados executados ...');
+-          ws.send('Generating information database commands');
+-        }
+-
+-        if (regex3.test(output)) {
+-          console.log('Gerando monitoramento do sistema ...');
+-          ws.send('Generating system monitoring');
+-        }
+-      }
+-    });
+-
+-    child.on('exit', (code, signal) => {
+-      console.log(`Processo redis-server encerrado com código ${code} e sinal ${signal}`);
+-      if (ws.readyState === 1) {
+-        ws.send(`Redis server stopped with code ${code}`);
+-      }
+-      // Finaliza o ensaio gravando os resultados consolidados
+-      finalizeRunResults();
+-    });
+-  }
+-  
+-  // rota para parar o servidor MM-DIRECT
+-  else if (req.url === '/stop') {
+-    const redisServerPath = path.join(rootPath, 'src');
+-    const child = child_process.spawn('./redis-cli', ['shutdown'], { cwd: redisServerPath });
+-
+-    child.on('error', (err) => {
+-      console.error(`Erro ao parar o servidor Redis via redis-cli: ${err}`);
+-      if (ws.readyState === 1) {
+-        ws.send(`Erro ao parar o servidor Redis: ${err.message}`);
+-      }
+-    });
+-
+-    child.on('exit', (code, signal) => {
+-      console.log(`redis-cli shutdown encerrado com código ${code} e sinal ${signal}`);
+-      if (ws.readyState === 1) {
+-        ws.send('Redis server stopped');
+-        ws.close();
+-      }
+-    });
+-
+-    child.stdout.on('data', (data) => {
+-      const output = data.toString();
+-      console.log(output);
+-      if (ws.readyState === 1) {
+-        ws.send(output);
+-      }
+-    });
+-  }
+-
+-  else if (req.url === '/memory') {
+-    let initialStartupTime = 0;
+-    try {
+-      if (fs.existsSync(pathCpu)) {
+-        const fileContent = fs.readFileSync(pathCpu, 'utf8');
+-        const lines = fileContent.split('\n');
+-        if (lines.length > 1) {
+-          const parts = lines[1].split(';');
+-          if (parts.length >= 3 && parts[2]) {
+-            initialStartupTime = parseInt(parts[2], 10);
+-          }
+-        }
+-      }
+-    } catch (e) {
+-      console.error("Error reading startup time from Memory log:", e);
+-    }
+-
+-    const memCtx = {
+-      databaseStartupMemoria: initialStartupTime,
+-      x: [],
+-      y: []
+-    };
+-
+-    const watcher = setupTailWatcher(pathCpu, (data) => {
+-      const lines = data.split(';');
+-      const endTime = parseInt(lines[0]);
+-
+-      if (lines[0] === "Database startup") {
+-        return;
+-      }
+-
+-      if (lines[0].match(/^\d+$/)) {
+-        const baseTime = memCtx.databaseStartupMemoria || endTime;
+-        const num = Math.floor((endTime - baseTime) / 1000000);
+-        memCtx.x.push(num);
+         memCtx.y.push(parseFloat(lines[2]));
+         ws.send(JSON.stringify([num, parseInt(lines[2])]));
+       }
+@@ -1201,15 +1036,20 @@ wss.on('connection', async (ws, req) => {
+ 
+     const watcher = setupTailWatcher(inputPath, (data) => {
+       const lines = data.split(',');
+-      const endTime = parseInt(lines[2]);
+ 
+-      if (lines[0] === "Database startup" || lines[0] === "Shutdown") {
++      if (lines[0] === "Database startup") {
++        latCtx.database_startup_time_latencia = parseInt(lines[2], 10);
+         return;
+       }
+ 
+-      if (lines[0] !== '0' && !isNaN(endTime)) {
+-        const baseTime = latCtx.database_startup_time_latencia || endTime;
+-        const num = Math.floor((endTime - baseTime) / 1000000);
++      if (lines[0] === "Shutdown" || lines[0] === "Recovery" || lines[0] === "key") {
++        return;
++      }
++
++      const startTime = parseInt(lines[2], 10);
++
++      if (lines[0] !== '0' && !isNaN(startTime) && latCtx.database_startup_time_latencia) {
++        const num = Math.floor((startTime - latCtx.database_startup_time_latencia) / 1000000);
+ 
+         if (lines[5] === 'N') {
+           latCtx.x1.push(num);

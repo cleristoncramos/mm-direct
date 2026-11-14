@@ -1,0 +1,64 @@
+9923:C 26 Sep 2026 12:03:18.747 * Indexed log Environment started!
+9923:C 26 Sep 2026 12:03:18.747 # oO0OoO0OoO0Oo Redis-IR is starting oO0OoO0OoO0Oo: arlino@ufpi.edu.br
+9923:C 26 Sep 2026 12:03:18.747 # Redis version=5.0.7, bits=64, commit=2efa5fd3, modified=1, pid=9923, just started
+9923:C 26 Sep 2026 12:03:18.747 # Warning: no config file specified, using the default config. In order to specify a config file use ./redis-server /path/to/redis.conf
+9923:M 26 Sep 2026 12:03:18.749 * Running mode=standalone, port=6379.
+9923:M 26 Sep 2026 12:03:18.749 # Server initialized
+9923:M 26 Sep 2026 12:03:18.749 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+9923:M 26 Sep 2026 12:03:18.749 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+9923:M 26 Sep 2026 12:03:18.749 * The server will be restarted 1 times!
+9923:M 26 Sep 2026 12:03:18.750 * Indexing the remaining log records after the last shutdown/crash ... Wait!
+9923:M 26 Sep 2026 12:03:18.750 * Initial log indexing finished: 0.000 seconds. Number of log records processed = 0. Number of records on indexed log = 0.
+9923:M 26 Sep 2026 12:03:18.750 * Ready to accept connections
+9923:M 26 Sep 2026 12:03:18.750 * 
+    The Asynchronous logging is ON!
+    The indexed log replication is OFF!
+    The log corruption is OFF!
+    The checkpoint is ON! The auto tune of time interval of checkpoints is ON!!
+    Memtier benckmark is ON!
+    Report generation is ON!
+    CSV file generation is ON!
+
+9923:M 26 Sep 2026 12:03:18.751 * Generating information about executed database commands ...
+9923:M 26 Sep 2026 12:03:18.751 * Generating system monitoring ... 
+9923:M 26 Sep 2026 12:03:18.751 * EXECUTION_BRANCH INITIAL_PRELOAD
+9923:M 26 Sep 2026 12:03:18.751 * EVENT PRELOAD_STARTED timestamp=1790434998751531 expected_tuples=5000
+9923:M 26 Sep 2026 12:03:18.758 * Generating information about the indexing write ...
+9923:M 26 Sep 2026 12:03:18.856 * INDEXED_LOG_VALIDATED path=logs/indexedLog.db records=134095 distinct_tuples=1122
+9923:M 26 Sep 2026 12:03:18.859 * PRELOAD_INDEX_OPEN path=logs/indexedLog.db records=134095
+9923:M 26 Sep 2026 12:03:18.859 * PRELOAD_CURSOR_STARTED
+9923:M 26 Sep 2026 12:03:18.859 * PRELOAD_TUPLE_LOADED key=redisIR-1
+9923:M 26 Sep 2026 12:03:18.859 * PRELOAD_TUPLE_LOADED key=redisIR-10
+9923:M 26 Sep 2026 12:03:18.859 * PRELOAD_TUPLE_LOADED key=redisIR-100
+9923:M 26 Sep 2026 12:03:18.860 * PRELOAD_TUPLE_LOADED key=redisIR-1000
+9923:M 26 Sep 2026 12:03:18.861 * PRELOAD_TUPLE_LOADED key=redisIR-1001
+9923:M 26 Sep 2026 12:03:19.152 * PRELOAD_CURSOR_FINISHED records=134095 tuples=1122
+9923:M 26 Sep 2026 12:03:19.153 * DB loaded from Indexed Log: 0.402 seconds. Number of tuples loaded into memory: 1122 (inclementally = 1122, on-demand = 0). Number of records processed: 134095. Inconsistenes: 0 :)
+9923:M 26 Sep 2026 12:03:19.158 * EVENT PRELOAD_COMPLETED timestamp=1790434999153537 loaded_tuples=1122 expected_tuples=1122 records_processed=134095 inconsistencies=0 duration=0.402s
+9923:M 26 Sep 2026 12:03:19.159 * EVENT FAILURE_TIMER_STARTED timestamp=1790434999159782 duration_seconds=3
+9923:M 26 Sep 2026 12:03:19.160 * Initial database loading completed. Failure timer started: the system is programmed to restart in 3 seconds!
+9923:M 26 Sep 2026 12:03:19.160 * EVENT STABLE_OPERATION_STARTED timestamp=1790434999160062
+9923:M 26 Sep 2026 12:03:19.160 * Memtier benchmark (round 1) started! Parameters = " --hide-histogram -n 5000 --key-prefix='redisIR-' --key-minimum=1 --key-maximum=5000 --command='set  __key__ __data__' --command-ratio=5000 --command-key-pattern=S"
+Writing results to stdout
+[RUN #1] Preparing benchmark client...
+9923:M 26 Sep 2026 12:03:19.167 * Indexer thread V2 started!
+9923:M 26 Sep 2026 12:03:19.174 * Checkpointer thread started! The first checkpointed wiil start in 0 seconds.
+9923:M 26 Sep 2026 12:03:19.180 * Checkpoint process 1 started! Checkpointing ...
+[RUN #1] Launching threads now...
+9923:M 26 Sep 2026 12:03:20.114 * Temporary EOF reached while reading sequential file command. Retrying later. command_start_seek=16203756
+[RUN #1 1%,   0 secs]  4 threads:        9352 ops,    9416 (avg:    9416) ops/sec, 676.94KB/sec (avg: 676.94KB/sec), 21.14 (avg: 21.14) msec latency[RUN #1 2%,   1 secs]  4 threads:       20435 ops,   11068 (avg:   10245) ops/sec, 800.50KB/sec (avg: 738.97KB/sec), 16.76 (avg: 18.77) msec latency9923:M 26 Sep 2026 12:03:22.160 * EVENT FAILURE_TRIGGERED timestamp=1790435002160322
+9923:M 26 Sep 2026 12:03:22.160 * Preparing to restart ...
+9923:M 26 Sep 2026 12:03:22.160 * Restarting the system now!
+9923:M 26 Sep 2026 12:03:22.160 # User requested shutdown...
+9923:M 26 Sep 2026 12:03:22.170 * Generation of executed database commands finished! See the file 'src/datasets/datasets.csv' on Redis instalation path. 
+9923:M 26 Sep 2026 12:03:22.203 * Memtier benchmark execution finished: 3.043 seconds.
+9923:M 26 Sep 2026 12:03:22.203 * Checkpoint is disabled and the Checkpointer thread will stop in few minutes!
+9923:M 26 Sep 2026 12:03:22.203 * Generating recovery report ...
+9923:M 26 Sep 2026 12:03:22.203 * The recovery report was generated! See the file 'src/recovery_report/recovery_report.txt' on Redis instalation path.
+9923:M 26 Sep 2026 12:03:22.205 * Memtier benchmark process was interrupted before its execution was finished !
+9923:M 26 Sep 2026 12:03:22.206 * Indexing report generation finished!  See the file 'src/indexing_report/indexing.csv' on Redis instalation path. 
+9923:M 26 Sep 2026 12:03:22.207 * The checkpoint process was stopped before finishing! 
+9923:M 26 Sep 2026 12:03:22.210 # Indexer thread stopped! Number of log records processed = 32902. Number of log records indexed = 32901
+9923:M 26 Sep 2026 12:03:22.211 * The RedisIR threads were canceled! 
+9923:M 26 Sep 2026 12:03:22.211 * Calling fsync() on the AOF file.
+9923:M 26 Sep 2026 12:03:22.215 # Redis is now ready to exit, bye bye...

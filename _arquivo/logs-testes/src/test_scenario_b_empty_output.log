@@ -1,0 +1,47 @@
+10181:C 26 Sep 2026 12:08:22.896 * Indexed log Environment started!
+10181:C 26 Sep 2026 12:08:22.897 # oO0OoO0OoO0Oo Redis-IR is starting oO0OoO0OoO0Oo: arlino@ufpi.edu.br
+10181:C 26 Sep 2026 12:08:22.897 # Redis version=5.0.7, bits=64, commit=2efa5fd3, modified=1, pid=10181, just started
+10181:C 26 Sep 2026 12:08:22.897 # Warning: no config file specified, using the default config. In order to specify a config file use ./redis-server /path/to/redis.conf
+10181:M 26 Sep 2026 12:08:22.897 * Running mode=standalone, port=6379.
+10181:M 26 Sep 2026 12:08:22.897 # Server initialized
+10181:M 26 Sep 2026 12:08:22.897 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+10181:M 26 Sep 2026 12:08:22.897 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+10181:M 26 Sep 2026 12:08:22.898 * The server will be restarted 1 times!
+10181:M 26 Sep 2026 12:08:22.898 * Fail to open 'finalLogSeek.dat' file!
+10181:M 26 Sep 2026 12:08:22.898 * Error while openning the BerkeleyDB database! No such file or directory
+10181:M 26 Sep 2026 12:08:22.898 * Cannot open the indexed log1!
+10181:M 26 Sep 2026 12:08:22.941 * The indexing could not start since sequential log file is empty!
+10181:M 26 Sep 2026 12:08:22.941 * Ready to accept connections
+10181:M 26 Sep 2026 12:08:22.941 * 
+    The Asynchronous logging is ON!
+    The indexed log replication is OFF!
+    The log corruption is OFF!
+    The checkpoint is ON! The auto tune of time interval of checkpoints is ON!!
+    Memtier benckmark is ON!
+    Report generation is ON!
+    CSV file generation is ON!
+
+10181:M 26 Sep 2026 12:08:22.944 * Generating system monitoring ... 
+10181:M 26 Sep 2026 12:08:22.944 * Generating information about executed database commands ...
+10181:M 26 Sep 2026 12:08:22.947 * Generating information about the indexing write ...
+10181:M 26 Sep 2026 12:08:22.976 * EXECUTION_BRANCH INITIAL_PRELOAD
+10181:M 26 Sep 2026 12:08:22.979 * EVENT PRELOAD_STARTED timestamp=1790435302976876 expected_tuples=5000
+10181:M 26 Sep 2026 12:08:22.979 * INDEXED_LOG_VALIDATED path=logs/indexedLog.db records=0 distinct_tuples=0
+10181:M 26 Sep 2026 12:08:22.979 * EVENT PRELOAD_FAILED timestamp=1790435302979569 loaded_tuples=0 expected_tuples=5000 reason="Indexed log file missing or empty (logs/indexedLog.db)"
+10181:M 26 Sep 2026 12:08:22.979 * EVENT EXPERIMENT_FAILED timestamp=1790435302979573 reason="Indexed log contains no tuples for preload"
+10181:M 26 Sep 2026 12:08:22.979 * Failure timer aborted: Preload or experiment failed.
+10181:M 26 Sep 2026 12:08:22.979 * Memtier benchmark aborted: Preload failed or experiment failed state.
+10181:M 26 Sep 2026 12:08:25.903 # User requested shutdown...
+10181:M 26 Sep 2026 12:08:25.920 * Memtier benchmark process was interrupted before its execution was finished !
+10181:M 26 Sep 2026 12:08:25.920 * Checkpoint is disabled and the Checkpointer thread will stop in few minutes!
+10181:M 26 Sep 2026 12:08:25.920 * Indexing report generation finished!  See the file 'src/indexing_report/indexing.csv' on Redis instalation path. 
+10181:M 26 Sep 2026 12:08:25.943 * Generation of executed database commands finished! See the file 'src/datasets/datasets.csv' on Redis instalation path. 
+10181:M 26 Sep 2026 12:08:25.945 * The RedisIR threads were canceled! 
+10181:M 26 Sep 2026 12:08:25.945 * Calling fsync() on the AOF file.
+10181:M 26 Sep 2026 12:08:25.983 # Redis is now ready to exit, bye bye...
+---------------------------------------------
+REDIS INSTANT RECOVERY
+Arlino Magalhães - arlino@ufpi.edu.br
+---------------------------------------------
+
+

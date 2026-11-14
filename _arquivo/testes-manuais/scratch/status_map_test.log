@@ -1,0 +1,7 @@
+STATUS_IDLE: Aguardando
+STATUS_PRELOADING: Carregando banco
+STATUS_STABLE_OPERATION: Operação estável
+STATUS_FAILURE_TRIGGERED: Falha simulada
+STATUS_RECOVERING: Recuperando
+STATUS_COMPLETED: Experimento concluído
+STATUS_FAILED: Experimento falhou

@@ -1,0 +1,13 @@
+10995:C 26 Sep 2026 12:26:55.067 * Indexed log Environment started!
+10995:C 26 Sep 2026 12:26:55.068 # oO0OoO0OoO0Oo Redis-IR is starting oO0OoO0OoO0Oo: arlino@ufpi.edu.br
+10995:C 26 Sep 2026 12:26:55.068 # Redis version=5.0.7, bits=64, commit=2efa5fd3, modified=1, pid=10995, just started
+10995:C 26 Sep 2026 12:26:55.068 # Warning: no config file specified, using the default config. In order to specify a config file use ./redis-server /path/to/redis.conf
+10995:M 26 Sep 2026 12:26:55.070 * Running mode=standalone, port=6379.
+10995:M 26 Sep 2026 12:26:55.070 # Server initialized
+10995:M 26 Sep 2026 12:26:55.070 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+10995:M 26 Sep 2026 12:26:55.070 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+10995:M 26 Sep 2026 12:26:55.071 * The server will be restarted 1 times!
+10995:M 26 Sep 2026 12:26:55.072 * Indexing the remaining log records after the last shutdown/crash ... Wait!
+10995:M 26 Sep 2026 12:26:55.072 # Indexing error! Bad file format reading the sequential log file. Last log record read: et
+
+10995:M 26 Sep 2026 12:26:55.101 * Memtier benchmark process was interrupted before its execution was finished !

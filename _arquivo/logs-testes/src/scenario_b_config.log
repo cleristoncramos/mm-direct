@@ -1,0 +1,6 @@
+11033:C 26 Sep 2026 12:27:39.624 * Indexed log Environment started!
+
+*** FATAL CONFIG FILE ERROR ***
+Reading the configuration file, at line 1
+>>> '/////////////////////////////////////////////////////////////////////////////////////////'
+Bad directive or wrong number of arguments

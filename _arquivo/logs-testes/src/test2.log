@@ -1,0 +1,419 @@
+48119:C 30 Sep 2026 13:44:47.881 * Indexed log Environment started!
+48119:C 30 Sep 2026 13:44:47.890 # oO0OoO0OoO0Oo Redis-IR is starting oO0OoO0OoO0Oo: arlino@ufpi.edu.br
+48119:C 30 Sep 2026 13:44:47.891 # Redis version=5.0.7, bits=64, commit=2efa5fd3, modified=1, pid=48119, just started
+48119:C 30 Sep 2026 13:44:47.891 # Warning: no config file specified, using the default config. In order to specify a config file use ./redis-server /path/to/redis.conf
+48119:M 30 Sep 2026 13:44:47.893 * Running mode=standalone, port=6379.
+48119:M 30 Sep 2026 13:44:47.905 # Server initialized
+48119:M 30 Sep 2026 13:44:47.905 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+48119:M 30 Sep 2026 13:44:47.905 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+48119:M 30 Sep 2026 13:44:47.905 * RUN_CONTINUED_AFTER_FAILURE runId=run_1790784252975081 runStartUs=1790784252975081
+48119:M 30 Sep 2026 13:44:47.905 * EVENT_JSON {"event":"RUN_CONTINUED_AFTER_FAILURE","runId":"run_1790784252975081","runStartUs":1790784252975081,"timestampUs":1790786687905857}
+48119:M 30 Sep 2026 13:44:47.905 * Preloading the database ...
+48119:M 30 Sep 2026 13:44:47.905 * The server will be restarted 1 time(s)!
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0210 logs/indexedLog.db: metadata page checksum error
+48119:M 30 Sep 2026 13:44:47.911 * Error while openning the BerkeleyDB database! Invalid argument
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0210 logs/indexedLog.db: metadata page checksum error
+48119:M 30 Sep 2026 13:44:47.913 * Error while openning the BerkeleyDB database! Invalid argument
+48119:M 30 Sep 2026 13:44:47.913 * Cannot open the indexed log! The initial indexing could not start!
+48119:M 30 Sep 2026 13:44:47.913 * Ready to accept connections
+48119:M 30 Sep 2026 13:44:47.919 * 
+    The Asynchronous logging is ON!
+    The indexed log replication is OFF!
+    The log corruption is OFF!
+    The checkpoint is OFF!
+    Memtier benckmark is ON!
+    Report generation is ON!
+    CSV file generation is ON!
+
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0196 Encrypted checksum: no encryption key specified
+BDB0210 logs/indexedLog.db: metadata page checksum error
+48119:M 30 Sep 2026 13:44:47.922 * Generating system monitoring ... 
+48119:M 30 Sep 2026 13:44:47.923 * Generating information about the indexing write ...
+48119:M 30 Sep 2026 13:44:47.923 * Generating information about executed database commands ...
+48119:M 30 Sep 2026 13:44:47.926 * Error while openning the BerkeleyDB database! Invalid argument
+48119:M 30 Sep 2026 13:44:47.931 * ⚠ ⚠ ⚠ ⚠ Database loading failed! Error when openning the Indexed Log. ⚠ ⚠ ⚠ ⚠ 
+48119:M 30 Sep 2026 13:44:47.931 * Log indexado corrompido detectado. Restaurando automaticamente do ultimo backup valido (backup=logs/indexedLog.db.bak).
+48119:M 30 Sep 2026 13:44:48.207 * INDEXED_LOG_VALIDATED path=logs/indexedLog.db records=22030 distinct_tuples=115
+48119:M 30 Sep 2026 13:44:48.212 * EXECUTION_BRANCH INITIAL_PRELOAD
+48119:M 30 Sep 2026 13:44:48.215 * EVENT PRELOAD_STARTED runId=run_1790784252975081 timestamp=1790786687920633 timestampUs=1790786687920633 runStartUs=1790784252975081 relativeMs=2434945.552 benchmark_expected_tuples=5000 indexed_log_distinct_tuples=115
+48119:M 30 Sep 2026 13:44:48.217 * EVENT_JSON {"event":"PRELOAD_STARTED","runId":"run_1790784252975081","timestampUs":1790786687920633,"runStartUs":1790784252975081,"relativeMs":2434945.552,"expectedTuples":5000,"distinctTuples":115}
+48119:M 30 Sep 2026 13:44:48.221 * PRELOAD_INDEX_OPEN path=logs/indexedLog.db records=22030
+48119:M 30 Sep 2026 13:44:48.223 * PRELOAD_CURSOR_STARTED
+48119:M 30 Sep 2026 13:44:48.236 * PRELOAD_TUPLE_LOADED key=redisIR-1
+48119:M 30 Sep 2026 13:44:48.257 * PRELOAD_TUPLE_LOADED key=redisIR-10
+48119:M 30 Sep 2026 13:44:48.260 * PRELOAD_TUPLE_LOADED key=redisIR-100
+48119:M 30 Sep 2026 13:44:48.266 * PRELOAD_TUPLE_LOADED key=redisIR-101
+48119:M 30 Sep 2026 13:44:48.287 * PRELOAD_TUPLE_LOADED key=redisIR-102
+48119:M 30 Sep 2026 13:44:48.709 * PRELOAD_CURSOR_FINISHED records=22030 tuples=115
+48119:M 30 Sep 2026 13:44:48.709 * DB loaded from Indexed Log: 0.789 seconds. Number of tuples loaded into memory: 115 (inclementally = 115, on-demand = 0). Number of records processed: 22030. Inconsistenes: 0 :)
+48119:M 30 Sep 2026 13:44:48.709 * EVENT PRELOAD_COMPLETED runId=run_1790784252975081 timestamp=1790786688709716 timestampUs=1790786688709716 runStartUs=1790784252975081 relativeMs=2435734.635 durationMs=789.083 loaded_tuples=115 indexed_log_distinct_tuples=115 records_processed=22030 inconsistencies=0 duration=0.789s
+48119:M 30 Sep 2026 13:44:48.709 * EVENT_JSON {"event":"PRELOAD_COMPLETED","runId":"run_1790784252975081","timestampUs":1790786688709716,"runStartUs":1790784252975081,"relativeMs":2435734.635,"durationMs":789.083,"loadedTuples":115,"distinctTuples":115,"recordsProcessed":22030,"inconsistencies":0}
+48119:M 30 Sep 2026 13:44:48.715 * EVENT STABLE_OPERATION_STARTED runId=run_1790784252975081 timestamp=1790786688715121 timestampUs=1790786688715121 runStartUs=1790784252975081 relativeMs=2435740.040
+48119:M 30 Sep 2026 13:44:48.715 * EVENT_JSON {"event":"STABLE_OPERATION_STARTED","runId":"run_1790784252975081","timestampUs":1790786688715121,"runStartUs":1790784252975081,"relativeMs":2435740.040}
+48119:M 30 Sep 2026 13:44:48.716 * Memtier benchmark (round 1) started! Parameters = " --hide-histogram -n 5000 --key-prefix='redisIR-' --key-minimum=1 --key-maximum=5000 --command='set  __key__ __data__' --command-ratio=5000 --command-key-pattern=S"
+48119:M 30 Sep 2026 13:44:48.719 * EVENT FAILURE_TIMER_STARTED runId=run_1790784252975081 timestamp=1790786688719497 timestampUs=1790786688719497 runStartUs=1790784252975081 relativeMs=2435744.416 durationMs=10000.000 duration_seconds=10
+48119:M 30 Sep 2026 13:44:48.726 * EVENT_JSON {"event":"FAILURE_TIMER_STARTED","runId":"run_1790784252975081","timestampUs":1790786688719497,"runStartUs":1790784252975081,"relativeMs":2435744.416,"durationMs":10000.000,"durationSeconds":10}
+48119:M 30 Sep 2026 13:44:48.726 * Initial database loading completed. Failure timer started: the system is programmed to restart in 10 seconds!
+memtier_benchmark: error while loading shared libraries: libcrypto.so.1.1: cannot open shared object file: No such file or directory
+48119:M 30 Sep 2026 13:44:48.741 * Memtier benchmark execution finished: 0.025 seconds.
+48119:M 30 Sep 2026 13:44:48.741 * Generating recovery report ...
+48119:M 30 Sep 2026 13:44:48.745 * The recovery report was generated! See the file 'src/recovery_report/recovery_report.txt' on Redis instalation path.
+48119:M 30 Sep 2026 13:44:48.828 * Indexer thread V2 started!
+48119:M 30 Sep 2026 13:44:58.728 * EVENT FAILURE_TRIGGERED runId=run_1790784252975081 timestamp=1790786698728060 timestampUs=1790786698728060 runStartUs=1790784252975081 relativeMs=2445752.979
+48119:M 30 Sep 2026 13:44:58.728 * EVENT_JSON {"event":"FAILURE_TRIGGERED","runId":"run_1790784252975081","timestampUs":1790786698728060,"runStartUs":1790784252975081,"relativeMs":2445752.979}
+48119:M 30 Sep 2026 13:44:58.728 * Preparing to restart ...
+48119:M 30 Sep 2026 13:44:58.729 * Restarting the system now!
+48119:M 30 Sep 2026 13:44:58.729 # User requested shutdown...
+48119:M 30 Sep 2026 13:44:58.729 * Generation of executed database commands finished! See the file 'src/datasets/datasets.csv' on Redis instalation path. 
+48119:M 30 Sep 2026 13:44:59.009 * Memtier benchmark process was interrupted before its execution was finished !
+48119:M 30 Sep 2026 13:44:59.012 * Indexing report generation finished!  See the file 'src/indexing_report/indexing.csv' on Redis instalation path. 
+48119:M 30 Sep 2026 13:44:59.012 # Indexer thread stopped! Number of log records processed = 0. Number of log records indexed = 0
+48119:M 30 Sep 2026 13:44:59.977 * System monitoring collecting finished! See the file system_monitoring/system_monitoring.csv.
+
+48119:M 30 Sep 2026 13:45:00.046 * Backup automatico do log indexado concluido (logs/indexedLog.db.bak).
+48119:M 30 Sep 2026 13:45:00.077 * The RedisIR threads were cleanly joined and finished!
+48119:M 30 Sep 2026 13:45:00.077 * Calling fsync() on the AOF file.
+48119:M 30 Sep 2026 13:45:00.097 # Redis is now ready to exit, bye bye...
+48119:C 30 Sep 2026 13:45:01.163 * Indexed log Environment started!
+48119:C 30 Sep 2026 13:45:01.174 # oO0OoO0OoO0Oo Redis-IR is starting oO0OoO0OoO0Oo: arlino@ufpi.edu.br
+48119:C 30 Sep 2026 13:45:01.174 # Redis version=5.0.7, bits=64, commit=2efa5fd3, modified=1, pid=48119, just started
+48119:C 30 Sep 2026 13:45:01.174 # Warning: no config file specified, using the default config. In order to specify a config file use /home/cleriston/Documentos/projeto/MM-DIRECT/src/./redis-server /path/to/redis.conf
+48119:M 30 Sep 2026 13:45:01.200 * Running mode=standalone, port=6379.
+48119:M 30 Sep 2026 13:45:01.200 # Server initialized
+48119:M 30 Sep 2026 13:45:01.200 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+48119:M 30 Sep 2026 13:45:01.200 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+48119:M 30 Sep 2026 13:45:01.200 * RUN_CONTINUED_AFTER_FAILURE runId=run_1790784252975081 runStartUs=1790784252975081
+48119:M 30 Sep 2026 13:45:01.200 * EVENT_JSON {"event":"RUN_CONTINUED_AFTER_FAILURE","runId":"run_1790784252975081","runStartUs":1790784252975081,"timestampUs":1790786701200464}
+48119:M 30 Sep 2026 13:45:01.200 * Indexing the remaining log records after the last shutdown/crash ... Wait!
+48119:M 30 Sep 2026 13:45:01.201 * Initial log indexing finished: 0.000 seconds. Number of log records processed = 0. Number of records on indexed log = 0.
+48119:M 30 Sep 2026 13:45:01.201 * Ready to accept connections
+48119:M 30 Sep 2026 13:45:01.208 * 
+    The Asynchronous logging is ON!
+    The indexed log replication is OFF!
+    The log corruption is OFF!
+    The checkpoint is OFF!
+    Memtier benckmark is ON!
+    Report generation is ON!
+    CSV file generation is ON!
+
+48119:M 30 Sep 2026 13:45:01.212 * Generating system monitoring ... 
+48119:M 30 Sep 2026 13:45:01.215 * Generating information about the indexing write ...
+48119:M 30 Sep 2026 13:45:01.218 * Generating information about executed database commands ...
+48119:M 30 Sep 2026 13:45:01.367 * INDEXED_LOG_VALIDATED path=logs/indexedLog.db records=22030 distinct_tuples=115
+48119:M 30 Sep 2026 13:45:01.367 * EXECUTION_BRANCH POST_FAILURE_RECOVERY
+48119:M 30 Sep 2026 13:45:01.367 * EVENT RECOVERY_STARTED runId=run_1790784252975081 timestamp=1790786701216937 timestampUs=1790786701216937 runStartUs=1790784252975081 relativeMs=2448241.856 benchmark_expected_tuples=5000 indexed_log_distinct_tuples=115
+48119:M 30 Sep 2026 13:45:01.367 * EVENT_JSON {"event":"RECOVERY_STARTED","runId":"run_1790784252975081","timestampUs":1790786701216937,"runStartUs":1790784252975081,"relativeMs":2448241.856,"expectedTuples":5000,"distinctTuples":115}
+48119:M 30 Sep 2026 13:45:01.378 * PRELOAD_INDEX_OPEN path=logs/indexedLog.db records=22030
+48119:M 30 Sep 2026 13:45:01.378 * PRELOAD_CURSOR_STARTED
+48119:M 30 Sep 2026 13:45:01.389 * PRELOAD_TUPLE_LOADED key=redisIR-1
+48119:M 30 Sep 2026 13:45:01.391 * PRELOAD_TUPLE_LOADED key=redisIR-10
+48119:M 30 Sep 2026 13:45:01.406 * PRELOAD_TUPLE_LOADED key=redisIR-100
+48119:M 30 Sep 2026 13:45:01.423 * PRELOAD_TUPLE_LOADED key=redisIR-101
+48119:M 30 Sep 2026 13:45:01.433 * PRELOAD_TUPLE_LOADED key=redisIR-102
+48119:M 30 Sep 2026 13:45:02.336 * PRELOAD_CURSOR_FINISHED records=22030 tuples=115
+48119:M 30 Sep 2026 13:45:02.340 * DB loaded from Indexed Log: 1.123 seconds. Number of tuples loaded into memory: 115 (inclementally = 115, on-demand = 0). Number of records processed: 22030. Inconsistenes: 0 :)
+48119:M 30 Sep 2026 13:45:02.342 * EVENT RECOVERY_COMPLETED runId=run_1790784252975081 timestamp=1790786702340053 timestampUs=1790786702340053 runStartUs=1790784252975081 relativeMs=2449364.972 durationMs=1123.116 loaded_tuples=115 indexed_log_distinct_tuples=115 records_processed=22030 inconsistencies=0 duration=1.123s
+48119:M 30 Sep 2026 13:45:02.342 * EVENT_JSON {"event":"RECOVERY_COMPLETED","runId":"run_1790784252975081","timestampUs":1790786702340053,"runStartUs":1790784252975081,"relativeMs":2449364.972,"durationMs":1123.116,"loadedTuples":115,"distinctTuples":115,"recordsProcessed":22030,"inconsistencies":0}
+48119:M 30 Sep 2026 13:45:02.342 * EVENT THREADS_CLEANUP_COMPLETED runId=run_1790784252975081 timestamp=1790786702342250 timestampUs=1790786702342250 runStartUs=1790784252975081 relativeMs=2449367.169
+48119:M 30 Sep 2026 13:45:02.342 * EVENT_JSON {"event":"THREADS_CLEANUP_COMPLETED","runId":"run_1790784252975081","timestampUs":1790786702342250,"runStartUs":1790784252975081,"relativeMs":2449367.169}
+48119:M 30 Sep 2026 13:45:02.342 * EVENT EXPERIMENT_COMPLETED runId=run_1790784252975081 timestamp=1790786702342273 timestampUs=1790786702342273 runStartUs=1790784252975081 relativeMs=2449367.192
+48119:M 30 Sep 2026 13:45:02.342 * EVENT_JSON {"event":"EXPERIMENT_COMPLETED","runId":"run_1790784252975081","timestampUs":1790786702342273,"runStartUs":1790784252975081,"relativeMs":2449367.192}
